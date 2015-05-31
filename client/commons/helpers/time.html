@@ -1,0 +1,36 @@
+
+<template name="helpers_time">
+
+	<div class="relative overflow time-date inline-block" id="{{cal.name}}-wrapper">
+		<input class="{{date_class}} cursor unselect inline abs-full as-trigger" name="{{cal.name}}" id="{{cal.name}}" value="{{cal.cur}}" readonly="readonly"/>
+		<span class="dummy unselect">{{cal.cur}}</span>
+	</div>
+
+	<div class="invis-select unselect hour">
+		@<span class="ref">{{h.cur}}</span>:
+		<select class="as-trigger" name="{{h.name}}" id="{{h.name}}">
+			{{#each h.num}}
+			<option value="{{val}}" selected="{{selected}}">{{val}}</option>
+			{{/each}}
+		</select>
+	</div>
+
+	<div class="invis-select unselect min">
+		<span class="ref">{{m.cur}}</span>
+		<select class="as-trigger" name="{{m.name}}" id="{{m.name}}">
+			{{#each m.num}}
+			<option value="{{val}}" selected="{{selected}}">{{val}}</option>
+			{{/each}}
+		</select>
+	</div>
+
+	<div class="invis-select unselect sec">
+		<span class="ref">{{ap.cur}}</span>
+		<select class="as-trigger" name="{{ap.name}}" id="{{ap.name}}">
+			{{#each ap.options}}
+			<option value="{{val}}" selected="{{selected}}">{{val}}</option>
+			{{/each}}
+		</select>
+	</div>
+
+</template>

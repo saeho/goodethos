@@ -1,0 +1,97 @@
+
+<template name="page_body">
+	{{#each body}}
+		{{#if template}}
+			{{>template}}
+		{{/if}}
+	{{/each}}
+</template>
+
+
+<template name="page_body_text">
+	<section {{attr}}>{{{content}}}</section>
+</template>
+
+
+<template name="page_body_img">
+	<section {{attr}}>
+		{{#if lct}}{{>page_body_lct lct}}{{/if}}
+		{{#if img}}
+			<img {{img}} />
+		{{/if}}
+	</section>
+</template>
+
+
+<template name="page_body_video">
+	{{#if content}}
+	<section {{attr}}>
+		<div class="iframe-holder">
+			{{#if lct}}{{>page_body_lct lct}}{{/if}}
+			<iframe {{content}}></iframe>
+		</div>
+	</section>
+	{{/if}}
+</template>
+
+<template name="page_body_gallery">
+{{#with this}}
+	{{#if gallery}}
+	<section {{attr}}>
+		{{#if gallery.edit_mode}}
+		<input id="input-{{attr.id}}" type="file" class="hide gal-img" data-order="0" data-index="{{this.block_index}}" />
+		{{/if}}
+
+		{{#if gallery.items}}
+			{{#if init}}
+				<div class="loading-master bg-light"><span class="loading spin-inifinite"></span></div>
+			{{/if}}
+			{{#each gallery.items}}
+				<figure {{this.attr}}>
+					{{#if ic_data}}
+						{{>img_controls ic_data}}
+					{{/if}}
+					<img {{this.img}} />
+				</figure>
+			{{/each}}
+		{{else}}
+			<div class="round x ltc-remove transition" data-delete="{{attr.id}}"></div>
+			<div class="relative condensed small-line bigger-medium gallery-{{style}}-empty gal-add cursor new-temp">
+				<span class="gallery-demo gd1"></span>
+				<span class="gallery-demo gd2"></span>
+				<span class="gallery-demo gd3"></span>
+				<span class="gallery-demo gd4"></span>
+				<strong>Create a group of photos</strong><br />
+				<em class="gray">Click to start</em>
+			</div>
+		{{/if}}
+	</section>
+	{{/if}}
+{{/with}}
+</template>
+
+
+<template name="page_body_lct">
+	{{{extra_html}}}
+	{{#if buttons}}
+		<div {{ltc_attr}}>
+		{{#each buttons}}
+			<button {{this.attr}}></button>
+		{{/each}}
+		</div>
+	{{/if}}
+</template>
+
+
+<template name="img_controls">
+	<div class="img-editor unselect abs-full">
+		<button class="round x down right"></button>
+
+		<div class="main-buttons center">
+			{{#unless hide_edit}}<button class="transition-none round target trigger gal-edit"><span class="desc sub center">Edit</span></button>{{/unless}}
+			{{#unless hide_add}}<button class="transition-none round target gal-add"><span class="desc sub center">Add New</span></button>{{/unless}}
+			{{#unless hide_break}}<button class="transition-none round target gal-break as-trigger {{break}} transition-none"><span class="desc sub center">Break</span></button>{{/unless}}
+			{{#if show_caption}}<button class="transition-none round target gal-caption as-trigger {{caption}} transition-none"><span class="desc sub center">Caption</span></button>{{/if}}
+		</div>
+	</div>
+</template>

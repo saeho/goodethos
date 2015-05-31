@@ -1,0 +1,42 @@
+
+<template name="signin">
+
+	{{#if overlay}}
+		{{#if device_is 'phone'}}<span class="popup-close big"></span>{{/if}}
+	{{/if}}
+
+	<section class="normal center table phone-back-white">
+		<div class="inside">
+			<form {{main_attr}}>
+
+				{{>GE_pip error}}
+
+				{{#if overlay}}
+					{{#unless device_is 'phone'}}<span class="popup-close small"></span>{{/unless}}
+					<img src="https://s3-us-west-2.amazonaws.com/goodethos/assets/logos/black.png" class="ge-logo-std" />
+				{{else}}
+					<a href="{{pathFor route='goodethos'}}"><img src="https://s3-us-west-2.amazonaws.com/goodethos/assets/logos/black.png" class="ge-logo-std" /></a>
+				{{/if}}
+
+				<div class="signin-services">
+					<span class="share-social ss-fb pop-in"></span>
+					<span class="share-social ss-tw pop-in"></span>
+					<span class="share-social ss-is pop-in"></span>
+				</div>
+
+				<input class="input-medium re-wrapper {{errorClass 'user_or_email'}}" type="text" name="user_or_email" placeholder="Username" />
+				<input class="input-medium re-wrapper {{errorClass 'password'}}" type="password" name="password" placeholder="Password" />
+
+				<div class="button-back input-medium re-wrapper">
+					<button type="submit" class="sub submit-button">Log In</button>
+				</div>
+
+				<p class="padding-t unselect">
+					<a {{signup_link}}>Sign Up</a>
+				</p>
+			</form>
+		</div>
+	</section>
+
+</template>
+<!-- /signin -->

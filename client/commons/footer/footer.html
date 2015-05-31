@@ -1,0 +1,44 @@
+<template name="footer">
+
+	<div id="footer-ghost"></div>
+
+	<footer class="bg-white condensed {{style}}" id="main-footer">
+		<span class="cursor transition bg-white unselect" id="footer-up-down"></span>
+		<nav class="center bigger wrapper-narrow" id="main-footer-wrapper">
+
+				<div class="inline-block footer-section">
+					<h4 class="serif">{{nav_about.title}}</h4>
+					{{#each nav_about.submenu}}
+						{{#if url }}
+							<a href="{{ url }}" class="block bigger">{{title}}</a>
+						{{ else }}
+							<span class="block silver bigger">{{title}}</span>
+						{{/if}}
+					{{/each}}
+				</div>
+				<!-- /about -->
+
+				<div class="inline-block footer-section">
+					<h4 class="serif">{{nav_social.title}}</h4>
+					{{#each nav_social.submenu}}
+						<a href="{{ url }}" target="_blank" class="block bigger">{{title}}</a>
+					{{/each}}
+				</div>
+				<!-- /social -->
+		</nav>
+
+		<div class="relative" id="cp">
+			<div class="relative clear">
+				{{#unless device_is 'phone'}}<span class="float-l">Follow Good Ethos:&nbsp;&nbsp;</span>{{/unless}}
+				{{#each nav_social.submenu}}
+					<a href="{{ url }}" target="_blank" class="sm-tiny smt-{{key}}"></a>
+				{{/each}}
+				<span class="float-r master-title">&copy; {{#if brand}}{{brand.o_name}}{{else}}Good Ethos{{/if}}</span>
+			</div>
+		</div>
+		<!-- /cp -->
+
+	</footer>
+	<!-- /footer -->
+
+</template>

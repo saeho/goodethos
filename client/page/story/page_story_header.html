@@ -1,0 +1,26 @@
+
+<template name="page_story_header">
+
+	{{#if lct}}{{>page_body_lct lct}}{{/if}}
+
+	<header {{header.attr}}>
+		<div {{header.attr_inside}}>
+
+			<div class="title-wrapper inside">
+				<div class="wrapper">
+					<h1 {{header.attr_title}}>{{header.title}}</h1>
+					{{#if page_summary_visible}}
+						<h4 {{header.attr_summary}}>{{header.summary}}</h4>
+					{{/if}}
+					{{#if header.img}}
+					<figure class="bg-alt relative always-loading" id="pah-container">
+						<img src="{{header.img.src}}" id="{{header.img.key}}" class="featured-img relative"/>
+					</figure>
+					{{/if}}
+				</div>
+			</div>
+
+		</div>
+	</header>
+
+</template>

@@ -1,0 +1,30 @@
+
+<template name="edit_user">
+
+	<section class="table">
+		<div class="inside">
+
+			<form class="relative pop-in-soft bg-light normal" id="edit-user">
+
+				{{>GE_pip pip}}
+
+				<span class="popup-close small"></span>
+
+				<p class="bigger ep-nav unselect">
+					<span class="popup-profile target inline-block {{#if is 'profile'}}cur{{/if}}">Profile</span>
+					<span class="popup-organization target inline-block {{#if is 'organization'}}cur{{/if}}">Publication</span>
+					{{#if form_data.has_o}}
+						<span class="popup-social target inline-block {{#if is 'social'}}cur{{/if}}">Social</span>
+						{{#unless device_is 'phone'}}<span class="popup-brand target inline-block {{#if is 'brand'}}cur{{/if}}">Photo</span>{{/unless}}
+					{{/if}}
+				</p>
+
+				<div class="text">
+					{{>Template.dynamic template=tmpl data=form_data}}
+				</div>
+			</form>
+
+		</div>
+	</section>
+
+</template>

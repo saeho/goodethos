@@ -1,0 +1,92 @@
+
+<template name="all_loop">
+	<article class="sa-loop relative cursor trigger {{info.type}} {{#if cur}}cur{{/if}}">
+		{{#unless device_is 'mobile'}}
+		<div class="controls compressed uppercase spaced-big unselect invis">
+			{{#if url}}<a href="{{url}}" class="edit transition-bg-color white">View</a>{{/if}}
+			<a href="/{{organization}}/{{_id}}/edit" class="edit transition-bg-color white">Edit</a>
+		</div>
+		{{/unless}}
+
+		<h4 class="title bigger-heading charcoal spaced-small">
+			{{#if content.title}}
+				{{content.title}}
+			{{else}}
+				Untitled
+			{{/if}}
+		</h4>
+		<p class="serif bigger summary charcoal small-line">
+			{{#if content.summary}}
+				{{content.summary}}
+			{{else}}
+				No page summary.
+			{{/if}}
+		</p>
+		<p class="ebony condensed info">
+			<span class="icon icon-{{info.type}}"></span>
+			{{>author_pic author}}
+			{{{status_name}}} -
+			Saved {{time_ago}} by {{display_name author}}
+		</p>
+	</article>
+</template>
+
+<template name="all_preview">
+
+	<input id="input-search-users" placeholder="Search by typing anywhere on screen" class="search-small" value="{{search_query}}" />
+
+	{{#if isPreview}}
+		{{>loading}}
+		<div class="preview relative trigger with-top">
+
+			<div class="abs-full bg-bright invis transition" id="hover-cover">
+				<div class="table">
+					<div class="inside center sub unselect">
+						{{#if url}}<a href="{{url}}" class="inline-block edit invis">View</a>{{/if}}
+						<a href="/{{organization}}/{{_id}}/edit" class="inline-block edit invis">Edit</a>
+					</div>
+				</div>
+			</div>
+
+			<h1 class="{{master_title_class content.title}} title">{{content.title}}</h1>
+			<p class="serif bigger-caption average-line">
+				{{#if content.summary}}
+					{{content.summary}}
+				{{else}}
+					No page summary.
+				{{/if}}
+			</p>
+
+			{{#if first_img}}
+				<img src="{{first_img}}"/>
+			{{else}}
+				<h4 class="silver subtitle bigger-heading upd-break">There aren't any images in this page</h4>
+			{{/if}}
+
+			{{#if imgs}}
+			<h4 class="silver subtitle bigger-heading">Other images in this page:</h4>
+			<div class="clear">
+				{{#each imgs}}
+					<figure class="thumb bg-charcoal background" style="background-image: url({{this}});"></figure>
+				{{/each}}
+			</div>
+			{{/if}}
+
+		</div>
+	{{else}}
+		{{#if search}}
+		<div class="preview relative trigger with-top">
+			<h2 class="master-mini no-bottom relative">{{search.count}}</h2>
+			<p class="condensed bigger-heading silver short-line">
+				For search query: <strong class="blue">{{search.query}}</strong>
+			</p>
+			{{#each search.result}}
+				{{>user_search_loop_page}}
+			{{/each}}
+		</div>
+		{{else}}
+			{{>search_no_result query=search_query msg=no_result_msg}}
+		{{/if}}
+	{{/if}}
+
+</template>

@@ -1,0 +1,71 @@
+
+<template name="profile_redesign">
+
+	<div class="table">
+		<div class="inside">
+
+			<section class="bg-light normal re-wrapper relative" id="profile-redesign">
+				<span class="popup-close small"></span>
+
+				{{>GE_pip pip}}
+
+				<p class="center ebony">This is how your page will look.</p>
+
+				<p class="clear center">
+					<span class="inline-block text-color bg-charcoal white cursor {{#if profile.text.white}}on{{/if}}">White Text</span><span class="inline-block text-color bg-white charcoal cursor {{#if profile.text.black}}on{{/if}}">Black Text</span>
+				</p>
+
+				<div class="clear">
+					<div class="profile-preview {{brand 'text'}}" style="{{brand 'bg'}}" id="profile-bg-main">
+
+						<div class="text">
+							<p class="master-title bigger-legend title">Name</p>
+							<p class="serif bigger-medium">This is my profile page.</p>
+						</div>
+
+						<div class="contributors-preview relative overflow" style="{{brand 'bg_second'}}" id="profile-bg-second">
+							<span class="round stripes round1"></span>
+							<span class="round stripes round2"></span>
+							<span class="round stripes round3"></span>
+							<span class="round stripes round4"></span>
+						</div>
+					</div>
+					<!-- /profile preview -->
+
+					{{#if profile}}
+					<div class="profile-preview">
+
+						<div class="text relative" id="change-bg-main">
+							<div class="eucc-np relative unselect">
+								<span class="eucc-preview" style="{{brand 'bg'}}"></span>
+								<span class="pmn-prev inline-block relative target {{#unless profile.main.show_prev}}invis-35{{/unless}}"></span>
+								<input {{profile.main.input}}>
+								<span class="pmn-next inline-block relative target {{#unless profile.main.show_next}}invis-35{{/unless}}"></span>
+							</div>
+							{{#each profile.main.cc}}<span class="eucc cursor" style="background-color: {{this}}" data-color="{{this}}"></span>{{/each}}
+						</div>
+						<!-- /main -->
+
+						<div class="text relative" id="change-bg-second">
+							<div class="eucc-np relative unselect">
+								<span class="eucc-preview" style="{{brand 'bg_second'}}"></span>
+								<span class="pmn-prev inline-block relative target {{#unless profile.second.show_prev}}invis-35{{/unless}}"></span>
+								<input {{profile.second.input}}>
+								<span class="pmn-next inline-block relative target {{#unless profile.second.show_next}}invis-35{{/unless}}"></span>
+							</div>
+							{{#each profile.second.cc}}<span class="eucc cursor" style="background-color: {{this}}" data-color="{{this}}"></span>{{/each}}
+						</div>
+						<!-- /second -->
+
+					</div>
+					{{/if}}
+				</div>
+
+				{{>button}}
+
+			</section>
+
+		</div>
+	</div>
+
+</template>

@@ -1,0 +1,43 @@
+
+<template name="user_aids_page_comments">
+
+	<form id="page-comments">
+		<span class="popup-close small"></span>
+
+		{{#if commenting.admin}}
+			<h1 class="section-title bg-white master-title">
+				<p class="float-r switch shadow-inset-soft cursor {{#if commenting.is_allowed}}on{{/if}} transition unselect" id="commenting-switch"><span class="ball transition"></span></p>
+				Comments
+			</h1>
+
+			<div class="text-comments bg-light">
+				{{#if commenting.is_allowed}}
+					{{#if comments}}
+						<ul class="list-comments normal">
+						{{#each comments}}
+							{{>comment_single}}
+						{{/each}}
+						</ul>
+					{{else}}
+						<p class="commenting-disabled-msg normal">There aren't any comments yet.</p>
+					{{/if}}
+				{{else}}
+					<p class="commenting-disabled-msg normal">Commenting is disabled for this page.</p>
+				{{/if}}
+			</div>
+		{{else}}
+			<div class="abs-full center bg-white on-top normal">
+				<div class="table">
+					<div class="inside">
+
+							<p class="error-p">You do not have required priviledges<br>to moderate comments for this page.</p>
+							<span class="round cursor ok pc-close white bg-red">OK</span>
+
+					</div>
+				</div>
+			</div>
+		{{/if}}
+
+	</form>
+
+</template>

@@ -1,0 +1,49 @@
+
+<template name="user_aids_page_settings">
+
+	<form class="average-line" id="page-settings">
+		<span class="popup-close small"></span>
+
+		<h1 class="section-title bg-white master-title">Settings</h1>
+
+		<div class="text-full bg-light normal">
+
+			{{#if status.is_published}}
+			<div class="clear line">
+				Published:
+				<div class="published-blob float-r {{#if status.can_pod}}bg-white{{/if}}">
+					{{#if status.can_pod}}
+						{{>helpers_time date=status.date name='ps-time' date_class='normal tight tiny'}}
+					{{else}}
+						{{status.date_render}}
+					{{/if}}
+				</div>
+			</div>
+			{{else}}
+				<p class="clear line">Page Status: <span class="float-r">{{status.name}}</span></p>
+			{{/if}}
+
+			{{#if static}}
+				{{#each static}}
+				<p class="clear line">{{name}} <span class="float-r">{{value}}</span></p>
+				{{/each}}
+			{{/if}}
+
+			<div class="clear line">Topic:
+				<p class="published-blob float-r {{#if status.can_pod}}bg-white invis-select{{/if}} padding-none">
+					<span class="ref">{{topics.cur}}</span>
+					{{#if status.can_pod}}
+					<select name="ps-topic" id="ps-topic">
+						{{#each topics.all}}
+						<option value="{{val}}" selected="{{selected}}">{{name}}</option>
+						{{/each}}
+					</select>
+					{{/if}}
+				</p>
+			</div>
+
+		</div>
+
+	</form>
+
+</template>

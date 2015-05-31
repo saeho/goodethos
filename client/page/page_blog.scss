@@ -1,0 +1,73 @@
+
+/* Commons */
+#page-blog-master {
+	min-height: 750px; padding: 0 0 50px; /* Together, they must equal to 800px */
+}
+#page-blog-master .content-img { background-color: #aaa; }
+
+
+/* Header */
+#page-blog-header {
+	background: #f0f0f0;
+	position: relative; padding: 100px 0 0;
+	font-size: .95em; }
+#page-blog-header .featured-img { max-height: 580px; overflow: hidden; }
+#page-blog-header img { width: 100%; height: auto; }
+#page-blog-header.is-loading:before { top: 125px; right: 25px; left: auto; bottom: auto; margin: 0; }
+
+#page-blog-header .title-wrapper { padding: 5% 4.5% 0; }
+#page-blog-header .title { padding: 10px 0; }
+#page-blog-header .summary { padding: 0 0 25px; }
+
+	/* On Top */
+	#page-blog-header.on_top_true .featured-img { background: #282828; min-height: 200px; }
+	#page-blog-header.on_top_true .featured-img img { opacity: .7; filter: alpha(opacity=7); -khtml-opacity: .7; }
+	#page-blog-header.on_top_true .title-wrapper { position: absolute; z-index: 50; left: 0; right: 0; }
+	#page-blog-header.on_top_true .title-wrapper .title, #page-blog-header.on_top_true .title-wrapper .summary { color: #fff; }
+
+	/* On Bot */
+	#page-blog-header.on_top_false .title-wrapper .title { color: #2d2d2d; }
+	#page-blog-header.on_top_false .featured-img { background: #aaa; }
+
+
+/*
+	## Body
+	## Remember, everything moves in 32px
+*/
+#page-blog-body { padding: 2.5% 0 0; }
+#page-blog-body .content-wrapper:only-child { min-height: 350px; }
+
+@media screen and (min-width: 640px) {
+	#page-blog-body .content-wrapper, .dotted-paper { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/line-height-32.png); }
+	.linepaper { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/linepaper.png); }
+
+	#page-blog-body .content-wrapper { border-top: solid 25px #fff; border-bottom: solid 25px #fff; }
+	#page-blog-body .content-wrapper, .linepaper, .dotted-paper {
+		padding-top: 0; padding-bottom: 0;
+		background-color: transparent; background-position: 0 0; background-size: 9px 32px;
+		font-size: 16px; }
+
+	.linepaper, .dotted-paper,
+	#page-blog-body .content-wrapper p, #page-blog-body .content-wrapper blockquote,
+	#page-blog-body .content-wrapper h2, #page-blog-body .content-wrapper h3 {
+		line-height: 32px; }
+	.linepaper p, .dotted-paper p,
+	#page-blog-body .content-wrapper p, #page-blog-body .content-wrapper blockquote {
+		padding: 0 0 32px; }
+	#page-blog-body .content-wrapper h2, #page-blog-body .content-wrapper h3 {
+		padding: 32px 0 0; }
+	#page-blog-body .content-wrapper blockquote { margin: -2px 25px 2px; letter-spacing: .002em; }
+
+	#page-blog-body .content-wrapper h2 { font-size: 2.2em; margin: -3px 0 3px; }
+	#page-blog-body .content-wrapper h3 { font-size: 1.9em; margin: 2px 0 -2px; }
+
+	.dotted-paper p:last-child { padding: 0 0 20px; }
+}
+
+@media screen and (max-width: 1024px) {
+	#page-blog-header { padding-top: 5%; }
+}
+
+@media screen and (max-width: 700px) {
+	#page-blog-header { padding-top: 0; }
+}

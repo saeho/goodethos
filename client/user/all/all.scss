@@ -1,0 +1,99 @@
+
+#user-page-desktop {
+	overflow: auto;
+	position: fixed; left: 50%; right: 0; top: 0; bottom: 0; }
+
+/* Nav State */
+#overlord.nav-mini #user-page-desktop { margin: 0 0 0 25px; }
+#overlord.nav-open #user-page-desktop { margin: 0 0 0 100px; }
+#overlord.nav-mini #user-page-title { margin: 0 -25px 0 50px; }
+#overlord.nav-open #user-page-title { margin: 0 -100px 0 200px; }
+#overlord.nav-open #user-page-title.has-logo { margin: 0 -100px 0 250px; }
+
+/* Preview */
+#user-page-desktop .loading-master { z-index: 15; }
+
+#user-page-desktop .preview {
+	font-size: .8em;
+	max-width: 780px; min-height: 580px; padding: 4% 8%; }
+#user-page-desktop .with-top { margin-top: 50px; }
+#user-page-desktop .title { padding: 5px 0 7px; margin: 0 0 5px -1px; }
+#user-page-desktop .no-bottom { padding: 5px 0; }
+#user-page-desktop .subtitle { padding: 27px 0 8px; }
+#user-page-desktop .upd-break { border-top: solid 1px #dedede; }
+#user-page-desktop .thumb { display: block; float: left; width: 48px; height: 48px; margin: 0 1px 1px 0; }
+
+#user-page-desktop .edit {
+	font-size: 24px; letter-spacing: 2.5px; text-indent: 5px;
+	border: solid 3px #000; background: #fff; color: #333;
+	padding: 4px; margin: 0 5px; min-width: 98px; }
+#user-page-desktop .edit:hover { border-color: #fff; }
+
+/* List */
+#user-page-master { padding: 50px 0; margin: 0 50% 0 0; }
+
+@media screen and (max-width: 1024px) {
+	#user-page-master { margin: 0 auto; max-width: 700px; }
+	#user-page-desktop { display: none; }
+}
+
+.sa-looper { padding: 2.4% 0; }
+
+.sa-loop { padding: 2.4% 20px; border-bottom: solid 2px #fff; }
+.sa-loop:hover { background: #fafafa; }
+.sa-loop.cur { background: #fff; }
+
+.sa-loop .title { padding: 4px 0 0; }
+.sa-loop p { padding: 0; }
+.sa-loop .summary { padding: 0; }
+.sa-loop .info { padding: 10px 0 0; }
+
+	.sa-loop .controls { position: absolute; top: 10px; right: 10px; }
+	.sa-loop .edit { display: inline-block; vertical-align: top; }
+
+	.sa-loop .edit, #user-page-title .float-r { font-size: 15px; line-height: 20px; }
+	.sa-loop .edit, #user-page-title .invis-select {
+		color: #fff; background: #444;
+		padding: 2px 7px 1px 9px; border-radius: 10px; }
+
+	.sa-loop .edit:hover { background: $blue; }
+	.sa-loop.blog .edit:hover { background: #23a13b; }
+	.sa-loop.event .edit:hover, .sa-loop.note .edit:hover { background: $cyan; }
+
+	#user-page-master .icon, .house-loops .icon {
+		display: block; float: left; border-radius: 50%;
+		background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/page-type-icons.png); background-size: 24px 96px;
+		width: 24px; height: 24px; margin: 0 5px 0 0; }
+	#user-page-master .icon-blog, .house-loops .icon-blog { background-color: #23a13b; background-position: 0 -48px; }
+	#user-page-master .icon-story, .house-loops .icon-story { background-color: $blue; background-position: 0 0; }
+	#user-page-master .icon-event, .house-loops .icon-event { background-color: $cyan ; background-position: 0 -24px; }
+	#user-page-master .icon-note, .house-loops .icon-note { background-color: $cyan ; background-position: 0 -72px; }
+
+	.house-loops .loop.blog a:hover .info { background-color: #23a13b; }
+	.house-loops .loop.story a:hover .info { background-color: $blue; }
+	.house-loops .loop.event a:hover .info, .house-loops .loop.note a:hover .info { background-color: $cyan; }
+
+	.house-loops .loop a:hover .info span, .house-loops .loop a:hover .info strong { color: #fff; }
+	.house-loops .loop a:hover .info { border-color: #fff; }
+	.house-loops .loop a:hover .with-big .info { border-color: rgba(0,0,0,0); }
+	.house-loops .loop.blog a:hover .inner { -webkit-box-shadow: 0 0 0 1px #23a13b; -moz-box-shadow: 0 0 0 1px #23a13b; box-shadow: 0 0 0 1px #23a13b; }
+	.house-loops .loop.story a:hover .inner { -webkit-box-shadow: 0 0 0 1px #0077aa; -moz-box-shadow: 0 0 0 1px #0077aa; box-shadow: 0 0 0 1px #0077aa; }
+	.house-loops .loop.event a:hover .inner, .house-loops .loop.note a:hover .inner { -webkit-box-shadow: 0 0 0 1px #00978e; -moz-box-shadow: 0 0 0 1px #00978e; box-shadow: 0 0 0 1px #00978e; }
+
+/* Nav */
+#user-page-title {
+	background: rgba(240,240,240,.87); border-bottom: solid 2px #fff;
+	height: 49px; margin: 0 0 0 50px;
+	position: fixed; top: 0; left: 0; right: 50%; z-index: 10; }
+#user-page-title h1 {
+	padding: 16px 21px 0; font-size: 17px;
+	position: absolute; top: 0; left: 0; }
+#user-page-title .float-r { padding: 17px 10px 0; }
+
+#user-page-title .invis-select { margin: -2px 0 0 2px; }
+#user-page-title .invis-select:hover { background: #5f5f5f; }
+
+@media screen and (max-width: 1024px) {
+	#user-page-title { right: 0; }
+	#overlord:not(.desktop) #user-page-title { position: absolute; top: 0; margin: 0; }
+}

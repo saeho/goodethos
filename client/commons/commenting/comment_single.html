@@ -1,0 +1,30 @@
+
+<template name="comment_single">
+
+	<li class="relative comment-single {{#if excerpt}}excerpt{{/if}} {{#if edit_mode}}edit-mode{{/if}}" id="{{_id}}">
+
+		{{#if edit_mode}}
+			<figure class="mini-switch shadow-inset-soft cursor {{#unless hidden}}on{{/unless}} transition unselect"><span class="ball transition"></span></figure>
+		{{/if}}
+
+		<div class="message">
+			{{{message_html}}}
+			<div class="author-name">
+				{{>comment_single_author_pic author}}
+				<span class="invis-50"><strong>{{author.name}}</strong> {{#if replyTo}}replied{{else}}commented{{/if}} {{author.time_ago}}</span>
+			</div>
+		</div>
+	</li>
+
+</template>
+
+
+<template name="comment_single_author_pic">
+	{{#if isImg}}
+		<figure class="inline-block author-pic round overflow">
+			{{#if img}}<img src="{{img}}" />{{/if}}
+		</figure>
+	{{else}}
+		<figure class="author-pic relative shadow-soft background round" style="{{img}}"></figure>
+	{{/if}}
+</template>

@@ -1,0 +1,15 @@
+
+<template name="author_pic">
+	{{#if author.exists}}
+	<figure class="you round transition background {{author.service_raw}}" style="
+		{{#if author.url}}
+			background-image: url({{author.url}}); background-color: transparent;
+		{{else}}
+			{{brand 'logo_big'}} background-color: transparent;
+		{{/if}}
+	">
+		<span class="round transition service {{author.service}}"></span>
+	</figure>
+	{{/if}}
+
+</template>

@@ -1,0 +1,48 @@
+<template name="eu_profile">
+	{{#if name}}
+	<label class="{{label_class}}">Your Name</label>
+	<div class="clear">
+		{{#each name}}
+			<div class="half float-l">
+			{{#if allow_edit}}
+			<input class="{{input_class}}" value="{{value}}" type="text" name="{{key}}" placeholder="{{placeholder}}" />
+			{{else}}
+			<div class="input bg-white stripes">{{value}}&nbsp;</div>
+			{{/if}}
+			</div>
+		{{/each}}
+	</div>
+	{{/if}}
+
+	{{#if emails}}
+	<label class="{{label_class}}">E-Mail</label>
+	{{#each emails}}
+		{{#unless verified}}<a class="small-label ebony cursor verify-email red">Verify your e-mail address</a>{{/unless}}
+		<div class="relative">
+			<span class="eu-icons email-{{#unless verified}}not-{{/unless}}verified tooltip down right"></span>
+			<input class="{{input_class}}"
+				type="text"
+				value="{{value}}"
+				name="{{name}}" />
+		</div>
+	{{/each}}
+	{{/if}}
+
+	{{#unless isDemo}}
+	<label class="{{label_class}}">Change Password</label>
+	<input class="{{input_class}}" type="password" name="cur_pwd" placeholder="Current Password" />
+	<div class="clear">
+		<div class="half float-l">
+			<input class="{{input_class}}" type="password" name="pwd" placeholder="Password" />
+		</div>
+		<div class="half float-l">
+			<input class="{{input_class}}" type="password" name="pwd_repeat" placeholder="Repeat Password" />
+		</div>
+	</div>
+	{{/unless}}
+
+	{{#if show_button}}
+		{{>button}}
+	{{/if}}
+
+</template>

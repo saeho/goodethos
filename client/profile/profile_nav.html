@@ -1,0 +1,12 @@
+
+<template name="profile_nav">
+	<nav class="loop bigger house-nav">
+		<div class="inner clear relative">
+			{{#if query}}<span class="close-small"></span>{{/if}}
+			<input value="" placeholder="Search" name="search-profile" id="search-profile" />
+			<div class="box cursor middle-title sign-guestbook transition bg-white">
+				Guestbook {{#if total_comments}}<span class="green">({{total_comments}})</span>{{/if}}
+			</div>
+		</div>
+	</nav>
+</template>

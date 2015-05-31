@@ -1,0 +1,19 @@
+
+<template name="page_blog_header">
+
+	{{#if lct}}{{>page_body_lct lct}}{{/if}}
+	<header {{header.attr}}>
+		<div class="title-wrapper">
+			<h1 {{title.attr}}>{{title.val}}</h1>
+			<h4 {{summary.attr}}>{{summary.val}}</h4>
+		</div>
+
+		{{#if header.img}}
+		<figure {{header.img_attr}}>
+			<img {{header.img}} />
+		</figure>
+		{{/if}}
+
+	</header>
+
+</template>

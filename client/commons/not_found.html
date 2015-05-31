@@ -1,0 +1,27 @@
+
+<template name="not_found">
+<main class="fixed-full bg-black background takeover" id="not-found">
+	<div class="text white center normal-line condensed bigger-medium">
+		<img src="https://s3-us-west-2.amazonaws.com/goodethos/assets/logos/white.png" width="125" height="41" class="block" />
+		<p class="invis-85">
+			We couldn't find what you were looking for...<br />
+			But don't worry, Bruno's on the lookout!
+		</p>
+		<p class="invis-85">
+			<a href="{{ pathFor route='goodethos' }}"><u>Click here</u></a> to go to the homepage.
+		</p>
+	</div>
+</main>
+</template>
+<!-- /auth layout -->
+
+<template name="empty">
+	{{> yield}}
+</template>
+
+<template name="loading">
+	<div class="loading-master">
+		{{#if message}}<span class="loading-message normal">{{message}}</span>{{/if}}
+		<span class="loading spin-inifinite"></span>
+	</div>
+</template>

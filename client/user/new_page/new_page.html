@@ -1,0 +1,48 @@
+<template name="user_new_page">
+	<div {{ master_attr }}>
+		<div class="center wrapper-wide">
+
+			{{#if not_popup}}
+			<header id="cn-title">
+				<h1 class="sub center title-size">New {{page_type}}</h1>
+				<p class="ebony condensed bigger spaced">Setup your title page (don't worry, this can be changed at any time)</p>
+			</header>
+			{{else}}
+			{{/if}}
+
+			<section class="center condensed charcoal bigger spaced cn-choices transition-opacity cn-layout cur" data-switch="layout">
+				<!-- <buttons> are an inline-block, don't let any spaces between #each -->
+				{{#each layout_options}}<div class="shadow-soft cn-option transition-basic {{this.cur}} pop-in" id="{{this.id}}" data-layout="{{this.id}}">
+					<span class="director ebony transition">{{this.desc}}</span>
+					<div class="stage abs-full overflow">
+						{{#each this.actors}}<span class="actor sub transition {{this}}"></span>{{/each}}
+					</div>
+				</div>{{/each}}
+			</section>
+
+			{{#if not_popup}}
+			<section class="center condensed charcoal bigger spaced transition-opacity cn-choices cn-text" data-switch="text">
+
+				<span class="new-back transition round"></span>
+
+				<div class="cn-option transition wrapper-pop table big relative">
+					<div class="inside">
+						<span class="guide transition sub">Title</span>
+						<h1 class="master-big wrapper-pop master-title no-enter editable" id="page-title" data-max="100" contenteditable="true" placeholder="Title"></h1>
+					</div>
+				</div>
+
+				<div class="cn-option transition wrapper-pop table small relative">
+					<div class="inside">
+						<span class="guide transition sub">Summary</span>
+						<h4 id="page-summary" class="bigger-caption wrapper-pop serif invis-70 editable no-enter" data-max="255" contenteditable="true" placeholder="Summary (Optional)"></h4>
+					</div>
+				</div>
+
+				<button id="submit" class="bg-charcoal cn-option sub smooth no-shadow">Create</button>
+			</section>
+			{{/if}}
+
+		</div>
+	</div>
+</template>

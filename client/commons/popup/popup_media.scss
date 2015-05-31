@@ -1,0 +1,188 @@
+
+/* Popup Media */
+#popup-media { position: relative; height: 100%; }
+#popup-media .inside { padding: 50px; }
+@media screen and (max-width: 1024px) { #popup-media .inside { padding: 50px 5%; } }
+#popup-media .img-contain {
+	margin: 4%;
+	position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+@media screen and (max-width: 1024px) { #popup-media .img-contain { margin: 50px; } }
+@media screen and (max-width: 700px) { #popup-media .img-contain { margin: 7%; } }
+
+#popup-media .with-caption { bottom: 30px; }
+#popup-media .pm-figcaption {
+	max-width: 620px; margin: 0 auto; padding: 0 5%;
+	position: absolute; bottom: 13px; left: 0; right: 0; }
+
+#popup-media-nav { position: absolute; top: 12px; left: 0; right: 0; bottom: auto; z-index: 55; }
+#popup-media-nav .cursor {
+	border-radius: 50%;
+	position: absolute; left: 50%; top: 0;
+	width: 25px; height: 25px;
+	border: solid 1px #555; background-color: #fff; }
+
+	/* .pmn-next and .pmn-prev is shared in other templates */
+	#popup-media-nav .cursor:before, #popup-media-nav .cursor:after, .pmn-prev:before, .pmn-prev:after, .pmn-next:before, .pmn-next:after {
+		background: #444;
+		display: block; content: ' ';
+		position: absolute; }
+
+	/* Buttons Positioning */
+	#popup-media-nav .pmn-close { margin: 0 0 0 -14px; }
+	#popup-media-nav .pmn-prev { margin: 0 0 0 -45px; }
+	#popup-media-nav .pmn-next { margin: 0 0 0 17px; }
+	#popup-media-nav .pmn-save { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/popup-save.png); background-repeat: no-repeat; background-position: 50% 0; background-size: 25px 50px; }
+	#popup-media-nav .on { background-color: $bg_green; background-position: 50% -25px; border-color: rgba(0,0,0,0); }
+
+		/* If edit-mode, buttons are just inline-blocks */
+		#popup-media-nav.edit-mode .cursor {
+			position: relative; left: auto;
+			display: inline-block; margin: 0 2px; }
+
+	.pmn-close:before, .pmn-close:after{
+		width: 13px; height: 1px;
+		top: 12px; left: 6px; }
+	.pmn-prev:before, .pmn-next:after { width: 8px; height: 1px; }
+	.pmn-prev:after, .pmn-next:before { width: 7px; height: 1px; }
+	.pmn-add:before { width: 11px; height: 1px; top: 12px; left: 7px; }
+	.pmn-add:after { height: 11px; width: 1px; top: 7px; left: 12px; }
+
+	.pmn-prev:before { top: 10px; left: 8px; }
+	.pmn-prev:after { top: 15px; left: 9px; }
+	.pmn-next:after { top: 10px; left: 9px; }
+	.pmn-next:before { top: 15px; left: 9px; }
+	.pmn-close:before, .pmn-prev:before, .pmn-next:before { -ms-transform: rotate(-45deg); -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
+	.pmn-close:after, .pmn-prev:after, .pmn-next:after { -ms-transform: rotate(45deg); -webkit-transform: rotate(45deg); transform: rotate(45deg); }
+
+#popup-media-nav .cursor .desc {
+	position: absolute; left: 50%; top: 25px;
+	display: none;
+	font-size: 12px; line-height: 1.15;
+	width: 70px; margin: 0 0 0 -35px; }
+#popup-media-nav .cursor:hover .desc { display: block; }
+
+/* Edit Mode */
+.edit-mode #popup-media-nav { top: 12px; }
+
+/* New */
+#pmc-new {
+	padding: 25px 25px 15px; text-align: left; letter-spacing: .01em;
+	background: #fff; border: solid 1px #444; }
+#pmc-new .cursor {
+	display: block; height: 35px; line-height: 1; padding: 0 0 0 35px;
+	background: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/pmc-new.png) no-repeat; background-size: 35px 140px; }
+#pmc-new .pmc-picture { background-position: 0 0; }
+#pmc-new .pmc-video { background-position: 0 -35px; }
+#pmc-new .pmc-twitter { background-position: 0 -70px; }
+#pmc-new .pmc-instagram { background-position: 0 -105px; }
+
+		/* Popup in Popup */
+		#pm-pip { background: rgba(255,255,255,.87); z-index: 71; }
+		#pm-static-pip { background: #fff; z-index: 72; }
+		#pm-pip .inline-block, #pm-static-pip .inline-block {
+			background: #4a4a4a;
+			border-radius: 50%; color: #fff;
+			width: 40px; height: 35px; padding: 5px 0 0; margin: 0 2px; }
+		#pm-pip p, #pm-static-pip p { max-width: 225px; margin: 0 auto; }
+		#pm-pip .inline-block:hover, #pm-static-pip .inline-block:hover { background: #222; }
+		#pm-static-pip .cursor-bigger { width: 70px; height: 51px; padding: 19px 0 0; }
+
+		/* Change Video Input Values */
+		#popup-media .change-value {
+			position: absolute; left: 0; right: 0; top: -40px;
+			height: 40px; }
+		#popup-media .change-value input {
+			border: solid 1px #777; background: rgba(255,255,255,.87);
+			height: 38px; }
+		#popup-media .video-not-found { background: #fff; width: 100%; display: none; }
+
+		/* Change Image */
+		.pmc-area .back {
+			width: 80px; height: 80px; margin: -40px 0 0 -40px; z-index: 1;
+			background-color: rgba(255,255,255,.2);
+			-webkit-box-shadow: 0 0 15px rgba(0,0,0,.2); -moz-box-shadow: 0 0 15px rgba(0,0,0,.2); box-shadow: 0 0 15px rgba(0,0,0,.2); }
+		.pmc-area .back, .pmc-area .icon { position: absolute; left: 50%; top: 50%; }
+		.pmc-area:hover .back { background-color: rgba(255,255,255,.9); width: 150px; height: 150px; margin: -75px 0 0 -75px; }
+		.working .pmc-area { display: none; }
+
+				.pmc-area .icon {
+					width: 50px; height: 50px; margin: -25px 0 0 -25px; z-index: 2;
+					background: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/pmc-area.png) no-repeat; background-size: 50px 150px; }
+				#pmc-social-search .icon { margin: 0 auto; }
+				#pmc-img-change .icon { background-position: 0 0; }
+				#pmc-twitter-change .icon { background-position: 0 -50px; }
+				#pmc-instagram-change .icon { background-position: 0 -100px; }
+
+		#popup-media .lb-area {
+			position: absolute; left: 50%; top: 50%;
+			background: #fff; border: solid 1px #444;
+			width: 298px; height: 78px; margin: -40px 0 0 -150px; }
+		#popup-media .lb-bar { margin-top: -8px; }
+		#popup-media .lb-message { margin-top: -6px; color: #444; }
+
+		/* Social Media */
+		#pmc-social-search {
+			max-width: 700px; min-width: 550px; margin: 0 auto;
+			position: absolute; top: 50px; bottom: 0; left: 0; right: 0; z-index: 70; }
+		#pmc-social-search .query {
+			font-size: 24px; line-height: 32px;
+			background: #fff; border: solid 1px #777; border-top: none;
+			background: none; border: none;
+			padding: 14px 20px 13px; }
+		#pmc-social-search.has-result .query { border: solid 1px #777; border-top: none; background: #fff; }
+
+		.query-options {
+			background: #fff; border: solid 1px #777;
+			color: #333; line-height: 1;
+			padding: 7px 10px; }
+
+		#pmc-social-search .inline-block { padding: 5px 0 6px; }
+		#pmc-social-search .invis-select { display: inline-block; padding: 0; }
+		#pmc-social-search input.inline-block { margin: 8px 5px 0; padding: 0; height: auto; }
+		#pmc-social-search .x {
+			position: absolute; top: -10px; right: -10px; }
+
+		#pmc-social-search .qo-button { padding: 5px 18px 6px 5px; margin: 0 0 0 3px; }
+			#pmc-social-search .arroww-down:before {
+				left: auto; right: 4px; top: 9px;
+				border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #fff; }
+
+		#pm-result {
+			overflow: hidden; overflow-y: auto; padding: 10px 0 25px;
+			position: absolute; left: 0; right: 0; top: 103px; bottom: 0; }
+		#pmc-social-search .loading-container { z-index: 10; top: 103px; }
+		#pmc-social-search .loading-container .loading { top: 200px; }
+		.pm-guide-text { padding: 25px 4% 0; }
+
+				/* Preview Before Pick */
+				.sm-preview {
+					line-height: 1.45;
+					border: solid 1px rgba(0,0,0,0); border-top: solid 1px #ddd;
+					padding: 15px 5px 15px 63px; cursor: pointer; }
+				.sm-preview:hover { background: #fff; border-color: #444; }
+
+				.sm-preview .sm-embed {
+					float: right; margin: 0 0 0 10px;
+					max-width: 200px; max-height: 120px; }
+
+				.sm-profile-pic {
+					float: left;
+					width: 48px; height: 48px; margin: 0 0 0 -58px; }
+				.sm-preview p { padding: 0; }
+				.sm-preview p.sm-text { padding: 0 0 3px; }
+
+				/* Preview After Pick */
+				.social-media-pop { margin: 0 auto; color: #fff; }
+				.smp-embed { background: #2a2a2a; }
+				.smp-embed img { display: block; margin: 0 auto; width: 100%; max-height: 780px; }
+
+				.smp-msg { max-width: 480px; }
+				.smp-msg-only { max-width: 400px; }
+				.smp-msg .text { padding: 35px 25px; line-height: 1.8; }
+				.smp-msg-only .text { padding: 43px 25px 44px; font-size: 1.25em; line-height: 1.5; }
+
+				.smp-by {
+					line-height: 1.35;
+					background: rgba(0,0,0,.1);
+					height: 48px; padding: 19px 25px 11px; }
+				.smp-profile-pic { width: 48px; height: 48px; float: left; margin: -4px 10px 0 0; }

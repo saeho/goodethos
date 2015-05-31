@@ -1,0 +1,141 @@
+
+<template name="team_preview">
+
+	<input id="input-search-users" placeholder="Search by typing anywhere on screen" class="search-small" value="{{search_query}}" />
+
+	{{#if isPreview}}
+		<div class="preview relative with-top">
+		{{#with data}}
+
+			<h2 class="master-mini title team-user relative">
+				{{>author_pic}}
+				{{name}}
+			</h2>
+
+			{{#if isO.inside}}
+				<p class="condensed bigger-heading {{#if isO.invited}}blue{{else}}red{{/if}}">
+					{{#if isO.invited}}
+						Invitation sent <span class="master-title green">({{role.name}})</span>
+					{{else}}
+						Not in your organization
+					{{/if}}
+				</p>
+
+				<div class="upd-loop padding-b margin-b">
+					<h4 class="upd-loop-title bigger-heading condensed silver">
+						{{#if isO.invited}}
+							If <a href="{{sm_url}}" target="_blank" class="red dotted-link">this person</a> is not part of your organization, you should <u class="ebony">cancel</u> the invitation immediately.
+						{{else}}
+							Before inviting this person to join your team, make sure
+							he/she is part of your organization by <a href="{{sm_url}}" target="_blank" class="red dotted-link">verifying this URL</a>.
+						{{/if}}
+					</h4>
+				</div>
+
+				{{#unless isO.invited}}
+				<div class="padding-t padding-b bigger-heading condensed average-line">
+					{{#each roles_opt}}
+					<p class="padding-none">
+						<input type="radio" name="role" value="{{level}}" id="radio-{{name}}" class="inline" checked="{{checked}}">
+						&nbsp;&nbsp;<label for="radio-{{name}}"><strong>{{name}}</strong> {{desc}}</label>
+					</p>
+					{{/each}}
+				</div>
+
+				<div class="padding-t padding-b silver condensed bigger-heading margin-b">
+						After the invite is sent, he/she will receive a notification on the website.
+				</div>
+				{{/unless}}
+
+				<div class="clear">
+					{{#if isO.invited}}
+					<div class="button-back input-tiny float-l">
+						<button type="submit" class="sub submit-button" id="cancel-button">Cancel</button>
+					</div>
+					{{else}}
+					<div class="button-back input-tiny float-l">
+						<button type="submit" class="sub submit-button perm" id="invite-button">Invite</button>
+					</div>
+					{{/if}}
+				</div>
+
+			{{else}}
+				<p class="condensed bigger-heading silver short-line">
+					<strong class="ebony">{{role.name}}</strong> {{role.desc}}
+					{{#if isO.allow_remove}}<br /><span class="cursor red" id="remove-user">Remove User</span>{{/if}}
+				</p>
+
+				{{#if pages}}
+					{{#each pages}}
+						{{>user_search_loop_page}}
+					{{/each}}
+				{{else}}
+					<div class="upd-loop">
+						<h4 class="upd-loop-title condensed bigger-heading silver">{{name}} hasn't created anything yet.</h4>
+					</div>
+				{{/if}}
+			{{/if}}
+
+		{{/with}}
+		</div>
+
+	{{else}}
+		{{#if search_result}}
+		<div class="sa-looper transition relative with-top">
+			{{#each search_result}}
+				{{>user_team_single}}
+			{{/each}}
+		</div>
+		{{else}}
+			{{>search_no_result query=search_query msg=no_result_msg}}
+		{{/if}}
+	{{/if}}
+
+</template>
+
+
+<template name="user_team_single">
+	<div class="sa-loop relative cursor trigger transition-bg-color team-user {{cur}}">
+
+		{{>author_pic}}
+
+		{{#if was_queried}}
+			<span class="float-r condensed bigger {{isO.color}}">
+				{{isO.msg}}
+			</span>
+		{{else}}
+			{{#if change_roles}}
+				<p class="float-r invis-select condensed bigger ebony">
+					<span class="ref">{{role.name}}</span>
+					<select class="change-roles">
+						{{#each change_roles}}<option value="{{level}}" selected="{{selected}}">{{name}}</option>{{/each}}
+					</select>
+				</p>
+			{{else}}
+				<span class="float-r condensed bigger ebony {{#if isUser}}blue{{/if}}">{{role.name}}</span>
+			{{/if}}
+		{{/if}}
+
+		<p class="charcoal master-title bigger-medium">{{name}}{{#if isUser}}&nbsp;&nbsp;<span class="blue">(You)</span>{{/if}}</p>
+
+	</div>
+</template>
+
+
+<template name="search_no_result">
+	<div class="preview relative with-top">
+		<div class="udp-loop">
+			<h2 class="master-mini relative no-bottom">Nothing Found</h2>
+			<div class="condensed bigger-heading short-line">
+				<p class="crawl-t padding-b" style="padding-left: 1px;">
+					No results for <strong class="red">{{query}}</strong>
+				</p>
+				{{#if msg}}
+				<p class="silver crawl-t" style="max-width: 420px;">
+					{{{msg}}}
+				</p>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</template>

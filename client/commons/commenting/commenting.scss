@@ -1,0 +1,99 @@
+
+#commenting, #page-comments {
+  line-height: 1.3;
+  position: relative; z-index: 49; }
+#commenting.animate { @include animation(delay-fade-in-animate .7s 1); }
+.commenting-wrapper { margin: 0 auto; max-width: 580px; }
+
+.comment-single p, .comment-single.excerpt p.author-name { padding: 0 0 12px; }
+
+ul.list-comments, .list-comments li, #commenting textarea { margin: 0; list-style-type: none; padding: 0; }
+
+#new-comment { margin: 0 0 50px; }
+
+#commenting textarea {
+  border: none;
+  background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/commenting-dark-dots.png);
+  background-color: transparent; background-position: 0 0; background-size: 9px 32px;
+  font-size: 18px; line-height: 32px;
+  padding: 0; margin: 20px 0; min-height: 140px; }
+.brand-light #commenting textarea {
+  color: #fff;
+  background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/commenting-light-dots.png); }
+
+#commenting .nca, .comment-single .nca { padding: 1px 0 0; }
+.comment-single:not(.edit-mode) .message p { font-size: 1.078em; }
+.comment-single:not(.edit-mode) .message { padding: 10px; min-height: 32px; }
+.brand-light .comment-single .message, .brand-dark .comment-single .message {
+  padding: 10px 0 0 8px;
+  background: none; }
+
+.comment-single, .list-comments .comment-single {
+  background: #fff;
+  padding: 0 0 0 58px; margin: 10px 0 0; }
+.brand-light .comment-single, .brand-dark .comment-single {
+  margin: 25px 0 0;
+  border-top-style: solid; border-top-width: 1px; }
+.brand-light .comment-single { border-top-color: rgba(255,255,255,.5); }
+.brand-dark .comment-single { border-top-color: rgba(0,0,0,.5); }
+
+.brand-light .comment-single, .brand-dark .comment-single { background: none; padding: 0 0 0 49px; }
+
+.author-pic, .author-pic img { width: 48px; height: 48px; }
+
+
+        /* Author */
+        .author-pic { width: 48px; height: 48px; }
+        #commenting .nca .author-pic { margin: 0 1px 0 9px; }
+        #house-book .nca .author-pic { margin: 0; }
+
+        #commenting .message p:last-of-type { padding: 0; }
+        #commenting .message .author-name { padding: 4px 0 0; font-size: .9em; }
+
+        #commenting .nca .author-name, .comment-single .nca .author-name { padding: 5px 10px 0; }
+        #commenting .nca .button-back, .comment-single .nca .button-back {
+            float: right;
+            text-align: center; color: #fff;
+            width: 84px; margin: 4px 0 0; }
+          #commenting .nca .button-back button { padding: .50em .7em .49em; }
+          .brand-light #commenting button { background: #fff; color: $color_text; }
+
+                .comment-single .author-pic { position: absolute; left: 9px; top: 9px; }
+                .brand-light .comment-single .author-pic, .brand-dark .comment-single .author-pic { left: 0; }
+
+
+        /* Single Comments - Excerpt - Override */
+        .comment-single.excerpt { padding: 10px 20px; margin: 0; border-bottom: solid 1px #ccc; }
+        .comment-single.excerpt:last-child { border-bottom: none; }
+        .comment-single.excerpt .message { padding: 0; }
+        .comment-single.excerpt .author-pic, .comment-single.excerpt .author-pic img {
+            position: relative; left: auto; top: auto;
+            float: left; width: 18px; height: 18px; margin: 0 6px 0 0; }
+
+        /* Single Comments - Edit Mode */
+        .comment-single .mini-switch { position: absolute; top: 7px; right: 7px; display: none; }
+        .comment-single:hover .mini-switch { display: block; }
+        .comment-single .is-hidden { color: rgba(0,0,0,.4); }
+
+                /* Controls for Ellipsis */
+                .comment-single.edit-mode { background: none; }
+                .comment-single.edit-mode:hover { background: #fff; }
+                .comment-single.edit-mode:hover .ellipsis, .comment-single.edit-mode .real { display: none; }
+                .comment-single.edit-mode:hover .real { display: block; }
+
+
+        /* Switch Social */
+        .switch-social {
+            display: block; float: left;
+            background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/switch-social.png); background-size: 200px 40px;
+            width: 40px; height: 40px; }
+        #switch-to-fb { background-color: #3b5998; background-position: 0 0; }
+        #switch-to-tw { background-color: #55acee; background-position: -40px 0; }
+        #switch-to-ig { background-color: #1d6e9e; background-position: -80px 0; }
+        #switch-to-ge { background-color: #00a097; background-position: -120px 0; }
+
+        #new-comment .login-msg { padding: 10px 0 0 12px; }
+
+@media screen and (max-width: 1024px) {
+    #commenting { padding-top: 50px; padding-bottom: 50px; }
+}

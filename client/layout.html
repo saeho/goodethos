@@ -1,0 +1,32 @@
+
+<template name="layout">
+	<div class="{{nav_state}} {{device_is}} {{#unless brand 'logo_thumb'}}no-logo{{/unless}} transition" id="overlord">
+
+		{{#unless device_is 'mobile'}}
+			{{> nav_master}}
+		{{/unless}}
+
+		<div id="master">
+			{{#if display_popup}}
+				{{>popup_master}}
+			{{/if}}
+
+			<div class="bg-alt" id="master-wrapper">
+				{{#unless hide_header}}
+					{{>header}}
+				{{/unless}}
+
+				{{>yield}}
+
+				{{#unless hide_footer}}
+					{{>footer}}
+				{{/unless}}
+
+				{{#if device_is 'mobile'}}
+				<div class="transition" id="mobile-nav-open"></div>
+				{{/if}}
+
+			</div>
+		</div>
+	</div>
+</template>

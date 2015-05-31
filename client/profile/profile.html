@@ -1,0 +1,66 @@
+
+<template name="profile">
+	{{#if Template.subscriptionsReady}}
+		{{#if o}}
+		<main class="bg-light" id="house">
+			<div class="transition {{brand 'text'}}" id="house-warmer" style="{{brand 'bg'}}">
+				<header class="inner">
+					{{#if social}}
+					<div id="house-social">
+						{{#each social}}<a href="{{url}}" class="{{name}} social inline-block invis-70" target="_blank"></a>{{/each}}
+					</div>
+					{{/if}}
+
+					{{#if profile.isOwner}}
+						<span class="edit-brand inline-block smaller condensed cursor transition-opacity invis-50">Change Design</span>
+					{{/if}}
+
+					<h1 class="master-title title {{title.size}}">{{title.val}}</h1>
+					<p class="house-desc serif short-line spaced">
+					{{#if brand 'mission'}}
+						{{brand 'mission'}}
+					{{/if}}
+					</p>
+				</header>
+
+				{{#if contributors}}
+				<section class="brand-second relative" style="{{brand 'bg_second'}}" id="house-contributors">
+					<div class="contributors-list relative">
+						<h4 class="middle-title subtitle bigger inline-block brand-inner">Contributors</h4>
+						{{#each contributors}}
+							{{>author_pic}}
+						{{/each}}
+					</div>
+				</section>
+				{{/if}}
+			</div>
+
+			{{>commenting_book comments=comments}}
+
+			<section class="house-loops">
+				{{>profile_nav query=query}}
+				{{>profile_quick_post query=query}}
+
+				{{#if loop}}
+					{{#each loop}}
+						{{>tmpl}}
+					{{/each}}
+				{{else}}
+				<article class="loop relative">
+					<div class="condensed inner bigger small-line">
+						<span class="master-title bigger-caption block">Nothing Found</span>
+						No results for <strong class="red">{{query}}</strong>
+					</div>
+				</article>
+				{{/if}}
+			</section>
+
+		</main>
+		{{else}}
+			{{>not_found}}
+		{{/if}}
+	{{else}}
+		{{>loading}}
+	{{/if}}
+
+</template>

@@ -1,0 +1,68 @@
+
+/* Mobile Gateway */
+#mobile-gateway { background: #eee; }
+
+
+/* Gateway Header */
+#mobile-header {
+	font-size: 15px; line-height: 25px;
+	height: 64px; position: relative; z-index: 20; }
+#mobile-header .co-logo, #mobile-header .co-logo .contain { height: 50px; width: 50px; }
+#mobile-header .co-logo {
+	padding: 7px; float: left;
+	position: relative; left: auto; right: auto; top: auto; bottom: auto; }
+#mobile-header .no-logo .contain { padding: 14px 0 0; height: auto; }
+#mobile-header .has-logo .contain { padding: 0; }
+#mobile-header .ge-logo-contain { margin: 10px 0 0 10px; }
+
+		/* No Logo Sandwich */
+		#mobile-header .no-logo:before, #mobile-header .no-logo:after {
+			content: ' '; display: block;
+			width: 30px; height: 2px;
+			background: #373737;
+			position: absolute; left: 50%; top: 50%; }
+		#mobile-header .no-logo:before { margin: -13px 0 0 -15px; }
+		#mobile-header .no-logo:after { margin: 11px 0 0 -15px; }
+
+		#mobile-header .ge-logo-abs {
+			position: absolute; top: 15px; left: 74px;;
+			width: 100px !important; height: auto; }
+
+		/* Name */
+		#mobile-header .name {
+			line-height: 1.1;
+			padding: 12px 10px 0; max-width: 150px; }
+
+		/* User */
+		#mobile-header .cur-user { margin: 10px; float: right; position: relative; }
+		#mobile-header .mh-sign {
+			padding: 0; height: 32px; width: 32px;
+			background: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/mobile-auth.png); background-size: 40px 70px;
+			border: solid 1px #555; margin: 6px 4px 0; }
+		#mobile-header .auth-signin { background-position: -3px -2px; }
+		#mobile-header .auth-signup { background-position: -4px -39px; }
+
+		#mobile-header .user-photo { width: 38px; height: 38px; margin: 3px; position: relative; }
+		#mobile-header .user-photo .contain { position: absolute; top: 3px; left: 3px; right: 3px; bottom: 3px; }
+
+
+/* Gateway Menu */
+#mobile-gateway .menu { padding: 11px 0 0; height: 34px; }
+#mobile-gateway .menu a, #mobile-gateway .menu span { margin: 0 10px; }
+
+#mobile-gateway .menu .nav-door { margin-left: 0; padding-left: 20px; position: relative; }
+#mobile-gateway .menu .nav-door:before {
+	border-top: solid 1px #555; border-bottom: solid 1px #555;
+	content: ' '; display: block;
+	width: 12px; height: 3px;
+	position: absolute; top: 7px; left: 0; }
+#mobile-gateway .menu .nav-door:after {
+	border-top: solid 1px #555;
+	content: ' '; display: block;
+	width: 12px;
+	position: absolute; top: 15px; left: 0;
+}
+
+@media screen and (max-width: 350px) {
+
+}

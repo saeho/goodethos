@@ -1,0 +1,22 @@
+
+<template name="page_story">
+
+	<article {{master_attr}}>
+
+		{{> page_story_header}}
+
+		<main class="page-body" id="page-{{page.info.type}}-body">
+			{{> page_body}}
+		</main>
+	</article>
+
+	{{> ge_editor editor}}
+
+</template>
+
+<template name="layout_title_controls">
+	<input {{this.img_attr}}/>
+	{{#each this.buttons}}
+	<button {{this.attr}}></button>
+	{{/each}}
+</template>

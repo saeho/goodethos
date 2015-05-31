@@ -1,0 +1,16 @@
+<template name="GE_pip">
+{{#if showPip}}
+  <div class="abs-full pop-in-soft {{back}} normal center" id="popup-in-popup">
+  {{#if loading}}
+    <span class="loading spin-inifinite"></span>
+  {{else}}
+    <div class="table">
+      <div class="inside">
+        <div class="bigger small-line margin-b margin-t">{{{msg}}}</div>
+        <span class="round cursor ok white {{ok}}">OK</span>
+      </div>
+    </div>
+  {{/if}}
+  </div>
+{{/if}}
+</template>

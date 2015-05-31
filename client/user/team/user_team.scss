@@ -1,0 +1,53 @@
+
+.sa-loop.team-user { padding-left: 80px; }
+#user-page-desktop h2.team-user { padding-left: 50px; }
+
+/* Loop - With Photo */
+.team-user .you { left: 0; z-index: 5; margin: -20px 0 0; }
+.you { position: relative; width: 40px; height: 40px; }
+.team-user .you { position: absolute; top: 50%; }
+.you.profile { background-color: #222; }
+
+/* Loop - With Admin Options */
+.team-user .invis-select { padding-right: 14px; }
+.team-user .invis-select:before {
+	content: ' '; display: block; width: 0; height: 0;
+	position: absolute; right: 0; top: 13px;
+	border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #aaa; }
+
+/* Loop - Inside Preview */
+.upd-loop-title { padding: 10px 0 0; }
+.upd-loop { border-top: solid 1px #dedede; padding: 7px 0 10px; }
+
+
+		/* Services */
+		.service {
+			position: absolute; top: -3px; left: -13px; z-index: -1;
+			width: 22px; height: 22px; }
+		.service.ss-fb { background-position: -88px -22px; }
+		.service.ss-tw { background-position: -44px -22px; }
+		.service.ss-is { background-position: -66px -22px; }
+		.service.ss-profile { background-color: $cyan; background-position: -110px -22px; }
+
+		/* For Loop - Override */
+		.sa-loop.team-user .you { left: 28px; }
+
+
+/* Search - Big */
+.search-big {
+	background: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/search-big.png) no-repeat 0 4px; background-size: 100px 100px;
+	min-height: 100px; padding: 0 0 0 115px; }
+.search-big input {
+	font-size: 35px; line-height: 45px;
+	padding: 0 0 5px; margin: 0; }
+
+		#user-page-desktop .button-back { margin-right: 7px; }
+
+/* Search - Small */
+.search-small, #search-profile {
+	background: #fff url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/search-small.png) no-repeat 0 0; background-size: 50px 100px;
+	}
+input.search-small {
+	position: absolute; top: 0; left: 0; right: 0;
+	-webkit-box-shadow: 0 2px #f0f0f0; -moz-box-shadow: 0 2px #f0f0f0; box-shadow: 0 2px #f0f0f0;
+	display: block; height: 49px; padding: 5px 15px 0 50px; width: 100%; }

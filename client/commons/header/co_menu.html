@@ -1,0 +1,20 @@
+
+
+<template name="co_menu">
+	{{#if device_is 'mobile'}}
+	<div class="links">
+		<span class="inline-block sub nav-door">Menu</span>
+
+		{{#if comment}}
+		<span class="inline-block sub open-comments">Comment</span>
+		{{/if}}
+
+	</div>
+	{{else}}
+		{{#if url}}
+		<a href="{{url}}" class="ge-home inline-block master-title">
+			{{brand 'ideal_name'}}
+		</a>
+		{{/if}}
+	{{/if}}
+</template>

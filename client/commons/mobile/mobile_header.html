@@ -1,0 +1,47 @@
+
+<template name="mobile_header">
+
+	<div class="overflow bg-white" id="mobile-header">
+
+		<figure class="background nav-door co-logo overflow transition-mid shadow-soft {{#if brand.logo_thumb}}has-logo{{else}}no-logo{{/if}}" style="{{brand 'logo_thumb'}}">
+			{{#unless brand.logo_thumb}}
+			<div class="contain transition-mid center sub">
+				Menu
+			</div>
+			{{/unless}}
+		</figure>
+
+		{{#if no_page}}
+			{{#if brand.logo_thumb}}
+			<figure class="nav-door co-logo overflow no-logo bg-white">
+				<div class="contain transition-mid center sub">
+					Menu
+				</div>
+			</figure>
+			{{/if}}
+		{{/if}}
+
+		{{#if brand 'ideal_name'}}
+		<p class="float-l name nav-door">
+			<span class="master-title bigger-caption block ellipsis">{{brand 'ideal_name'}}</span>
+			<em class="serif ebony">is on Good Ethos</em>
+		</p>
+		{{else}}
+		<img src="https://s3-us-west-2.amazonaws.com/goodethos/assets/logos/black.png" class="ge-logo-abs nav-door" />
+		{{/if}}
+
+		<div class="cur-user">
+			{{#if logged_user.show}}
+				<figure {{logged_user.attr}}>
+					{{#if logged_user.isO}}<span class="contain" style="{{logged_user.pic}}"></span>{{/if}}
+				</figure>
+			{{else}}
+				{{#unless logged_user.isReader}}
+				<span class="inline-block auth-signin mh-sign round"></span><span class="inline-block auth-signup mh-sign round"></span>
+				{{/unless}}
+			{{/if}}
+		</div>
+
+	</div>
+
+</template>

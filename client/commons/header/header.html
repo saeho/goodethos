@@ -1,0 +1,82 @@
+
+<template name="header">
+
+	<section id="{{#if device_is 'mobile'}}mobile{{else}}nav{{/if}}-gateway" class="unselect
+		{{#if page.edit_mode}}perm{{/if}}
+		{{#unless page}}none{{/unless}}
+		{{layout.nav_class}}">
+
+		{{#if device_is 'mobile'}}
+			{{>mobile_header}}
+		{{/if}}
+
+		{{#if page}}
+			{{#if page.type}}
+				{{#unless device_is 'mobile'}}
+				<div class="condensed sides page-by">
+					<span class="serif">{{page.type}}</span>
+					<span class="inline-block">by {{brand.o_name}}</span>
+				</div>
+				{{/unless}}
+			{{/if}}
+
+			<nav class="menu {{#if page.header}}edit-mode{{else}}view-mode{{/if}}">
+				{{#if page.header}}
+					{{>header_editing page.header}}
+				{{else}}
+					{{>co_menu}}
+				{{/if}}
+			</nav>
+		{{/if}}
+
+		{{#if page.type}}
+			{{#unless device_is 'mobile'}}
+				{{#unless page.header}}
+				<div class="condensed sides page-commenting">
+					{{#if page.show_edit_url}}
+						<a href="/{{page.organization}}/{{page._id}}/edit" class="white dotted-link">Edit Page</a>
+						&nbsp;|&nbsp;
+					{{/if}}
+					<span class="white transition {{#if page.commenting}}dotted-link cursor open-comments{{/if}}">
+						{{#if page.commenting}}
+							{{comments}}
+						{{else}}
+							Comments Disabled
+						{{/if}}
+					</span>
+				</div>
+				{{/unless}}
+			{{/unless}}
+		{{/if}}
+	</section>
+
+	{{#if page.share_url}}
+	<div id="page-share">
+		{{#if device_is 'mobile'}}<p class="share-social ss-menu pop-in box nav-door" style="display: none;"><span class="hamburger"></span></p>{{/if}}
+		<a href="http://www.facebook.com/sharer/sharer.php?u={{page.share_url}}" target="_blank" class="share-social ss-fb" style="display: none;"></a>
+		<a href="https://twitter.com/intent/tweet?url={{page.share_url}}&amp;text={{page.share_text}}" target="_blank" class="share-social ss-tw" style="display: none;"></a>
+		<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{page.share_url}}&amp;title={{page.share_text}}&amp;summary={{page.share_text}}" target="_blank" class="share-social ss-li" style="display: none;"></a>
+		<a href="https://plus.google.com/share?url={{page.share_url}}" target="_blank" class="share-social ss-gp" style="display: none;"></a>
+	</div>
+	{{/if}}
+
+</template>
+
+<template name="header_editing">
+	<div class="hma-l">
+		<span class="inline-block sub cursor transition" id="page-comments-button">Comments</span>
+	</div>
+	<p class="inline-block cursor sub {{#if published}}on{{else}}special{{/if}}" id="page-save">
+		<span class="relative">{{#if published}}Edit Page{{else}}Publish{{/if}}</span>
+	</p>
+	<div class="hma-r">
+		<span class="inline-block sub cursor transition" id="page-settings-button">Settings</span>
+	</div>
+
+	<div id="page-editing">
+		<p class="condensed inline-block" id="save-message">
+			<span id="save-status">{{#if save_status}}{{save_status}}{{else}}Saved{{/if}}</span>
+			{{#unless save_status}}<span id="save-time" data-timestamp="{{ timestamp }}">{{ last_saved }}</span>{{/unless}}
+		</p>
+	</div>
+</template>

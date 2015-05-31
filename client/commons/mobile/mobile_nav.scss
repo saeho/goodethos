@@ -1,0 +1,24 @@
+
+#mobile-nav {
+	max-width: 300px; margin: 0 auto; padding: 40px 15px; }
+
+#mobile-nav .logo { width: 144px; height: auto; display: block; padding: 0 0 35px; margin: 0 auto; }
+
+#mobile-nav .lmi {
+	border-bottom: solid 1px rgba(255,255,255,.25); text-align: right;
+	background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/lmi-bigger.png); background-repeat: no-repeat; background-size: 60px 675px;
+	display: block; padding: 8px 0 7px 50px; }
+#mobile-nav .break { display: block; height: 32px; }
+#mobile-nav .lmi:last-child { border: none; }
+#mobile-nav .big-links { font-size: 1.25em; line-height: 29px; }
+
+#mobile-nav .mobile-goodethos { background-position: -10px -338px; }
+#mobile-nav .mobile-goodcompany { background-position: -10px -386px; }
+#mobile-nav .mobile-goodreads { background-position: -10px -434px; border: none; }
+
+#mobile-nav .mobile-home { background-position: -10px -534px; }
+#mobile-nav .mobile-all { background-position: -10px -292px; }
+#mobile-nav .mobile-profile { background-position: -10px -486px; }
+
+#mobile-nav .mobile-signin, #mobile-nav .mobile-signout { background-position: -10px -578px; }
+#mobile-nav .mobile-signup { background-position: -10px -630px; }

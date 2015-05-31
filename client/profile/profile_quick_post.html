@@ -1,0 +1,37 @@
+
+<template name="profile_quick_post">
+	{{#if isOpen}}
+	<section class="loop bigger {{#if quick_post}}on{{/if}}" id="quick-post">
+		<div class="inner clear relative">
+
+			<div class="condensed single-line">
+			{{#if query}}
+				Search result for: <strong class="blue">{{query}}</strong>
+			{{else}}
+				<p class="qp unselect {{#unless quick_post}}cursor{{/unless}}">
+					{{>author_pic wtf='wtf'}}
+					Write a quick note as:<br />
+					<strong>{{display_name}}</strong>
+					<span class="arroww-down"></span>
+				</p>
+
+				{{#if quick_post}}
+				<span class="close-small"></span>
+				<div id="qp-area">
+					{{>write_qp}}
+				</div>
+				{{/if}}
+			{{/if}}
+			</div>
+
+		</div>
+	</section>
+	{{/if}}
+</template>
+
+<template name="write_qp">
+	<form class="qp-inner" name="write-qp" id="write-qp">
+		<textarea class="linepaper serif-normal" name="content.body" id="quick-post-textarea"></textarea>
+		{{>button button_text='Post Note' class='off'}}
+	</form>
+</template>

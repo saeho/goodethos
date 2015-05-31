@@ -1,0 +1,158 @@
+
+
+<template name="popup_media">
+	{{#if device_is 'desktop'}}
+	<nav {{popup_nav.attr}}>
+		<!-- inline-blocks must have no spaces between -->
+		{{#each popup_nav.buttons}}<div class="cursor {{this.name}}"><p class="desc">{{{this.desc}}}</p></div>{{/each}}
+	</nav>
+	<!-- /nav -->
+	{{else}}
+		<span class="popup-close big"></span>
+	{{/if}}
+	<div class="wrapper-wide pop-in-soft" id="popup-media">
+		{{> popup_media_pip pip}}
+		{{> Template.dynamic template=tmpl data=content }}
+	</div>
+</template>
+
+
+<template name="pmc_new">
+	<div class="table">
+		<div class="inside center">
+			<div class="condensed bigger-title inline-block" id="pmc-new">
+				<span class="cursor pmc-picture" data-type="img">Picture</span>
+				<span class="cursor pmc-video" data-type="youtube">Video</span>
+				<span class="cursor pmc-twitter" data-type="twitter">Twitter</span>
+				<span class="cursor pmc-instagram" data-type="instagram">Instagram</span>
+			</div>
+		</div>
+	</div>
+</template>
+
+
+<template name="pmc_social">
+	<div class="table">
+		<div class="inside">
+			{{#if this.social}}
+			<div class="social-media-pop {{this.type}}-bg smp-msg{{#unless this.social.embed}}-only{{/unless}} shadow-soft relative" id="pmc-social"
+				data-id="{{this.social.id}}">
+
+				{{#if this.edit_mode}}
+					<div class="abs-full pmc-area cursor social-change" id="pmc-{{this.type}}-change">
+						<span class="icon"></span>
+						<div class="round back transition"></div>
+					</div>
+				{{/if}}
+
+				{{#with this.social}}
+					{{#if embed}}
+					<figure class="smp-embed">
+						<img src="{{embed}}">
+					</figure>
+					{{/if}}
+					<p class="text sans-serif-thin">{{msg}}</p>
+					<p class="smp-by condensed">
+						<img src="{{profile_pic}}" class="smp-profile-pic">
+						<strong>{{by_name}}</strong><br />
+						{{by_username}} - {{date}}
+					</p>
+				{{/with}}
+			</div>
+			{{/if}}
+
+			{{#if this.edit_mode}}
+			<div class="{{#if this.social}}hide fade-out{{/if}} sans-serif tiny" id="pmc-social-search">
+				{{#if this.social}}<span class="social-change round x"></span>{{/if}}
+
+				{{#with this.query}}
+					{{#if authenticated}}
+					<div class="condensed bigger-medium query-options clear" id="search-mode">
+						<div class="float-l">
+							<span class="inline-block">Search by:</span>
+							<p class="invis-select">
+								<span class="inline-block bg-ge-solid arroww-down qo-button white" id="pst-visible">{{st_first}}</span>
+								<select id="pm-search-types">
+									{{#each search_types}}
+									<option {{this}}>{{this.value}}</option>
+									{{/each}}
+								</select>
+							</p>
+						</div>
+
+						<div class="float-r">
+							<input type="checkbox" class="inline-block" id="pm-entities" value="1" style="{{hide_check}}">
+							<label for="pm-entities" id="pm-entities-label" class="inline-block" style="{{hide_check}}">Only return tweets with pictures or videos</label>
+						</div>
+					</div>
+
+					<input id="pm-query" class="query sans-serif-thin center" placeholder="Search {{type_cap}}"/>
+
+					<div id="pm-result">
+						<p class="silver bigger center">
+							Search {{type_cap}} by typing anywhere on screen.
+						</p>
+					</div>
+					{{else}}
+					<div class="center" id="pm-result">
+						<p class="silver bigger-heading">
+							You must authenticate using {{type_cap}} before using this feature.
+						</p>
+						<p class="auth-sm round bg-ge-solid white cursor" id="{{type}}-authenticate">
+							<span class="icon"></span>
+							<span class="sub">Authenticate</span>
+						</p>
+					</div>
+					{{/if}}
+				{{/with}}
+
+			</div>
+			{{/if}}
+
+		</div>
+	</div>
+</template>
+
+
+<template name="pmc_media">
+	{{#if this.img}}
+		<figure class="img-contain contain{{#if this.caption.show}} with-caption{{/if}}" id="pmc-value"
+			style="{{#unless this.is_new}}background-image: url('{{this.img}}');{{/unless}}">
+			{{#if this.edit_mode}}
+				<div class="abs-full pmc-area cursor" id="pmc-img-change">
+					<span class="icon"></span>
+					<div class="round back transition"></div>
+				</div>
+				<input type="file" id="pmc-file-upload" style="display: none;" />
+			{{/if}}
+		</figure>
+		{{> pmc_media_caption this}}
+	{{else}}
+		<div class="table wrapper-pop">
+			<div class="inside">
+				<figure class="iframe-holder">
+					{{#if this.edit_mode}}
+						<div class="change-value">
+							<input class="video-not-found center normal abs-full" readonly="readonly" />
+							<input name="new_val" id="new_val" class="video-url-input center" placeholder="Enter YouTube/Vimeo URL" value="{{video.url}}{{video.id}}" data-id="{{video.id}}" />
+						</div>
+					{{/if}}
+					<iframe {{video.attr}}></iframe>
+				</figure>
+				{{> pmc_media_caption this}}
+			</div>
+		</div>
+	{{/if}}
+</template>
+
+
+<template name="pmc_media_caption">
+	{{#with this}}
+		{{#if caption.show}}
+		<figcaption {{caption.attr}}>
+			{{#if title.show}}<strong {{title.attr}}>{{title.text}}</strong>{{/if}}
+			<span {{desc.attr}}>{{desc.text}}</span>
+		</figcaption>
+		{{/if}}
+	{{/with}}
+</template>

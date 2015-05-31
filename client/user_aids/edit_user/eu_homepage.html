@@ -1,0 +1,81 @@
+<template name="eu_homepage">
+
+	{{#if this}}
+		{{#each name}}
+			{{#if label}}<label class="{{label_class}}">{{label}}</label>{{/if}}
+			<input class="{{class}} {{#if disabled}}stripes{{/if}}" value="{{value}}" type="text" name="{{key}}" placeholder="{{placeholder}}" disabled="{{disabled}}" />
+		{{/each}}
+
+		<label class="{{label_class}}">Description</label><span class="{{label_class}}" id="chars-remaining"></span>
+		<textarea class="no-enter {{#if disabled}}stripes{{/if}}" data-max="170" maxlength="170" id="mission" name="mission" disabled="{{disabled}}">{{mission}}</textarea>
+
+		{{#if show_button}}
+			{{>button}}
+		{{/if}}
+
+	{{else}}
+		<div class="small-line with-text">
+		{{#if user.isO}}
+			<p class="margin-b">
+				<strong>Thank you for joining!</strong><br />
+				Finish your registration process by completing this form.
+			</p>
+			<label class="normal-label" for="info.type">
+				How will you use Good Ethos?
+			</label>
+			<div class="invis-select block crawl-t">
+				<span class="ref block normal">Personal blog or portfolio.</span>
+				<select class="organization" id="info.type" name="info.type">
+					<option value="Blog">Personal blog or portfolio.</option>
+					<option value="Company">Publication or blog for a for-profit organization.</option>
+					<option value="Nonprofit">Publication or blog for a not-for-profit organization.</option>
+				</select>
+			</div>
+
+			<label class="normal-label" for="name.full">
+				What is your publication's name?
+			</label>
+			<input type="text" value="" id="name.full" name="name.full" placeholder="Publication Name"/>
+
+			<label class="normal-label" for="name.short">
+				Is there a short name for your publication?
+			</label>
+			<input type="text" value="" id="name.short" name="name.short" maxlength="5" placeholder="i.e. GE"/>
+
+			{{>button button_text='Create'}}
+
+		{{else}}
+			{{#if user.invited}}
+				<p>
+					<strong>You were invited to join <span class="blue">{{user.invited.o_name}}</span></strong><br />
+					You shouldn't accept invitations from unknown people.
+				</p>
+
+				<div class="your-co-container inline-block small-line">
+					<figure class="your-co round overflow shadow-soft background" style="{{#if user.invited.o_photo}}background-image: url({{user.invited.o_photo}});{{/if}} {{#if user.invited.logo_back}}background-color: {{user.invited.logo_back}};{{/if}} margin-top: -5px;"></figure>
+              Company: <strong>{{user.invited.o_name}}</strong><br />
+              Your Role: <strong>{{user.invited.role.name}}</strong>
+          </div>
+
+				<p style="padding-top: 22px;">
+					<span class="cursor dotted-link blue" id="join-link">Join this Publication</span><br />
+					<span class="cursor dotted-link blue" id="decline-link">Decline Invitation</span>
+				</p>
+
+			{{else}}
+				<p class="margin-b">
+					<strong>Welcome to Good Ethos!</strong><br />
+					You do not belong to any publications.
+				</p>
+				<p class="margin-b">
+					If your organization is already signed up, your administrator can add you by searching your name or user ID.
+				</p>
+				<p>
+					Your user ID is <strong>{{user._id}}</strong>.
+				</p>
+			{{/if}}
+		{{/if}}
+		</div>
+	{{/if}}
+
+</template>

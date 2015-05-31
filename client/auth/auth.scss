@@ -1,0 +1,51 @@
+
+/* Not Found */
+#not-found { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/404.jpg); }
+#not-found .text {
+	max-width: 500px; margin: 0 auto;
+	position: absolute; left: 0; right: 0; top: 15%; }
+#not-found p { padding: 0 0 12px; }
+#not-found img { margin: 0 auto 20px; }
+
+@media screen and (max-width: 780px) { #not-found { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/404-mobile.jpg); } }
+
+		/* PIP */
+		#popup-in-popup.pop-in-soft { z-index: 100; }
+ 		#popup-in-popup { padding: 30px 25px 0; }
+		#popup-in-popup p { padding: 0 0 10px; }
+
+/* Main */
+#auth-main { min-height: 310px; max-width: 300px; margin: 0 auto; padding: 70px 17px 55px; }
+#auth-main .ge-logo-std { display: block; margin: 10px auto; }
+#popup-html, #popup-help {
+	padding: 25px; height: 300px; max-width: 250px; margin: -150px auto 0;
+	position: absolute; top: 50%; left: 0; right: 0; }
+#popup-help { max-width: 335px; padding: 50px 25px 40px; margin: -195px auto 0; }
+
+.auth-popup { background: #fff; }
+.auth-popup input, .auth-popup textarea { background: #eaeaea; border-color: #eaeaea; }
+
+#auth-main input:hover, .auth-popup input:hover, .auth-popup textarea:hover { border-color: #444; }
+
+@media screen and (max-width: 578px) {
+	#master-popup .shadow-big { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; }
+	.phone-back-white { background: #fff; }
+}
+
+/* Sign In */
+#auth-main .signin-services { padding: 9px 0; }
+
+/* Sign Up */
+#auth-main .sucp, #auth-main .sucp-big { max-width: 270px; margin: 0 auto; padding: 15px 0 10px; }
+#auth-main .sucp p, #auth-main .sucp-big p { padding: 0 0 8px; }
+#auth-main .sucp-big { padding-top: 28px; }
+
+#auth-main .signup-organization { padding: 14px 0 0; }
+#auth-main .signup-option {
+	display: block; padding: 4px 0 3px; margin: 7px auto 0; max-width: 220px;
+	border: solid 1px #555; }
+#auth-main .signup-option .bg-ge { position: absolute; top: -1px; bottom: -1px; left: -1px; right: -1px; z-index: 1; }
+#auth-main .signup-option:hover { color: #fff; border-color: transparent; }
+
+#auth-main .signup-services { padding: 10px 0; }
+#auth-main .share-social { margin: 0 3px; }

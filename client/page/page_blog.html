@@ -1,0 +1,15 @@
+
+<template name="page_blog">
+	<article class="{{#if edit_mode}}edit-mode{{/if}}" id="page-{{page.info.type}}-master">
+		<div class="bg-white wrapper-blog">
+
+			{{>page_blog_header}}
+			<main class="page-body" id="page-{{page.info.type}}-body">
+				{{> page_body}}
+			</main>
+
+			{{> ge_editor editor}}
+
+		</div>
+	</article>
+</template>

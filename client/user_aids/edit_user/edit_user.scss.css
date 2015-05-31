@@ -1,0 +1,55 @@
+
+#edit-user { max-width: 520px; min-height: 520px; margin: 0 auto; }
+#edit-user .button-back { margin-top: 17px; }
+#edit-user a.ebony:hover:not(.red) { color: #aaa; }
+
+#edit-user .text { padding: 20px 35px; }
+
+.eu-icons {
+	width: 35px;
+	background: #fff url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/edit-user.png) no-repeat; background-size: 315px 35px;
+	position: absolute; right: 1px; top: 1px; bottom: 1px; }
+
+	.eu-icons.email-verified { background-position: 0 50%; }
+	.eu-icons.email-not-verified { background-position: -70px 50%; }
+	.eu-icons.eu-icon-facebook { background-position: -105px 50%; }
+	.eu-icons.eu-icon-twitter { background-position: -140px 50%; }
+	.eu-icons.eu-icon-instagram { background-position: -175px 50%; }
+	.eu-icons.eu-icon-linkedin { background-position: -210px 50%; }
+	.eu-icons.eu-icon-gplus { background-position: -245px 50%; }
+	.eu-icons.eu-icon-web { background-position: -280px 50%; }
+	.eu-icons.error { background-position: -35px 50%; }
+
+.ep-nav {
+	padding: 45px 35px 11px; overflow: hidden;
+	background: #fff; color: #aaa; }
+.ep-nav .inline-block { position: relative; padding: 0 10px 0 0; margin: 0 6px 0 0; }
+
+.ep-nav .cur, .ep-nav .inline-block:hover { color: #444; }
+.ep-nav .target:before {
+	transition: all .3s ease; -webkit-transition: all .3s ease;
+	content: ' '; display: block; width: 0; height: 0; margin: 0 0 -11px -9px;
+	position: absolute; bottom: -7px; left: 50%;
+	border-left: 5px solid rgba(0,0,0,0); border-right: 5px solid rgba(0,0,0,0); border-bottom: 5px solid #444; }
+.ep-nav .cur:before { bottom: 0; }
+
+@media screen and (max-width: 550px) {
+	#edit-user .text, .ep-nav { padding-left: 20px; padding-right: 20px; }
+	#edit-user {
+		max-width: none; max-height: none;
+		overflow-x: hidden; overflow-y: auto;
+		position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+}
+
+.your-co-container { padding: 14px 0; }
+.your-co-container .your-co {
+	width: 48px; height: 48px; float: left; margin: 0 8px 0 0;
+}
+
+
+/* Brand */
+.brand-bg-container { margin-top: 10px; }
+.choose-brand-bg, .eu-logo-container { width: 132px; height: 132px; position: relative; float: left; padding: 12px; }
+.eu-logo-container {
+	margin: 0 14px 0 0;
+	background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/no-logo.png); background-color: #eee; }

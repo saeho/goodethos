@@ -1,0 +1,74 @@
+
+<template name="commenting">
+	{{#if animate}}
+	<div class="circle-in bg-popup"></div>
+	<span class="popup-close big"></span>
+	{{/if}}
+
+	<div class="padding normal {{#if animate}}animate{{/if}}" id="commenting">
+		<div class="commenting-wrapper">
+
+		{{#if enabled}}
+		<form class="relative clear" id="new-comment">
+
+			{{#if user.isAccepted}}
+				<div class="clear">
+					{{#if user.isOwner}}
+						{{>commenting_service name='good ethos' short='ge'}}
+					{{/if}}
+					{{>commenting_service name='facebook' short='fb'}}
+					{{>commenting_service name='twitter' short='tw'}}
+					{{>commenting_service name='instagram' short='ig'}}
+				</div>
+
+				<textarea class="normal" placeholder="Write a message" name="comment-message" id="comment-message"></textarea>
+
+				<div class="nca clear relative">
+					<figure class="author-pic float-l relative background round overflow" style="{{#unless user.isImg}}{{user.img}}{{/unless}}">
+					{{#if user.isImg}}
+						<img src="{{user.img}}" />
+					{{/if}}
+					</figure>
+
+					<p class="float-l author-name">
+						Commenting as <strong>{{user.name}}</strong><br />
+						via {{user.service}}
+					</p>
+
+					<div class="button-back input-tiny center">
+						<button type="submit" class="sub submit-button">Submit</button>
+					</div>
+				</div>
+			{{else}}
+				{{>commenting_service name='facebook' short='fb' notFaded='1'}}
+				{{>commenting_service name='twitter' short='tw' notFaded='1'}}
+				{{>commenting_service name='instagram' short='ig' notFaded='1'}}
+				<span class="login-msg float-l">Log in with a social media account to comment.</span>
+			{{/if}}
+		</form>
+
+		{{#if comments}}
+			<ul class="list-comments">
+				{{#each comments}}
+					{{>comment_single}}
+				{{/each}}
+			</ul>
+		{{else}}
+			<!-- No Comments -->
+		{{/if}}
+
+		{{else}}
+		<div class="padding center">
+			<h1 class="master-mini title">Sorry!</h1>
+			<p>Commenting is disabled.</p>
+		</div>
+		{{/if}}
+
+		</div>
+	</div>
+</template>
+
+
+<template name="commenting_service">
+	<figure class="cursor switch-social {{#if serviceIs name}}pop-in{{else}}invis-50{{/if}}" data-social="{{name}}" id="switch-to-{{short}}"></figure>
+</template>

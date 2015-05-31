@@ -1,0 +1,15 @@
+<template name="eu_social">
+	{{#if this}}
+		<label class="{{label_class}}">Social Media</label>
+		{{#each social_media}}
+		<div class="relative">
+			<span class="eu-icons {{icon}} tooltip down right"></span>
+			<input {{attr}} />
+		</div>
+		{{/each}}
+	{{/if}}
+
+	{{#if show_button}}
+		{{>button}}
+	{{/if}}
+</template>

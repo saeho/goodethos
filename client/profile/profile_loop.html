@@ -1,0 +1,58 @@
+
+<template name="profile_loop">
+	<article class="loop relative {{type_raw}}">
+		<a href="{{url}}">
+		<div class="clear relative {{#if img.isBig}}with-big bg-black{{else}}inner bg-white{{/if}}">
+
+			<div class="condensed info transition">
+				<span class="icon icon-{{type_raw}}"></span> {{>author_pic author}}
+				<strong class="charcoal transition">{{type}}</strong>
+				<span class="silver transition">by {{display_name author}} - {{time_ago}}</span>
+			</div>
+
+			{{#if img.isBig}}
+			<figure class="big-img relative">
+				<img src="{{img.src}}" />
+			</figure>
+			{{/if}}
+			{{#if img.isSmall}}
+			<figure class="small-img float-r background" style="background-image: url({{img.src}});"></figure>
+			{{/if}}
+
+			<div class="text">
+				<h1 class="master-title title short-line">{{title}}</h1>
+				<p class="smaller charcoal normal-line desc">
+					{{excerpt}}
+				</p>
+			</div>
+
+		</div>
+		</a>
+	</article>
+</template>
+
+<template name="profile_note">
+	<article class="loop relative {{type_raw}}">
+		<div class="clear relative inner bg-white">
+
+			<div class="condensed info transition">
+				<span class="icon icon-{{type_raw}}"></span> {{>author_pic author}}
+				<strong class="charcoal transition">{{type}}</strong>
+				<span class="silver transition">by {{display_name author}} - {{time_ago}}</span>
+			</div>
+
+			{{#if isOwner}}
+			<span class="close-small"></span>
+			{{/if}}
+
+			<h4 class="master-title title short-line">
+				{{display_name author}}
+			</h4>
+
+			<div class="smaller charcoal desc normal-line text">
+				{{{text}}}
+			</div>
+
+		</div>
+	</article>
+</template>

@@ -1,0 +1,27 @@
+
+<template name="ge_editor">
+
+	{{#if toolbar}}
+	<div id="ge-editor">
+		{{#each toolbar}}
+			<span {{this}}></span>
+		{{/each}}
+		<p id="a-helper" class="toolbar-helper">
+			<span class="geeb geeb-a"></span>
+			<input id="a-input" class="toolbar-input" placeholder="http://..." />
+		</p>
+	</div>
+
+	<div class="white condensed" id="tooltip-info"></div>
+	{{/if}}
+
+	{{#if this.new_block_bar}}
+	<div id="if-form" class="transition-opacity">
+		{{#each this.new_block_bar}}
+			<button id="ifb-{{this}}" class="if-button round"></button>
+		{{/each}}
+		<input id="ifb-img_helper" type="file" class="hide" />
+	</div>
+	{{/if}}
+
+</template>

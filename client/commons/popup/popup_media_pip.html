@@ -1,0 +1,23 @@
+
+<template name="popup_media_pip">
+{{#if this}}
+	<div class="abs-full center condensed bigger" id="pm-pip">
+		{{#if loading}}
+		<span class="loading spin-inifinite"></span>
+		{{else}}
+		<div class="table unselect">
+			<div class="inside">
+				<p>{{{msg}}}</p>
+				{{#if function}}
+					<span class="cursor inline-block yes {{function}}-yes">Yes</span>
+					<span class="cursor inline-block {{function}}">No</span>
+					<p class="crawl-t"><span class="cursor pip-cancel silver dotted-link">Cancel</span></p>
+				{{else}}
+					<span class="cursor inline-block pip-cancel">OK</span>
+				{{/if}}
+			</div>
+		</div>
+		{{/if}}
+	</div>
+{{/if}}
+</template>

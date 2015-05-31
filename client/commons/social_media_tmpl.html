@@ -1,0 +1,19 @@
+
+<!--
+	Don't use <figure>, sometimes this entire template is wrapped in <figure>
+	and <figure> inside <figure> is not a proper DOM structure.
+-->
+
+<template name="social_media_tmpl">
+	{{#if embed_attr}}
+	<div {{embed_attr}}></div>
+	{{/if}}
+	<div {{text_attr}}>
+		<p {{profile.attr}}>
+			<img {{profile.pic}} />
+			<strong>{{profile.name}}</strong><br />
+			{{profile.username}} <span class="sm-ago">- {{profile.time_ago}}</span>
+		</p>
+		<p class="sm-msg sans-serif-thin">{{msg}}</p>
+	</div>
+</template>

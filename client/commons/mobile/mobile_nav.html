@@ -1,0 +1,25 @@
+<template name="mobile_nav">
+
+	<nav class="abs-full white table" id="mobile-nav">
+
+		<div class="inside">
+			<span class="anchor cursor" data-url="/"><img src="https://s3-us-west-2.amazonaws.com/goodethos/assets/logos/white.png" class="logo" /></span>
+
+			<p class="big-links sub">
+				{{#each links}}
+					{{#if break}}
+						<span class="break"></span>
+					{{else}}
+						{{#if url}}
+							<span data-url="{{url}}" class="anchor cursor lmi {{class}}">{{title}}</span>
+						{{else}}
+							<span class="lmi invis-50 {{class}}">{{title}}</span>
+						{{/if}}
+					{{/if}}
+				{{/each}}
+			</p>
+		</div>
+
+	</nav>
+
+</template>

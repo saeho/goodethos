@@ -1,0 +1,23 @@
+
+<template name="user_search_empty">
+	<div class="preview trigger relative with-top">
+		<div class="search-big">
+			<input id="input-search-users" class="master-title" placeholder="Search"/>
+			<p class="condensed gray bigger-heading single-line" style="padding-left: 1px;">
+				{{{msg}}}
+			</p>
+		</div>
+	</div>
+</template>
+
+<template name="user_search_loop_page">
+	<article class="upd-loop">
+		<h4 class="upd-loop-title middle-title bigger-heading">
+			<a href="{{url}}">{{#if title}}{{title}}{{else}}Untitled{{/if}}</a>
+		</h4>
+		<aside class="ebony condensed info bigger-medium">
+			<span class="icon icon-{{type}}"></span>
+			{{{status_name}}} - Saved {{time_ago}}
+		</aside>
+	</article>
+</template>

@@ -1,0 +1,36 @@
+
+<template name="user_aids_page_draft">
+	<form class="average-line" id="publish-draft">
+		<span class="popup-close small"></span>
+
+		{{>GE_pip pip}}
+
+		<h1 class="section-title bg-white master-title">Already Published</h1>
+
+		<div class="text-full bg-light normal">
+
+			<div class="confirm-message relative">
+				<p class="padding-b">
+				{{#if can_pod}}
+					This page must be unpublished<br />
+					before you can edit it.
+				{{else}}
+					You must be an editor in order<br />
+					 to unpublish this page.
+				{{/if}}
+				</p>
+				<p class="padding-b silver ellipsis">
+					<a href="{{published_url}}">{{published_url}}</a>
+				</p>
+				{{#if can_pod}}
+				<div class="button-back input-small re-wrapper">
+					<button type="submit" class="sub submit-button">Unpublish</button>
+				</div>
+				{{/if}}
+			</div>
+
+			<a class="cursor inline-block pc-close">Cancel</a>
+		</div>
+
+	</form>
+</template>

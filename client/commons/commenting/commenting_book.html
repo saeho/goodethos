@@ -1,0 +1,11 @@
+
+<template name="commenting_book">
+	{{#if open}}
+	<section class="{{brand 'text'}} transition" id="house-book" style="{{brand 'bg'}}">
+		<div class="abs-full inner ge-scroll brand-inner">
+			<span class="inner-close"></span>
+			{{>commenting comments}}
+		</div>
+	</section>
+	{{/if}}
+</template>

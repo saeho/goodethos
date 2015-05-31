@@ -1,0 +1,35 @@
+
+<template name="user_aids_page_publish">
+	<form class="average-line {{#if error}}with-error{{/if}}" id="publish-draft">
+		<span class="popup-close small"></span>
+
+		{{#if pip}}
+			{{>GE_pip pip}}
+		{{else}}
+			<h1 class="section-title bg-white master-title">Ready to Publish?</h1>
+
+			<div class="text-full-tight bg-light normal">
+				<p class="padding-none">When you publish, line spaces in<br />this page will be auto-adjusted.</p>
+
+				<div class="shadow-medium preview-container relative bg-white">
+					{{#if page.img_attr}}
+						{{#if page.img_nav}}<span class="cursor prev off"></span>{{/if}}
+						<figure {{page.img_attr}}></figure>
+						{{#if page.img_nav}}<span class="cursor next"></span>{{/if}}
+					{{/if}}
+					{{#with page}}
+					<div {{preview_text_attr}}>
+						<h2 class="middle-title title short-line" id="pod-title">{{title}}</h2>
+						<p class="desc serif bigger">{{excerpt}}</p>
+					</div>
+					{{/with}}
+				</div>
+
+				<div class="button-back input-small re-wrapper margin-b">
+					<button type="submit" class="sub submit-button">Publish</button>
+				</div>
+				<a class="cursor inline-block pc-close">Cancel</a>
+			</div>
+		{{/if}}
+	</form>
+</template>
