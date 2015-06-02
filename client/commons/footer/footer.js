@@ -4,16 +4,15 @@
 /* Footer Helpers */
 Template.footer.helpers({
 	style: function(){
-
-		var style = GE_Help.nk(this.page, 'info.type') || Router.current().route.getName()
-
-		switch( style){
-			case 'goodethos':
-			case 'blog':
-				return 'no-border'
-			default:
-				return null
+		if (this.page && GE_Help.nk(this.page, 'info.type')) {
+			switch (this.page.info.type) {
+				case 'blog':
+					return 'no-border'
+				default:
+					return null
+			}
 		}
+		return null // Else
 	},
 	// nav_main: function(){
 	// 	var this_menu = globals.nav_main

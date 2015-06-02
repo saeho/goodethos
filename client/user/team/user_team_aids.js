@@ -6,11 +6,11 @@ Template.team_preview.helpers({
 	isPreview: function(){
 		return this.data._id ? true : false
 	},
-	pages: function(){
+	posts: function(){
 		// This is for preview when a user is clicked
-		var pages = Pages.find({ user: this._id },{sort: { 'date.edited': -1}}).fetch()
+		var posts = Posts.find({ user: this._id },{sort: { 'date.edited': -1}}).fetch()
 
-		return _.map( pages, function(p){
+		return _.map( posts, function(p){
 			var status = ge.status( p.status)
 			var type = GE_Help.capitalize( p.info.type)
 			var status_name = p.status<4 ? '<strong>'+status+' '+type+'</strong>' : '<strong class="charcoal">'+status+' '+type+'</strong>'

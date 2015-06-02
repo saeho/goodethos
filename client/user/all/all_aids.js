@@ -102,12 +102,12 @@ Template.all_preview.helpers({
 			// We do *not* need to do that check.
 			var cond = { $or: or }
 
-			var pages = Pages.find(cond).fetch()
-			var count = pages.length
+			var posts = Posts.find(cond).fetch()
+			var count = posts.length
 			if( !count) return false
-			count = 'Found '+pages.length+' Match'+( pages.length==1 ? '' : 'es')
+			count = 'Found '+posts.length+' Match'+( posts.length==1 ? '' : 'es')
 
-			var res = _.map( pages, function(p){
+			var res = _.map( posts, function(p){
 				var status = ge.status( p.status)
 				var type = GE_Help.capitalize( p.info.type)
 				var status_name = p.status<4 ? '<strong>'+status+' '+type+'</strong>' : '<strong class="charcoal">'+status+' '+type+'</strong>'

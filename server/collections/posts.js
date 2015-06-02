@@ -1,5 +1,5 @@
 
-PagesSchema = new SimpleSchema({
+PostsSchema = new SimpleSchema({
   user: { type: String,
     autoValue: function(){
       if(this.isInsert)
@@ -18,7 +18,7 @@ PagesSchema = new SimpleSchema({
       } else
         this.unset()
     } },
-  slug: { type: String, optional: true, // Unpublished pages may not have slugs
+  slug: { type: String, optional: true, // Unpublished posts may not have slugs
     autoValue: function() {
       var status = this.field('status').value
       if(_.isUndefined(status))
@@ -36,7 +36,7 @@ PagesSchema = new SimpleSchema({
             { organization: this_o }
           ]}
         // Loop DB check until an empty slug is found.
-        while(Pages.findOne(slug_condition)) {
+        while(Posts.findOne(slug_condition)) {
           new_slug = slug+GE_Help.random_string()
           slug_condition.$and[0] = { slug: new_slug }
         }
@@ -162,7 +162,7 @@ PagesSchema = new SimpleSchema({
     }},
 })
 
-Pages.allow({
+Posts.allow({
   insert: function(userId, doc) {
     return userId.length>2
   },
@@ -209,7 +209,7 @@ Pages.allow({
   }
 })
 
-Pages.deny({
+Posts.deny({
   remove: function(userId, doc) {
     return doc.locked // can't remove locked documents
   },
@@ -229,7 +229,7 @@ Meteor.methods({
     var o = Organizations.findOne(user.organization)
     if (!o || !_.contains( o.users, user._id)) throw new Meteor.Error("not-authorized") // Exit if user is not part of this organization
 
-    Pages.attachSchema(PagesSchema)
+    Posts.attachSchema(PostsSchema)
 
     data.user = user._id
     if (!_.has(data,'status'))
@@ -247,7 +247,7 @@ Meteor.methods({
       delete data['content.body']
     }
 
-    var created_id = Pages.insert(data)
+    var created_id = Posts.insert(data)
     return '/'+user.organization+'/'+created_id+'/edit'
   },
   /**
@@ -264,10 +264,10 @@ Meteor.methods({
     if (!user || !user.organization) throw new Meteor.Error("not-authorized")
 
     var cond = { $and: [{ _id: page_id }, { organization: user.organization }] }
-    Pages.attachSchema (PagesSchema)
+    Posts.attachSchema (PostsSchema)
 
     var update_data = {}
-    var cur_data = Pages.findOne (cond, { field : field })
+    var cur_data = Posts.findOne (cond, { field : field })
     cur_data = GE_Help.nk (cur_data, field)
     if (!_.isArray(cur_data)) throw new Meteor.Error("not_found", "Could not find the post data.")
 
@@ -277,7 +277,7 @@ Meteor.methods({
 
     cur_data.splice (loc, 1, before, insert, after)
     update_data[field] = cur_data
-    Pages.update (cond, { $set: update_data })
+    Posts.update (cond, { $set: update_data })
 
     return {
       before: before,
@@ -303,8 +303,8 @@ Meteor.methods({
       { status: { $lt: 4 } }
     ]}
 
-    Pages.attachSchema (PagesSchema)
-    var content = Pages.findOne (cond)
+    Posts.attachSchema (PostsSchema)
+    var content = Posts.findOne (cond)
     content = GE_Help.nk (content, field)
     if (!content) throw new Meteor.Error("not_found", "Could not find the post data.")
 
@@ -327,7 +327,7 @@ Meteor.methods({
 
     var update = {}
     update[field] = content
-    return Pages.update( cond, { $set: update })
+    return Posts.update( cond, { $set: update })
   },
   /**
    * Remove item from Gallery
@@ -343,9 +343,9 @@ Meteor.methods({
     if (blockIndex!==false) field += '.'+blockIndex+'.group'
 
     var cond = { $and: [{ _id: page_id }, { organization: user.organization }] }
-    Pages.attachSchema (PagesSchema)
+    Posts.attachSchema (PostsSchema)
 
-    var data = Pages.findOne (cond, { field: field })
+    var data = Posts.findOne (cond, { field: field })
     data = GE_Help.nk (data, field)
     if (!data) return false
 
@@ -361,7 +361,7 @@ Meteor.methods({
     var pullObj = {}
     pullObj[ field] = { key: { $in: deleteKeys } }
 
-    return Pages.update (cond, { $pull: pullObj }, function(err,res){
+    return Posts.update (cond, { $pull: pullObj }, function(err,res){
       if (!err)
         _.each (deleteArray, function( key){
           Images.remove(key)
@@ -380,12 +380,12 @@ Meteor.methods({
     var cond_pf = {}; cond_pf[field] = { $exists: true }
     cond.$and.push(cond_pf)
 
-    Pages.attachSchema (PagesSchema)
-		Pages.update (cond, { $set: updateObj })
+    Posts.attachSchema (PostsSchema)
+		Posts.update (cond, { $set: updateObj })
   },
   /**
    * DEPRECIATED
-   * Was originally used for Event Pages
+   * Was originally used for Event Posts
    * Kept here for reference, needs to be removed later.
    */
   pushPageBlock: function(field, page_id, updateObj) {
@@ -423,7 +423,7 @@ Meteor.methods({
     }))
 
     // Get cur data and push
-    var data = Pages.findOne( cond, { field : get })
+    var data = Posts.findOne( cond, { field : get })
     var return_obj = []
     var update_data = { $set: {} }
     var return_check = false
@@ -451,7 +451,7 @@ Meteor.methods({
 
     // Update
     if( return_check){
-      Pages.update( cond, update_data)
+      Posts.update( cond, update_data)
       return return_obj.length>1 ? return_obj : return_obj[0]
     }
     return false
@@ -468,8 +468,8 @@ Meteor.methods({
         { _id: page_id },
         { organization: user.organization }
       ]}
-    Pages.attachSchema (PagesSchema)
-    Pages.update( cond, { $set: data })
+    Posts.attachSchema (PostsSchema)
+    Posts.update( cond, { $set: data })
   },
   /**
    * Publish or Draft Page (POD)
@@ -517,14 +517,14 @@ Meteor.methods({
       return false // If publishing with no content, do not proceed
 
     var pod_func = function(cb) {
-      Pages.attachSchema(PagesSchema)
-      Pages.update( cond, { $set: set }, function(err,res){
+      Posts.attachSchema(PostsSchema)
+      Posts.update( cond, { $set: set }, function(err,res){
         if(err) {
           console.warn(err)
           var result = false
           cb && cb (null, result)
         } else {
-          var new_page = Pages.findOne( args._id, {content: 1, status: 1, slug: 1})
+          var new_page = Posts.findOne( args._id, {content: 1, status: 1, slug: 1})
           // Return new page data (you need to return it because Meteor reactivity & contenteditables don't play well together.)
           cb && cb (null, new_page)
         }
@@ -571,7 +571,7 @@ Meteor.publish('single-page', function(args) {
   }
 
   return [
-    Pages.find( p_cond, {
+    Posts.find( p_cond, {
       fields: {
         'info.featured': 0,
       }
@@ -582,14 +582,13 @@ Meteor.publish('single-page', function(args) {
  * Publish all written publications.
  */
 Meteor.publish('o-pubs', function() {
-
   var cond = {
     $query: {
       // user: this.userId, // If you want to disallow shared company-wide publications
       // organization: o_id
     },
     $orderby: { 'date.published': -1, 'date.edited': -1 }}
-  var o_pubs = Pages.find( cond, { fields: {
+  var o_pubs = Posts.find( cond, { fields: {
     'info.featured': 0,
     'layout': 0,
   }})

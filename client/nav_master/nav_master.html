@@ -22,7 +22,7 @@
 				<nav class="menu" id="nav-master-priority">
 					{{#each o_nav}}
 						{{#if url}}
-						<a href="{{pathFor url.route _o_slug=url.o_slug}}" class="{{class}}">{{name}}</a>
+						<a href="{{#if url.route}}{{pathFor url.route _o_slug=url.o_slug}}{{else}}{{url}}{{/if}}" class="{{class}}">{{name}}</a>
 						{{else}}
 						<span class="{{class}}">{{{name}}}</span>
 						{{/if}}

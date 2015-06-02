@@ -4,7 +4,7 @@
 
 		<nav class="transition {{#if brand 'logo_thumb'}}has-logo{{/if}}" id="user-page-title">
 			<h1 class="sub">Publications</h1>
-			{{#if hasPages}}
+			{{#if hasPosts}}
 			<div class="float-r compressed uppercase spaced-big">
 				Sort by:
 				<p class="inline-block invis-select transition">
@@ -29,9 +29,9 @@
 
 		<section class="sa-looper transition">
 			{{#if Template.subscriptionsReady}}
-				{{#if hasPages}}
-					{{#if pages}}
-						{{#each pages}}
+				{{#if hasPosts}}
+					{{#if posts}}
+						{{#each posts}}
 							{{>all_loop this}}
 						{{/each}}
 					{{else}}

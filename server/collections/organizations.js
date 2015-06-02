@@ -245,7 +245,7 @@ popImg: function( id, delete_key, args) {
         var setObj = {}
         setObj[ page_field] = new_array
 
-        Pages.update( cond, { $set: setObj }, function(){
+        Posts.update( cond, { $set: setObj }, function(){
             // Delete image after pulling from page
             Images.remove( delete_key)
         })

@@ -1,7 +1,7 @@
 
 // Quick Post Bar
 // # # # # # # # # # # # # # # # # # # # # # # # #
-Template.profile_quick_post.helpers({
+Template.blog_quick_post.helpers({
 	isOpen: function(){
 		var parent = Template.parentData()
 		var users_list = GE_Help.nk(parent, 'o.users') || []
@@ -28,7 +28,7 @@ Template.profile_quick_post.helpers({
 	},
 })
 
-Template.profile_quick_post.events({
+Template.blog_quick_post.events({
 	'click .qp': function(e,t){
 		Session.set('quick_post', true)
 		// Timeout for Reactive

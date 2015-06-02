@@ -1,21 +1,4 @@
 
-$serif: 'Mercury SSm A', 'Mercury SSm B', serif;
-$sans_serif: 'Slate W01 Bk', sans-serif;
-$sans_serif_thin: 'Slate W01 Light', sans-serif;
-$sans_serif_strong: 'Slate W01 Medium', sans-serif;
-$condensed: 'Slate W01 Bk Condensed', sans-serif;
-
-$color_text: #404040;
-
-$bg_green: #009f4c;
-$bg_red: #ca3342;
-
-$green: #2e9b3d;
-$red: #ed3c3c;
-$blue: #0077aa;
-$cyan: #00978e;
-$yellow: #fff247;
-
 @mixin border-radius($radius) {
 	-webkit-border-radius: $radius;
 	-moz-border-radius: $radius;
@@ -102,7 +85,7 @@ $yellow: #fff247;
 @import "client/page/event/layout_event_quarters.scss";
 @import "client/page/event/layout_event_slideshow.scss";
 @import "client/page/event/layout_event_timeline.scss";
-@import "client/profile/redesign/profile_redesign.scss";
+@import "client/profile/redesign/blog_redesign.scss";
 @import "client/user/all/all.scss";
 @import "client/user/new_page/new_page.scss";
 @import "client/user/team/user_team.scss";

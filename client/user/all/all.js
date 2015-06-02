@@ -1,9 +1,9 @@
 // Helpers
 Template.user_all.helpers({
-	hasPages: function(){
-		return Pages.find().count()
+	hasPosts: function(){
+		return Posts.find().count()
 	},
-	pages: function(){
+	posts: function(){
 		var o_slug = this.o.slug
 
 		// # # # #
@@ -32,7 +32,7 @@ Template.user_all.helpers({
 		}
 
 		var cond = { $and: andCond }
-		var pages = Pages.find(cond, sort).fetch()
+		var posts = Posts.find(cond, sort).fetch()
 		var authors_collection = Meteor.users.find({}, {
 			fields: {
 				name: 1,
@@ -42,7 +42,7 @@ Template.user_all.helpers({
 			return [a._id, a]
 		}))
 
-		return _.map( pages, function( page, index){
+		return _.map( posts, function( page, index){
 			page.author = authors[page.user] || {}
 			page.status_name = ge.status( page.status)
 			page.url = page.status>=4

@@ -138,7 +138,7 @@ Template.user_aids_page_publish.events({
 Template.user_aids_page_publish.created = function(){
 	Session.set('query',0)
 	this.autorun( (function(){
-		this.data.page = Pages.findOne( this.data.page_id)
+		this.data.page = Posts.findOne( this.data.page_id)
 		this.data.imgs = GE_Help.nk( this.data,'page.content') ? ge.extract_imgs (this.data.page.content) : []
 	}).bind(this))
 }

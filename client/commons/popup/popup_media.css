@@ -32,7 +32,7 @@
 	#popup-media-nav .pmn-prev { margin: 0 0 0 -45px; }
 	#popup-media-nav .pmn-next { margin: 0 0 0 17px; }
 	#popup-media-nav .pmn-save { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/popup-save.png); background-repeat: no-repeat; background-position: 50% 0; background-size: 25px 50px; }
-	#popup-media-nav .on { background-color: $bg_green; background-position: 50% -25px; border-color: rgba(0,0,0,0); }
+	#popup-media-nav .on { background-color: #009f4c; background-position: 50% -25px; border-color: rgba(0,0,0,0); }
 
 		/* If edit-mode, buttons are just inline-blocks */
 		#popup-media-nav.edit-mode .cursor {

@@ -266,7 +266,7 @@ Template.page_story.rendered = function() {
 			When the layout of the page changes, this autorun is used to either turn on/off the canvas function.
 		*/
 		if (session.style){
-			if (_.contains(globals.canvas_layouts, session.style)){
+			if (_.contains(GE_canvas_layouts, session.style)){
 				this.canvas.calc()
 				$(window).on('resize', this.canvas_func)
 			} else {
@@ -280,7 +280,7 @@ Template.page_story.rendered = function() {
 			if( $header.data('layout')!=session.style){
 				var setObj = {}
 				setObj[ 'layout.style'] = session.style
-				Pages.update( this.editor.page_id, { $set: setObj } )
+				Posts.update( this.editor.page_id, { $set: setObj } )
 
 				// Update Session so the header Template can change accordingly
 				// i.e. Some layout styles require black header bar, some require white.

@@ -1,15 +1,13 @@
 
 // Helpers
-Template.profile.helpers({
+Template.blog.helpers({
 	/*
 		Comments (Guestbook)
 	*/
 	comments: function(){
-		var o = this.o
 		return {
-			_id: o._id,
-			page_type: 'profile',
-			o_id: o._id,
+			_id: null,
+			page_type: 'blog',
 			overlay: true, // This stops duplicate subscriptions
 		}
 	},
@@ -42,6 +40,11 @@ Template.profile.helpers({
 	},
 	contributors: function(){
 		var o = this.o
+
+		return []
+
+		// TODO : THIS!!
+
 		var team = Meteor.users.find({
 			$and: [
 				{ _id: { $in: o.users }},
@@ -69,7 +72,7 @@ Template.profile.helpers({
 	},
 	loop: function(){
 		var o = this.o
-		var pages
+		var posts
 
 		if(o){
 			var query = Session.get('query')
@@ -91,11 +94,11 @@ Template.profile.helpers({
 				})
 				cond.$and.push({ $or: or })
 			}
-			pages = Pages.find(cond, { sort: { 'date.published': -1 }}).fetch()
+			posts = Posts.find(cond, { sort: { 'date.published': -1 }}).fetch()
 		}
 
-		if(o && pages.length){
-			var authors_list = _.map( pages, function(p){
+		if(o && posts.length){
+			var authors_list = _.map( posts, function(p){
 				return p.user
 			})
 			var authors = Meteor.users.find({ _id: { $in: authors_list }}).fetch()
@@ -110,7 +113,7 @@ Template.profile.helpers({
 			// 		services: 1
 			// 	}}).fetch()
 
-			var loop = _.map( pages, function( page, index){
+			var loop = _.map( posts, function( page, index){
 				var url = '/'+o.slug+'/'+page.slug
 
 				//var date = page.date.published || page.date.edited || page.date.created
@@ -122,7 +125,7 @@ Template.profile.helpers({
 					_id: page._id,
 					author: authors[page.user],
 
-					tmpl: page.info.type=='note' ? Template['profile_note'] : Template['profile_loop'],
+					tmpl: page.info.type=='note' ? Template['blog_note'] : Template['blog_loop'],
 					order: index,
 					url: url,
 
@@ -142,7 +145,7 @@ Template.profile.helpers({
 	},
 })
 
-Template.profile.events({
+Template.blog.events({
 	'input #search-profile': function(e,t){
 		Meteor.clearTimeout(this.timer)
 		this.timer = Meteor.setTimeout( function(){
@@ -163,7 +166,7 @@ Template.profile.events({
 
 		if( isAllowed){
 			Session.set('popup', {
-				template: 'profile_redesign',
+				template: 'blog_redesign',
 				class: 'bg-dim fade-in fixed-full',
 				data: {
 					overlay: true,
@@ -174,7 +177,7 @@ Template.profile.events({
 })
 
 // Created
-Template.profile.created = function(){
+Template.blog.created = function(){
 	// Init Sessions
 	Session.set('quick_post', false)
 	Session.set('query', false)
@@ -196,7 +199,7 @@ Template.profile.created = function(){
 }
 
 // Rendered
-Template.profile.rendered = function() {
+Template.blog.rendered = function() {
 	this.canvas = new GE_Canvas('#house', { min_height: true })
 	this.canvas.calc()
 	this.canvas_func = (function(){
@@ -207,7 +210,7 @@ Template.profile.rendered = function() {
 }
 
 // Destroyed
-Template.profile.destroyed = function() {
+Template.blog.destroyed = function() {
   $(window).off( 'resize', this.canvas_func )
 
 	if( this.comment_subscription)

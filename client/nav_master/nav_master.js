@@ -37,8 +37,8 @@ Template.nav_master.helpers({
 
 		o_nav.push({
 			name: 'Good Ethos',
-			url: { route: 'goodethos' },
-			class: a_class+' lmi-goodethos'+(cur=='goodethos' ? ' cur' : '')
+			url: 'https://goodethos.com',
+			class: a_class+' lmi-goodethos'
 		})
 
 		return o_nav
@@ -64,8 +64,8 @@ Template.nav_master.helpers({
 
 		return [{
 				name: 'Good Ethos',
-				url: { route: 'goodethos' },
-				class: a_class+' lmi-goodethos'+(cur=='goodethos' ? ' cur' : '')
+				url: 'https://goodethos.com',
+				class: a_class+' lmi-goodethos'
 			},{
 				name: 'Good Company',
 				// url: { route: 'goodcompany' },
@@ -132,7 +132,7 @@ Template.nav_master.helpers({
 				class: a_class+' lmi-team'+(cur=='team' ? ' cur' : '')
 			},{
 				name: 'Edit Profile',
-				url: { route: 'goodethos' },
+				url: '#',
 				class: a_class+' popup-'+(user.organization ? 'profile' : 'organization')+' lmi-profile'
 			}]
 		} else {
@@ -140,7 +140,7 @@ Template.nav_master.helpers({
 			var create_nav = false
 			var user_nav = [{
 				name: 'Edit Profile',
-				url: { route: 'goodethos' },
+				url: '#',
 				class: a_class+' popup-'+(user.organization ? 'profile' : 'organization')+' lmi-profile'
 			}]
 		}

@@ -132,7 +132,7 @@ Template.user_aids_page_settings.rendered = function(){
 			if( session.topic!=this.saved_topic ) setObj.$set['info.topic'] = session.topic
 
 			if( !_.isEmpty( setObj.$set) && this.data.page_id && this.data.page_id==this.page_id)
-				Pages.update( this.data.page_id, setObj)
+				Posts.update( this.data.page_id, setObj)
 		}
 	}).bind(this)
 	$(window).on('beforeunload', this.unload_func)

@@ -12,11 +12,11 @@ var state = function( edit_type){
 	return new_cur
 }
 
-Template.profile_redesign.helpers({
+Template.blog_redesign.helpers({
 	pip: function(){
 		if( this.pip) {
 			return {
-				msg: this.pip.msg || 'Your homepage has been re-designed.',
+				msg: this.pip.msg || 'Your blog has been re-designed.',
 			}
 		}
 	},
@@ -66,7 +66,7 @@ Template.profile_redesign.helpers({
 
 
 // Events
-Template.profile_redesign.events({
+Template.blog_redesign.events({
 	'click .eucc': function(e,t){
 		// It is assumed that you are changing the second bg if *not* main
 		var change_main = $(e.currentTarget).closest('#change-bg-main').length
@@ -178,6 +178,6 @@ Template.profile_redesign.events({
 })
 
 
-Template.profile_redesign.rendered = function(){
+Template.blog_redesign.rendered = function(){
 	prev_state = state()
 }

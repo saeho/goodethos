@@ -24,7 +24,7 @@ Template.user_aids_page_draft.events({
 	'submit': function(e,t){
 		e.preventDefault()
 		var user = Meteor.user()
-		var page = Pages.findOne(t.data.page_id)
+		var page = Posts.findOne(t.data.page_id)
 
 		var page_content = []
 		var was_text = false

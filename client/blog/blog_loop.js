@@ -1,7 +1,7 @@
 
 // House - Loop
 // # # # # # # # # # # # # # # # # # # # #
-Template.profile_loop.helpers({
+Template.blog_loop.helpers({
 	img: function(){
 		// Bigger
 		var isBig = !(this.order%3) && !Session.get('query')
@@ -17,7 +17,7 @@ Template.profile_loop.helpers({
 
 // House - Note
 // # # # # # # # # # # # # # # # # # # # #
-Template.profile_note.helpers({
+Template.blog_note.helpers({
 	isOwner: function(){
 		var o = Template.parentData().o
 		return Meteor.Device.isDesktop() && _.isArray(o.users)
@@ -31,9 +31,9 @@ Template.profile_note.helpers({
 	},
 })
 
-Template.profile_note.events({
+Template.blog_note.events({
 	'click .close-small': function(e,t){
 		if(confirm('Are you sure you want to delete this note?'))
-			Pages.remove(t.data._id)
+			Posts.remove(t.data._id)
 	},
 })

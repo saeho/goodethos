@@ -74,7 +74,7 @@ Template.page_body.created = function() {
 
 	/*
 		## ge_js.gallery()
-		In the Story pages, galleries are a group of images in unknown heights and widths.
+		In the Story posts, galleries are a group of images in unknown heights and widths.
 		In order to align these unknown sized images perfectly, I created a function that does some
 		basic math to figure out what height they need to be at in order to fit 100% of container width.
 

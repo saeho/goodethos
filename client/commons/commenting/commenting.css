@@ -2,7 +2,10 @@
 #commenting, #page-comments {
   line-height: 1.3;
   position: relative; z-index: 49; }
-#commenting.animate { @include animation(delay-fade-in-animate .7s 1); }
+#commenting.animate {
+  -webkit-animation: delay-fade-in-animate .7s 1;
+  -moz-animation: delay-fade-in-animate .7s 1;
+  animation: delay-fade-in-animate .7s 1; }
 .commenting-wrapper { margin: 0 auto; max-width: 580px; }
 
 .comment-single p, .comment-single.excerpt p.author-name { padding: 0 0 12px; }
@@ -56,7 +59,7 @@ ul.list-comments, .list-comments li, #commenting textarea { margin: 0; list-styl
             text-align: center; color: #fff;
             width: 84px; margin: 4px 0 0; }
           #commenting .nca .button-back button { padding: .50em .7em .49em; }
-          .brand-light #commenting button { background: #fff; color: $color_text; }
+          .brand-light #commenting button { background: #fff; color: #404040; }
 
                 .comment-single .author-pic { position: absolute; left: 9px; top: 9px; }
                 .brand-light .comment-single .author-pic, .brand-dark .comment-single .author-pic { left: 0; }

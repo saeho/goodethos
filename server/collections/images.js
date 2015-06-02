@@ -40,8 +40,8 @@ Meteor.methods({
         case 'story':
         case 'event':
         case 'blog':
-            var collection = Pages
-            collection.attachSchema( PagesSchema)
+            var collection = Posts
+            collection.attachSchema( PostsSchema)
             var cond = { $and: [ { _id: args.id }, { organization: user.organization } ] }
             break
         case 'organization':

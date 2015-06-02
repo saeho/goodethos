@@ -521,3 +521,5 @@ ge_editor.prototype = {
 			return 'nav-gray-perm'
 	},
 }
+
+GE_canvas_layouts = ['full-back'] // Add more here if needed

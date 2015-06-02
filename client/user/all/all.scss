@@ -56,22 +56,22 @@
 		color: #fff; background: #444;
 		padding: 2px 7px 1px 9px; border-radius: 10px; }
 
-	.sa-loop .edit:hover { background: $blue; }
+	.sa-loop .edit:hover { background: #0077aa; }
 	.sa-loop.blog .edit:hover { background: #23a13b; }
-	.sa-loop.event .edit:hover, .sa-loop.note .edit:hover { background: $cyan; }
+	.sa-loop.event .edit:hover, .sa-loop.note .edit:hover { background: #00978e; }
 
 	#user-page-master .icon, .house-loops .icon {
 		display: block; float: left; border-radius: 50%;
 		background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/page-type-icons.png); background-size: 24px 96px;
 		width: 24px; height: 24px; margin: 0 5px 0 0; }
 	#user-page-master .icon-blog, .house-loops .icon-blog { background-color: #23a13b; background-position: 0 -48px; }
-	#user-page-master .icon-story, .house-loops .icon-story { background-color: $blue; background-position: 0 0; }
-	#user-page-master .icon-event, .house-loops .icon-event { background-color: $cyan ; background-position: 0 -24px; }
-	#user-page-master .icon-note, .house-loops .icon-note { background-color: $cyan ; background-position: 0 -72px; }
+	#user-page-master .icon-story, .house-loops .icon-story { background-color: #0077aa; background-position: 0 0; }
+	#user-page-master .icon-event, .house-loops .icon-event { background-color: #00978e ; background-position: 0 -24px; }
+	#user-page-master .icon-note, .house-loops .icon-note { background-color: #00978e ; background-position: 0 -72px; }
 
 	.house-loops .loop.blog a:hover .info { background-color: #23a13b; }
-	.house-loops .loop.story a:hover .info { background-color: $blue; }
-	.house-loops .loop.event a:hover .info, .house-loops .loop.note a:hover .info { background-color: $cyan; }
+	.house-loops .loop.story a:hover .info { background-color: #0077aa; }
+	.house-loops .loop.event a:hover .info, .house-loops .loop.note a:hover .info { background-color: #00978e; }
 
 	.house-loops .loop a:hover .info span, .house-loops .loop a:hover .info strong { color: #fff; }
 	.house-loops .loop a:hover .info { border-color: #fff; }

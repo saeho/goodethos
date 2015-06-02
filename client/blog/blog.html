@@ -1,5 +1,5 @@
 
-<template name="profile">
+<template name="blog">
 	{{#if Template.subscriptionsReady}}
 		{{#if o}}
 		<main class="bg-light" id="house">
@@ -38,8 +38,8 @@
 			{{>commenting_book comments=comments}}
 
 			<section class="house-loops">
-				{{>profile_nav query=query}}
-				{{>profile_quick_post query=query}}
+				{{>blog_nav query=query}}
+				{{>blog_quick_post query=query}}
 
 				{{#if loop}}
 					{{#each loop}}

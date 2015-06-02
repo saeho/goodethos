@@ -29,9 +29,9 @@
 	display: block; content: ' '; width: 0; height: 0;
 	position: absolute; top: 50%; left: 50%; margin: -8px 0 0 -4px; }
 .prev:before { border-top: 8px solid rgba(0,0,0,0); border-bottom: 8px solid rgba(0,0,0,0); border-right: 8px solid #777; }
-.prev:not(.off):hover:before { border-right-color: $green; }
+.prev:not(.off):hover:before { border-right-color: #2e9b3d; }
 .next:before { border-top: 8px solid rgba(0,0,0,0); border-bottom: 8px solid rgba(0,0,0,0); border-left: 8px solid #777; }
-.next:not(.off):hover:before { border-left-color: $green; }
+.next:not(.off):hover:before { border-left-color: #2e9b3d; }
 .prev.off, .next.off { cursor: default; opacity: .35; filter: alpha(opacity=35); }
 .mini-popup .prev { left: -32px; }
 .mini-popup .next { left: auto; right: -32px; }

@@ -227,7 +227,7 @@ Template.page_blog.rendered = function(){
 
 		// Delete if it's an empty blog, save if it's not
 		if( !has_title && !has_summary && !has_content && !has_main)
-			Pages.remove( page._id )
+			Posts.remove( page._id )
 		else if( page.status && page.status<4 && page.status>0 // Check if page is in draft mode
 		&& page._id!=null && page._id==this.editor.page_id) // Check if page id matches the editor page id
 			this.editor.save() // Save before exit (if there's no difference, save won't happen)
