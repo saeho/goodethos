@@ -6,7 +6,7 @@ Template.author_pic.helpers({
 		var service = ge.get_service(user, true)
 
 		return {
-			exists: service=='profile' || img,
+			exists: service=='blog' || img,
 			url: img,
 			service: 'ss-'+service,
 			service_raw: service

@@ -12,7 +12,7 @@
 #nav-master :before, #nav-master :after, .nav-by, .takeover, #nav-gateway .page-by { transition: left .23s; -webkit-transition: left .23s; }
 
 		#nav-master {
-			background-color: #111111; background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/nav-master.jpg);
+			background-color: #111111; background-image: url(/packages/saeho_goodethos/img/core/nav-master.jpg);
 			width: 200px; margin: 0 0 0 -200px;
 			position: fixed; top: 0; left: 0; right: auto; bottom: 0; z-index: 10; }
 		#nav-master .scroll { position: absolute; top: 50px; bottom: 40px; left: 0; right: 0; padding: 0 0 50px; }
@@ -32,37 +32,37 @@
 		#nav-master .menu .submenu:after { bottom: 14px; }
 
 		.main-link, .sub-link {
-			background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/lmi-icons.png); background-repeat: no-repeat; background-size: 40px 510px; background-position: -40px 0;
+			background-image: url(/packages/saeho_goodethos/img/editor/lmi-icons.png); background-repeat: no-repeat; background-size: 40px 510px; background-position: -40px 0;
 			white-space: nowrap;
 			padding: 3px 15px 0 0; height: 28px; }
 		#nav-master .menu span.block:not(.cursor) { opacity: .5; filter: alpha(opacity=50); }
 		#overlord.nav-mini:not(.moving) .hn { margin: 0 0 0 50px; }
 		#overlord.nav-mini .main-link { text-indent: 70px; }
 
-		.lmi-goodethos { background-position: 5px -224px; }
-		.lmi-goodcompany { background-position: 5px -256px; }
-		.lmi-goodreads { background-position: 5px -288px; }
+		.lmi-goodethos { background-position: 5px -225px; }
+		.lmi-goodcompany { background-position: 5px -257px; }
+		.lmi-goodreads { background-position: 5px -289px; }
 
-		.lmi-home { background-position: 5px -353px; }
-		.lmi-analytics { background-position: 5px 0; }
-		.lmi-all { background-position: 5px -193px; }
-		.lmi-create { background-position: 5px -65px; }
-		.lmi-c-blog { background-position: 5px -480px; }
-		.lmi-c-story { background-position: 5px -32px; }
-		.lmi-c-event { background-position: 5px -128px; }
-		.lmi-c-initiative { background-position: 5px -160px; }
-		.lmi-help { background-position: 5px -96px; }
-		.lmi-profile { background-position: 5px -321px; }
-		.lmi-team { background-position: 5px -450px; }
+		.lmi-home { background-position: 5px -354px; }
+		.lmi-blog { background-position: 5px -161px; }
+		.lmi-analytics { background-position: 5px -1px; }
+		.lmi-all { background-position: 5px -194px; }
+		.lmi-create { background-position: 5px -66px; }
+		.lmi-c-blog { background-position: 5px -481px; }
+		.lmi-c-story { background-position: 5px -33px; }
+		.lmi-c-event { background-position: 5px -129px; }
+		.lmi-help { background-position: 5px -97px; }
+		.lmi-profile { background-position: 5px -322px; }
+		.lmi-team { background-position: 5px -451px; }
 
-		.lmi-signin { background-position: 5px -386px; }
-		.lmi-signup { background-position: 5px -419px; }
+		.lmi-signin { background-position: 5px -387px; }
+		.lmi-signup { background-position: 5px -420px; }
 
 /* Additionals */
 .logo-top {
 	padding: 7px 0 6px; height: 37px;
 	background-color: rgba(0,0,0,.2); background-position: -50px 50%; background-repeat: no-repeat; background-size: 30px 30px; }
-.logo-ge { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/logos/white-boxed.png); }
+.logo-ge { background-image: url(/packages/saeho_goodethos/img/logos/white-boxed.png); }
 .logo-top img { display: block; max-width: none; width: 113px; height: 37px; margin: 0 auto; }
 
 #nav-master .version {
@@ -99,13 +99,14 @@
 
 /* Nav Auth */
 #nav-auth {
+	opacity: 0; filter: alpha(opacity=0);
 	position: absolute; bottom: 0; left: 0; right: 0;
 	white-space: nowrap; line-height: 1.5; }
 #nav-auth .ana {
 	border-radius: 50%;
 	background-color: rgba(0,0,0,.4);
 	display: inline-block; width: 25px; height: 25px; margin: 0 1px; }
-#nav-auth .ana { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/ana.png); background-size: 25px 75px; }
+#nav-auth .ana { background-image: url(/packages/saeho_goodethos/img/editor/ana.png); background-size: 25px 75px; }
 
 #ana-guide { display: none; }
 
@@ -119,17 +120,6 @@
 	-webkit-box-shadow: 0 0 4px rgba(0,0,0,.3); -moz-box-shadow: 0 0 4px rgba(0,0,0,.3); box-shadow: 0 0 4px rgba(0,0,0,.3);
 	position: absolute; top: 200px; left: 50px;
 	display: block; height: 29px; padding: 3px 8px 0; }
-
-/* Nav Message */
-#nav-message {
-	text-transform: none; letter-spacing: 0; text-indent: 0; font-weight: 400; line-height: 1.15;
-	padding: 0 7px; width: 186px; overflow: hidden; max-height: 200px; }
-#nav-message .inner { padding: 20px 0 10px; }
-#overlord.nav-mini #nav-message { max-height: 0; }
-#nav-message, #nav-message a { color: rgba(255,255,255,.5); }
-#nav-message a:hover { color: #fff; }
-
-#overlord.nav-mini  #nav-message, #nav-auth { opacity: 0; filter: alpha(opacity=0); }
 
 /* Popup Master */
 #master-popup .real-width { height: 100%; position: relative; }

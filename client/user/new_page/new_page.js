@@ -27,7 +27,7 @@ Template.user_new_page.helpers({
 			new_event: 'Event',
 		}
 		if ( _.has( allowed_types, this.action)) return allowed_types[ this.action]
-		else { Router.go('user') }
+		else { Router.go('blog/user') }
 	},
 	popup: function(){ return this.popup },
 	not_popup: function(){ return !this.popup },
@@ -58,24 +58,24 @@ Template.user_new_page.helpers({
 					cur: (this.cur=='no-pic' ? 'on' : '')
 				}]
 			break
-			case 'new_event':
-				return [{
-					id: 'event-slideshow',
-					desc: 'Prominent slideshow gallery at top',
-					actors: actor_loop(15),
-					cur: (this.cur=='event-slideshow' ? 'on' : '')
-				},{
-					id: 'event-quarters',
-					desc: 'Up to three media items per row',
-					actors: actor_loop(10),
-					cur: (this.cur=='event-quarters' ? 'on' : '')
-				},{
-					id: 'event-timeline',
-					desc: 'Timeline of event (Beta)',
-					actors: actor_loop(13),
-					cur: (this.cur=='event-timeline' ? 'on' : '')
-				}]
-			break
+			// case 'new_event':
+			// 	return [{
+			// 		id: 'event-slideshow',
+			// 		desc: 'Prominent slideshow gallery at top',
+			// 		actors: actor_loop(15),
+			// 		cur: (this.cur=='event-slideshow' ? 'on' : '')
+			// 	},{
+			// 		id: 'event-quarters',
+			// 		desc: 'Up to three media items per row',
+			// 		actors: actor_loop(10),
+			// 		cur: (this.cur=='event-quarters' ? 'on' : '')
+			// 	},{
+			// 		id: 'event-timeline',
+			// 		desc: 'Timeline of event (Beta)',
+			// 		actors: actor_loop(13),
+			// 		cur: (this.cur=='event-timeline' ? 'on' : '')
+			// 	}]
+			// break
 		} // END : Switch
 	},
 })
@@ -171,7 +171,7 @@ Template.user_new_page.events({
 					}
 					Meteor.call("createPost", data, function(err, res){
 						if (err) console.warn(err)
-						else Router.go(res)
+						else Router.go('post', { _page: res, _action: 'edit' })
 					})
 				}
 			}

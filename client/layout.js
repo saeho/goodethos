@@ -54,9 +54,9 @@ Template.layout.events({
 	'click .open-help': function(e,t){
 		Session.set('popup', {
 			id: 'popup-help',
-			html: '<p>Good Ethos was once a startup -- now a side project, created by Jason Lee and Carmina Canezal.</p>\
-			<p>All front-end/back-end code, design, UX and UI icons were created by Jason Lee alone.</p>\
-			<p>If you need help or want to say hi, please contact us at <a href="mailto:hello@goodethos.com" class="dotted-link">hello@goodethos.com</a>.</p>',
+			html: '<p><strong>Thank you for using Good Ethos.</strong></p>\
+			<p>For feedback, feature requests, bug reports and friendly hello\'s, please e-mail me at <a href="mailto:hello@goodethos.com" class="dotted-link">hello@goodethos.com</a>.</p>\
+			<p>I would love to see what you\'ve done with this software or help out in any way I can.</p>',
 			class: 'bg-dim fade-in fixed-full',
 			data: {
 				overlay: true,

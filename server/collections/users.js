@@ -19,8 +19,8 @@ Meteor.publish('team', function(){
   return Meteor.users.find({ isTeam: true }, {
     fields: {
       'level': 1,
+      'isStaff': 1,
       'emails': 1,
-      'organization': 1,
       'services': 1,
       'name': 1,
       'isTeam': 1

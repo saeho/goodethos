@@ -8,6 +8,7 @@ Template.blog.helpers({
 		return {
 			_id: null,
 			page_type: 'blog',
+			o_id: 'something',
 			overlay: true, // This stops duplicate subscriptions
 		}
 	},
@@ -17,7 +18,7 @@ Template.blog.helpers({
 	title: function(){
 		var o = this.o
 		if(!o) return false
-		var title = GE_Help.nk(o, 'name.full') || GE_Help.nk(o, 'name.short') || 'Unknown House'
+		var title = GE_Help.nk(o, 'name.full') || GE_Help.nk(o, 'name.short') || 'Blog'
 		var size = ge.title_size( title)
 		return {
 			val: title,
@@ -48,7 +49,6 @@ Template.blog.helpers({
 		var team = Meteor.users.find({
 			$and: [
 				{ _id: { $in: o.users }},
-				{ organization: o._id }
 			]
 		})
 		return team.count() > 1 ? team.fetch() : false
@@ -79,7 +79,6 @@ Template.blog.helpers({
 			var cond = {
 				$and: [
 					{ 'status' : { '$gte': 4 } },
-					{ 'organization' : o._id },
 					{ 'date.published': { $lt: Session.get('cur_date') }}
 				]}
 
@@ -185,17 +184,11 @@ Template.blog.created = function(){
 	Session.set('cur_date', new Date()) // This prevents future published posts
 
 	// Do not use Meteor Template subscription here
-	this.autorun( (function(){
-		// Use Session to re-subscribe comments based on page numbers
-		if( GE_Help.nk( this.data, 'o._id') && !this.comment_subscription){
-			this.comment_subscription =
-			Meteor.subscribe('comments', {
-				_id: this.data.o._id,
-				page_type: 'profile',
-				o_id: this.data.o._id,
-			})
-		}
-	}).bind(this))
+	this.subscribe('comments', {
+		_id: null,
+		page_type: 'blog',
+		o_id: 'something'
+	})
 }
 
 // Rendered
@@ -212,9 +205,6 @@ Template.blog.rendered = function() {
 // Destroyed
 Template.blog.destroyed = function() {
   $(window).off( 'resize', this.canvas_func )
-
-	if( this.comment_subscription)
-		this.comment_subscription.stop()
 
 	delete Session.keys['query','cur_date','quick_post']
 }

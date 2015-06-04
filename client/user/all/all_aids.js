@@ -17,7 +17,7 @@ Template.all_loop.helpers({
 Template.all_loop.events({
 	'click .sa-loop': function(e,t){
 		if( Meteor.Device.isPhone() || Meteor.Device.isTablet())
-			Router.go(t.data.url || '/'+t.data.organization+'/'+t.data._id+'/edit')
+			Router.go(t.data.url || '/blog/'+t.data._id+'/edit')
 		else {
 			var data = t.data
 			if( !data.content.title) data.content.title = 'Untitled'
@@ -98,8 +98,6 @@ Template.all_preview.helpers({
 				or.push({ 'content.summary': regex })
 			})
 
-			// Because Meteor.publish() only published page that matches this organization,
-			// We do *not* need to do that check.
 			var cond = { $or: or }
 
 			var posts = Posts.find(cond).fetch()
@@ -112,7 +110,7 @@ Template.all_preview.helpers({
 				var type = GE_Help.capitalize( p.info.type)
 				var status_name = p.status<4 ? '<strong>'+status+' '+type+'</strong>' : '<strong class="charcoal">'+status+' '+type+'</strong>'
 				var time_ago = moment( p.date.edited ).fromNow().replace('a few seconds', 'few seconds')
-				var url = '/'+p.organization+'/'+p._id+'/edit'
+				var url = '/blog/'+p._id+'/edit'
 
 				return {
 					title: p.content.title,

@@ -13,6 +13,10 @@ var auth_pip_close = {
 	  		Session.set('error', errorSession)
 			},350)
 	  }
+	},
+	'keydown': function(e,t){
+		if (e.which==13 && t.$('.ok').length)
+			t.$('.ok').trigger('click')
 	}
 }
 

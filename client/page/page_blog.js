@@ -64,7 +64,7 @@ Template.page_blog.created = function(){
 		page_id: this.data.page._id,
 	})
 	this.uploader = new ge_uploader()
-	this.subscribe('futureImages', this.data.organization._id)
+	this.subscribe('futureImages')
 
 	// Page Edit Mode
 	var layout = this.data.page.layout
@@ -119,7 +119,6 @@ Template.page_blog.created = function(){
 			if( !this.comment_subscription){
 				this.comment_subscription = Meteor.subscribe('comments', {
 					_id: this.data.page._id,
-					o_id: this.data.page.organization,
 				})
 			}
 		} else if( this.comment_subscription) {

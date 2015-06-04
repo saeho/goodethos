@@ -1,22 +1,22 @@
 
 /* No Registration */
-#no-registration { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/no/no-registration.jpg); }
-#no-registration .text {
+#no-staff { background-image: url(/packages/saeho_goodethos/img/no/no-staff.jpg); }
+#no-staff .text {
 	max-width: 500px; margin: 0 0 100px 100px;
 	position: absolute; bottom: 10%; left: 0; }
-#no-registration img { margin: 0 0 20px; }
+#no-staff img { margin: 0 0 20px; }
 
 /* No Device */
-#no-device { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/no/no-device.jpg); }
+#no-device { background-image: url(/packages/saeho_goodethos/img/no/no-device.jpg); }
 #no-device .text { max-width: 278px; padding: 12.5% 5% 0; }
 #no-device .title { padding: 35px 0 17px; }
 @media screen and (max-width: 1024px) {
-	#no-device { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/no/no-device-tablet.jpg); }
+	#no-device { background-image: url(/packages/saeho_goodethos/img/no/no-device-tablet.jpg); }
 }
 @media screen and (max-width: 900px) {
-	#no-device { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/no/no-device-tablet-tall.jpg); }
+	#no-device { background-image: url(/packages/saeho_goodethos/img/no/no-device-tablet-tall.jpg); }
 }
 @media screen and (max-width: 700px) {
-	#no-device { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/no/no-device-phone.jpg); }
+	#no-device { background-image: url(/packages/saeho_goodethos/img/no/no-device-phone.jpg); }
 	#no-device .text { padding: 18% 5% 0; }
 }

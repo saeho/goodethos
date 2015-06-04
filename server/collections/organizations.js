@@ -34,7 +34,7 @@ Organizations_Schema = new SimpleSchema({
     name: { type: Object },
     "name.full": { type: String, max: 40, min: 4 },
     "name.short": { type: String, max: 5 },
-    "mission": { type: String, optional: true },
+    "description": { type: String, optional: true },
 
     "users": { type: [String], optional: true },
 
@@ -108,11 +108,11 @@ Organizations.allow({
         if (
             !_.contains( document.users, userId)
             || !_.has( modifier, '$set')
-            || _.difference( fields, ['img','name','mission','social_media','brand']).length) return false
+            || _.difference( fields, ['img','name','description','social_media','brand']).length) return false
 
         var test = _.map( modifier.$set, function( val, key){
             // If in the future more fields are needed, just add it to this array
-            if( _.contains( ['name.full','name.short','mission','brand.text','brand.bg','brand.bg_second'], key) ||
+            if( _.contains( ['name.full','name.short','description','brand.text','brand.bg','brand.bg_second'], key) ||
                 key.indexOf('social_media.')==0 ||
                 (key=='brand.logo' && _.isObject( val) && _.has( val, 'key')) ||
                 _.contains( ['value'], key.substr( key.length - 5)) ) return true
@@ -135,7 +135,7 @@ Meteor.publish('user-o', function() {
       Meteor.users.find({_id: this.userId}, {
         fields: {
             'level': 1,
-            'organization': 1,
+            'isStaff': 1,
             'invited': 1,
             'services': 1,
             'name': 1,
@@ -150,7 +150,7 @@ Meteor.publish('user-o', function() {
                     'address': 1,
                     'brand': 1,
                     'info.type': 1, // Only need certain fields from info, don't publish featured/level
-                    'mission': 1,
+                    'description': 1,
                     'name': 1,
                     'slug': 1,
                     'social_media': 1,

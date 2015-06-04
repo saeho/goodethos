@@ -12,7 +12,7 @@ Template.header.helpers({
 	// Page Session
 	page: function() {
 		var page = this.page
-		if( !page) return false
+		if (!page) return false
 		else if(_.isObject(page)){
 
 			var edit_mode = Router.current().params._action=='edit'
@@ -25,18 +25,11 @@ Template.header.helpers({
 			}
 
 			var save = Session.get('saving')
+			var author = Meteor.user(page.user)
 
 			if( _.isString( save)) var save_text = 'Uploading'
 			else var save_text = save ? 'Saving' : false
-/*
-			switch( typeof save){
-				case 'string':
-					var save_text = 'Uploading' // TODO : Setup up an array of allowed Save texts
-				default:
-					// boolean
-					var save_text = save ? 'Saving' : false
-			}
-*/
+
 			return {
 				_id: page._id,
 				organization: page.organization,
@@ -50,6 +43,7 @@ Template.header.helpers({
 				type: _.contains(['story','event','blog'], page.info.type)
 					? GE_Help.capitalize( page.info.type).replace('Blog', 'Blog Post')
 					: false,
+				author_name: ge.get_name(author) || 'Unknown',
 
 				header: edit_mode
 					? {

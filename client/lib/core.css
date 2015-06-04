@@ -1,4 +1,6 @@
 
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700|Merriweather:400,400italic,700,700italic|Open+Sans+Condensed:700|Arapey:400italic);
+
 /* Basics */
 .clear:after, .content-wrapper:after { display: block; content: ' '; clear: both; visibility: hidden; }
 .box { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
@@ -36,8 +38,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 ::selection { background: #7cffa4; color: #2a2a2a; }
 ::-moz-selection { background: #7cffa4; color: #2a2a2a; }
 
-.table { height: 100%; width: 100%; display: table; vertical-align: middle; }
-.table .inside { display: table-cell; vertical-align: middle; padding: 0; }
+.table { height: 100%; width: 100%; display: table !important; vertical-align: middle; }
+.table .inside { display: table-cell !important; vertical-align: middle; padding: 0; }
 
 .background { background-repeat: no-repeat; background-size: cover; background-position: 50%; }
 .contain { background-repeat: no-repeat; background-size: contain; background-position: 50%; }
@@ -113,14 +115,14 @@ body { color: #404040; overflow: visible; line-height: 1.7; overflow-x: hidden; 
 	body.overflow .layout-controls { display: none; }
 
 body, input, textarea, select, option, button, .invis-select.block {
-	font-size: 16px; font-weight: 400;
+	font-size: 15px; font-weight: 400;
 	-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 input, button { line-height: 1.35; }
 textarea { line-height: 1.6; }
-button, .normal, .sans-serif, .small-label, .ok { font-family: 'Slate W01 Bk', sans-serif; font-weight: normal; }
+button, .normal, .sans-serif, .small-label, .ok { font-family: 'PT Sans', sans-serif; font-weight: normal; }
 strong, b { font-weight: 700; }
-.subheading, .sans-serif-thin { font-family: 'Slate W01 Bk', sans-serif_thin; font-weight: normal; }
-.normal strong, .normal b, .sans-serif strong, .sans-serif b, strong.normal, b.normal, strong.sans-serif, b.sans-serif { font-family: 'Slate W01 Bk', sans-serif_strong; font-weight: normal; }
+.subheading, .sans-serif-thin { font-family: 'PT Sans', sans-serif; font-weight: normal; }
+.normal strong, .normal b, .sans-serif strong, .sans-serif b, strong.normal, b.normal, strong.sans-serif, b.sans-serif { font-family: 'PT Sans', sans-serif_strong; font-weight: normal; }
 
 .uppercase { text-transform: uppercase; }
 .capitalize { text-transform: capitalize; }
@@ -131,7 +133,6 @@ strong, b { font-weight: 700; }
 .spaced-small { letter-spacing: .007em; } .center .spaced-small { text-indent: .007em; }
 .spaced { letter-spacing: .015em; } .center .spaced { text-indent: .015em; }
 .spaced-medium { letter-spacing: .05em; } .center .spaced-medium { text-indent: .05em; }
-.spaced-big { letter-spacing: .08em; } .center .spaced-big { text-indent: .08em; }
 
 .padding { padding: 4%; }
 .padding-t { padding-top: 10px; }
@@ -145,7 +146,7 @@ strong, b { font-weight: 700; }
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 { padding: 2% 0 5%; margin: 0; line-height: 1.2; }
-.condensed { font-family: 'Slate W01 Bk Condensed', sans-serif; }
+.condensed { font-family: 'PT Sans', sans-serif; font-weight: 400; }
 
 h1 { font-size: 1.9em; }
 h2 { font-size: 1.7em; }
@@ -154,29 +155,23 @@ h4 { font-size: 1.4em; }
 h5 { font-size: 1.3em; }
 h6 { font-size: 1.2em; }
 
-h1, h2, .master-title { font-family: 'SlateW01-BoldCondensed', sans-serif; font-weight: normal; color: #3d3d3d; }
-h3, .middle-title { font-family: 'SlateW01-MediumCondense', sans-serif; font-weight: normal; color: #3d3d3d; }
-h4, h5, h6 { font-family: 'SlateW01-MediumCondense', sans-serif; font-weight: normal; color: #3d3d3d; }
+h1, h2, .master-title { font-family: 'PT Sans', sans-serif; font-weight: 700; color: #3d3d3d; }
+h3, .middle-title { font-family: 'PT Sans', sans-serif; font-weight: 700; color: #3d3d3d; }
+h4, h5, h6 { font-family: 'PT Sans', sans-serif; font-weight: 700; color: #3d3d3d; }
 
 		/* Serif */
-		/*.serif { font-family: 'CaslonClassicoW00-Itali', serif; letter-spacing: -.0035em; }*/
-		/*.serif, .serif i, .serif em, .serif b, .serif strong { font-weight: normal; font-style: normal; }*/
-		.serif { font-family: 'Hoefler Titling A', 'Hoefler Titling B', serif; font-style: italic; letter-spacing: .0025em; }
-		.serif, .serif i, .serif em, .serif b, .serif strong { font-weight: 300; font-style: italic; }
+		.serif { font-family: 'Arapey', serif; }
+		.serif, .serif i, .serif em, .serif b, .serif strong { font-weight: 400; font-style: italic; }
 
 
 		/* Sub */
-		.compressed, .sub { font-family: 'Verlag Comp A', 'Verlag Comp B', sans-serif; font-weight: 700; }
-		.sub { letter-spacing: .18em; text-transform: uppercase; }
-		.center .sub, .center.sub { text-indent: .225em; } /* x1.25 */
+		.compressed, .sub { font-family: 'Open Sans Condensed', sans-serif; font-weight: 700; }
+		.sub { letter-spacing: .1em; text-transform: uppercase; }
+		.center .sub, .center.sub { text-indent: .125em; } /* x1.25 */
 
 		/* Pullquotes, Italics, Others */
-		input, textarea, select { font-family: 'Slate W01 Bk', sans-serif; font-weight: normal; font-size: 14px; }
-		.condensed em, .condensed i, .condensed strong, .condensed b,
-		h1 b, h2 b, .master-title b, h1 i, h2 i, .master-title i,
-		h3 b, .middle-title b, h3 i, .middle-title i
-		{ font-style: normal !important; font-weight: normal !important; }
-		.condensed strong, .condensed b { font-family: 'SlateW01-MediumCondense', sans-serif; }
+		input, textarea, select { font-family: 'PT Sans', sans-serif; font-weight: 400; }
+		.condensed strong, .condensed b { font-weight: 700; }
 
 		.title-size { font-size: 3em; padding: 10px 0; }
 
@@ -213,7 +208,7 @@ h4, h5, h6 { font-family: 'SlateW01-MediumCondense', sans-serif; font-weight: no
 /* Social Media */
 .sm-tiny {
 	display: block; float: left; width: 18px; height: 18px; margin: 0 2px;
-	background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/sm-tiny.png); background-size: 126px 36px; }
+	background-image: url(/packages/saeho_goodethos/img/core/sm-tiny.png); background-size: 126px 36px; }
 .smt-fb { background-position: 0 0; }
 .smt-tw { background-position: -18px 0; }
 .smt-gp { background-position: -36px 0; }
@@ -224,7 +219,7 @@ h4, h5, h6 { font-family: 'SlateW01-MediumCondense', sans-serif; font-weight: no
 		/* Page Share */
 		.share-social {
 			width: 34px; height: 34px; cursor: pointer; margin: 0 1px;
-			background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/share-social.png); background-size: 170px 68px;
+			background-image: url(/packages/saeho_goodethos/img/core/share-social.png); background-size: 170px 68px;
 			border-radius: 50%; }
 		.share-social, .share-social.pop-in { display: inline-block; }
 
@@ -337,16 +332,16 @@ h4, h5, h6 { font-family: 'SlateW01-MediumCondense', sans-serif; font-weight: no
 /* Form */
 label.small-label { background: #444; color: #fff; font-weight: normal; }
 label.small-label, .small-label {
-	font-size: 14px; line-height: 24px;
+	font-size: 13px; line-height: 23px;
 	display: inline-block; margin: 15px 0 0; padding: 1px 5px; vertical-align: bottom; }
 label.normal-label { padding: 12px 0 4px; display: inline-block; }
 
 input, textarea, .invis-select.block, .input { padding: .6em .7em .55em; }
-button { padding: .6em .7em .64em; }
+button { padding: .6em .7em .7em; }
 input, textarea, button, .input {
 	display: block; width: 100%; margin: 0;
 	border: none; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
-input, textarea { font-size: 17px; background: #fff; color: #404040; border: solid 1px #fff; }
+input, textarea { font-size: 16px; background: #fff; color: #404040; border: solid 1px #fff; }
 .center input, .center textarea { text-align: center; }
 input.inline {
 	font-size: inherit; line-height: inherit; color: inherit;
@@ -402,9 +397,9 @@ textarea { resize: none; }
 	.input-big { width: 240px; }
 
 	.half.float-l input, .half.float-r input, .half.float-l .input, .half.float-r .input {
-		width: -moz-calc(100% - 2px);
-	    width: -webkit-calc(100% - 2px);
-	    width: calc(100% - 2px); }
+		width: -moz-calc(100% - 1px);
+    width: -webkit-calc(100% - 1px);
+    width: calc(100% - 1px); }
 	.half.float-l input, .half.float-l .input { margin-right: 1px; }
 	.half.float-r input, .half.float-r .input { margin-left: 1px; }
 
@@ -458,7 +453,7 @@ button.no-shadow:focus, button.no-shadow:hover { -webkit-box-shadow: none; -moz-
 #main-footer .serif { padding: 20px 0; }
 
 #footer-ghost {  height: 38px; } /* 18 line-height + 10 padding + 10 padding */
-#cp { font-size: 16px; line-height: 18px; padding: 0 15px; overflow: hidden; }
+#cp { font-size: 14px; line-height: 18px; padding: 0 15px; overflow: hidden; }
 #cp .relative { padding: 10px 0; }
 
 #footer-up-down {
@@ -505,7 +500,7 @@ button.no-shadow:focus, button.no-shadow:hover { -webkit-box-shadow: none; -moz-
 }
 
 @media screen and (max-width: 600px) {
-	body { font-size: 15px; }
+	body { font-size: 14px; }
 
 	.bigger-caption { font-size: 1.55em; }
 

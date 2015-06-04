@@ -38,8 +38,8 @@
 #page-blog-body .content-wrapper:only-child { min-height: 350px; }
 
 @media screen and (min-width: 640px) {
-	#page-blog-body .content-wrapper, .dotted-paper { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/line-height-32.png); }
-	.linepaper { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/linepaper.png); }
+	#page-blog-body .content-wrapper, .dotted-paper { background-image: url(/packages/saeho_goodethos/img/core/line-height-32.png); }
+	.linepaper { background-image: url(/packages/saeho_goodethos/img/core/linepaper.png); }
 
 	#page-blog-body .content-wrapper { border-top: solid 25px #fff; border-bottom: solid 25px #fff; }
 	#page-blog-body .content-wrapper, .linepaper, .dotted-paper {

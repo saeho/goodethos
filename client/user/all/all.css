@@ -51,10 +51,10 @@
 	.sa-loop .controls { position: absolute; top: 10px; right: 10px; }
 	.sa-loop .edit { display: inline-block; vertical-align: top; }
 
-	.sa-loop .edit, #user-page-title .float-r { font-size: 15px; line-height: 20px; }
+	.sa-loop .edit, #user-page-title .float-r { font-size: 14px; line-height: 20px; }
 	.sa-loop .edit, #user-page-title .invis-select {
 		color: #fff; background: #444;
-		padding: 2px 7px 1px 9px; border-radius: 10px; }
+		padding: 1px 7px 1px 8px; border-radius: 10px; }
 
 	.sa-loop .edit:hover { background: #0077aa; }
 	.sa-loop.blog .edit:hover { background: #23a13b; }
@@ -62,7 +62,7 @@
 
 	#user-page-master .icon, .house-loops .icon {
 		display: block; float: left; border-radius: 50%;
-		background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/page-type-icons.png); background-size: 24px 96px;
+		background-image: url(/packages/saeho_goodethos/img/editor/page-type-icons.png); background-size: 24px 96px;
 		width: 24px; height: 24px; margin: 0 5px 0 0; }
 	#user-page-master .icon-blog, .house-loops .icon-blog { background-color: #23a13b; background-position: 0 -48px; }
 	#user-page-master .icon-story, .house-loops .icon-story { background-color: #0077aa; background-position: 0 0; }
@@ -86,7 +86,7 @@
 	height: 49px; margin: 0 0 0 50px;
 	position: fixed; top: 0; left: 0; right: 50%; z-index: 10; }
 #user-page-title h1 {
-	padding: 16px 21px 0; font-size: 17px;
+	padding: 16px 21px 0; font-size: 16px;
 	position: absolute; top: 0; left: 0; }
 #user-page-title .float-r { padding: 17px 10px 0; }
 

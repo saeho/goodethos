@@ -53,11 +53,10 @@ Template.signup.helpers({
 	signin_link: function() {
 		return this.overlay ?
       { class: 'smaller auth-signin' } :
-      { class: 'smaller', href: '/signin' }
+      { class: 'smaller', href: Router.routes['GE_signin'].url() }
 	},
-  signup: function( type) {
-      var signup = Session.get('signup')
-      return !_.isUndefined( type) ? type==signup : signup
+  signup: function() {
+      return Session.get('signup')
   },
 	error: function() {
 		var error = Session.get('error') || {}
@@ -148,7 +147,7 @@ Template.signup.events({
                         Meteor.setTimeout( function(){
                             Session.set('popup', popup)
                         }, 500)
-                        Router.go('/')
+                        Router.go('/blog')
                     } else
                         Session.set('popup', popup)
                 }
@@ -183,81 +182,51 @@ Template.signup_organization.helpers({
 
 // #### Sign Up - Choose Portal
 Template.signup_choose.events({
-    'click #option-organization': function(){
-        Session.set('signup', 'organization')
-    },
-    'click #option-user': function(){
-        Session.set('signup', 'user')
-    },
-})
+  'click #option-organization': function(){
+    Session.set('signup', 'organization')
+  },
+  'click .share-social': function(e,t){
 
+    var callback = function(err){
+        if (err)
+            Session.set('error', {fields: false, msg: 'Sorry, we could not log you in.'})
+        else {
+            var has_o = false
+            var user = Meteor.user()
+            if( !t.data || !t.data.overlay){
+                var o = user.organization ? Organizations.findOne( user.organization) : false
 
-
-// #### Sign Up - Employee Login
-Template.signup_user.helpers({
-    msg: function(){
-        var user = Meteor.user()
-        var default_msg = 'Sign in as a user using one of the following social media networks.'
-        if( !user) return default_msg
-
-        var service = false
-
-        if( GE_Help.nk( user, 'services.facebook.id'))
-            service = 'Facebook'
-        else if( GE_Help.nk( user, 'services.twitter.id'))
-            service = 'Twitter'
-        else if( GE_Help.nk( user, 'services.instagram.id'))
-            service = 'Instagram'
-
-        if( service)
-            return 'You are currently logged in using <strong>'+service+'</strong>.'
-        else
-            return default_msg
-    }
-})
-Template.signup_user.events({
-    'click .share-social': function(e,t){
-
-        var callback = function(err){
-            if (err)
-                Session.set('error', {fields: false, msg: 'Sorry, we could not log you in.'})
-            else {
-                var has_o = false
-                var user = Meteor.user()
-                if( !t.data || !t.data.overlay){
-                    var o = user.organization ? Organizations.findOne( user.organization) : false
-
-                    if( o && o.slug){
-                        has_o = true
-                        Router.go('/'+o.slug)
-                    } else
-                        Router.go('/')
-                } else if( user.organization){
+                if( o && o.slug){
                     has_o = true
-                    Session.set('error', {fields: false, msg: 'Thank you for signing in!'})
-                }
+                    Router.go('/blog')
+                } else
+                    Router.go('/')
+            } else if( user.organization){
+                has_o = true
+                Session.set('error', {fields: false, msg: 'Thank you for signing in!'})
+            }
 
-                // If no organization
-                if( !has_o){
-                    Meteor.setTimeout( function(){
-                        Session.set('popup', {
-                            template: 'edit_user',
-                            class: 'bg-dim fade-in fixed-full',
-                            data: {
-                                cur: 'organization',
-                                overlay: true,
-                            }
-                        })
-                    }, ( !t.data || !t.data.overlay ? 500 : 0))
-                }
+            // If no organization
+            if( !has_o){
+                Meteor.setTimeout( function(){
+                    Session.set('popup', {
+                        template: 'edit_user',
+                        class: 'bg-dim fade-in fixed-full',
+                        data: {
+                            cur: 'organization',
+                            overlay: true,
+                        }
+                    })
+                }, ( !t.data || !t.data.overlay ? 500 : 0))
             }
         }
+    }
 
-        if( $(e.currentTarget).hasClass('ss-fb'))
-            Meteor.loginWithFacebook( callback)
-        else if( $(e.currentTarget).hasClass('ss-tw'))
-            Meteor.loginWithTwitter( callback)
-        else if( $(e.currentTarget).hasClass('ss-is'))
-            Meteor.loginWithInstagram( callback)
-    },
+    if( $(e.currentTarget).hasClass('ss-fb'))
+        Meteor.loginWithFacebook( callback)
+    else if( $(e.currentTarget).hasClass('ss-tw'))
+        Meteor.loginWithTwitter( callback)
+    else if( $(e.currentTarget).hasClass('ss-is'))
+        Meteor.loginWithInstagram( callback)
+  },
 })

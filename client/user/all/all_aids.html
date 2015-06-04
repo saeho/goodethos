@@ -2,9 +2,9 @@
 <template name="all_loop">
 	<article class="sa-loop relative cursor trigger {{info.type}} {{#if cur}}cur{{/if}}">
 		{{#unless device_is 'mobile'}}
-		<div class="controls compressed uppercase spaced-big unselect invis">
+		<div class="controls compressed uppercase spaced unselect invis">
 			{{#if url}}<a href="{{url}}" class="edit transition-bg-color white">View</a>{{/if}}
-			<a href="/{{organization}}/{{_id}}/edit" class="edit transition-bg-color white">Edit</a>
+			<a href="/blog/{{_id}}/edit" class="edit transition-bg-color white">Edit</a>
 		</div>
 		{{/unless}}
 
@@ -22,7 +22,7 @@
 				No page summary.
 			{{/if}}
 		</p>
-		<p class="ebony condensed info">
+		<p class="ebony condensed info smaller">
 			<span class="icon icon-{{info.type}}"></span>
 			{{>author_pic author}}
 			{{{status_name}}} -
@@ -43,7 +43,7 @@
 				<div class="table">
 					<div class="inside center sub unselect">
 						{{#if url}}<a href="{{url}}" class="inline-block edit invis">View</a>{{/if}}
-						<a href="/{{organization}}/{{_id}}/edit" class="inline-block edit invis">Edit</a>
+						<a href="/blog/{{_id}}/edit" class="inline-block edit invis">Edit</a>
 					</div>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 		{{#if search}}
 		<div class="preview relative trigger with-top">
 			<h2 class="master-mini no-bottom relative">{{search.count}}</h2>
-			<p class="condensed bigger-heading silver short-line">
+			<p class="condensed bigger-title silver short-line">
 				For search query: <strong class="blue">{{search.query}}</strong>
 			</p>
 			{{#each search.result}}

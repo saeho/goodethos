@@ -26,7 +26,7 @@ Template.page_body.helpers({
 		var data = Template.parentData()
 		var page = data.page
 
-		if( !page._id || !page.organization || !page.content.body || !page.content.body.length) return []
+		if( !page._id || !page.content.body || !page.content.body.length) return []
 
 		var edit_mode = page.status>0 && page.status<4
 		var page_id = page._id
@@ -35,7 +35,6 @@ Template.page_body.helpers({
 
 		var body = _.map( page_body, function( content, index){
 			if( _.contains(['text','gallery','img','vimeo','youtube'], content.type)) {
-				content.o_id = page.organization
 				content.page_id = page_id
 				content.page_type = page_type
 				content.edit_mode = edit_mode
@@ -348,7 +347,6 @@ Template.page_body_gallery.events({
 
 			var args = {
 				id: t.data.page_id,
-				o_id: t.data.o_id,
 				page_type: t.data.page_type,
 				func: 'push',
 				img_type: 'group',
@@ -442,7 +440,7 @@ Template.page_body_lct.helpers({
 	},
 	ltc_attr: function() {
 		var ltc_attr = {
-			class: 'layout-controls',
+			class: 'layout-controls'+(this.ltc_id=='#header-ltc' ? ' fixed' : ''),
 			'data-area': this.key,
 		}
 		if( this.ltc_id) ltc_attr.id = this.ltc_id.replace('#','')

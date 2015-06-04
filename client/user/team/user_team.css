@@ -16,7 +16,7 @@
 	border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #aaa; }
 
 /* Loop - Inside Preview */
-.upd-loop-title { padding: 10px 0 0; }
+.upd-loop-title { padding: 10px 0 3px; }
 .upd-loop { border-top: solid 1px #dedede; padding: 7px 0 10px; }
 
 
@@ -35,7 +35,7 @@
 
 /* Search - Big */
 .search-big {
-	background: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/search-big.png) no-repeat 0 4px; background-size: 100px 100px;
+	background: url(/packages/saeho_goodethos/img/core/search-big.png) no-repeat 0 4px; background-size: 100px 100px;
 	min-height: 100px; padding: 0 0 0 115px; }
 .search-big input {
 	font-size: 35px; line-height: 45px;
@@ -45,7 +45,7 @@
 
 /* Search - Small */
 .search-small, #search-profile {
-	background: #fff url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/search-small.png) no-repeat 0 0; background-size: 50px 100px;
+	background: #fff url(/packages/saeho_goodethos/img/core/search-small.png) no-repeat 0 0; background-size: 50px 100px;
 	}
 input.search-small {
 	position: absolute; top: 0; left: 0; right: 0;

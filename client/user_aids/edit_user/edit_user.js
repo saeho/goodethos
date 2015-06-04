@@ -2,9 +2,6 @@ var prev_state = {}
 var cur_obj = {}
 
 Template.edit_user.helpers({
-	is: function( menu){
-		return this.cur==menu
-	},
 	tmpl: function(){
 		switch( this.cur){
 			case 'profile': return 'eu_profile'
@@ -42,12 +39,12 @@ Template.edit_user.helpers({
 				var allow_edit = GE_Help.nk( user, 'services.password') ? true : false
 				var name = [{
 					allow_edit: allow_edit,
-					value: ge.get_name( user, 'first'),
+					value: ge.get_name(user, 'first'),
 					key: 'name.first',
 					placeholder: 'First Name'
 				},{
 					allow_edit: allow_edit,
-					value: ge.get_name( user, 'last'),
+					value: ge.get_name(user, 'last'),
 					key: 'name.last',
 					placeholder: 'Last Name',
 				}]
@@ -108,7 +105,7 @@ Template.edit_user.helpers({
 				}]
 				return _.extend( form_data, {
 					name: name,
-					mission: o.mission
+					description: o.description
 				})
 			} else return false // New user, no organization found
 			case 'brand':
@@ -188,7 +185,7 @@ Template.edit_user.events({
 
 Template.edit_user.created = function(){
 	var user = Meteor.user() || {}
-	if( user.organization) this.subscribe('futureImages', user.organization, true)
+	if (user.isStaff) this.subscribe('futureImages', true)
 
 	this.autorun( (function(){
 		var new_logo_img = Session.get('new_logo_img')

@@ -37,7 +37,7 @@
 		#mobile-header .cur-user { margin: 10px; float: right; position: relative; }
 		#mobile-header .mh-sign {
 			padding: 0; height: 32px; width: 32px;
-			background: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/mobile-auth.png); background-size: 40px 70px;
+			background: url(/packages/saeho_goodethos/img/core/mobile-auth.png); background-size: 40px 70px;
 			border: solid 1px #555; margin: 6px 4px 0; }
 		#mobile-header .auth-signin { background-position: -3px -2px; }
 		#mobile-header .auth-signup { background-position: -4px -39px; }

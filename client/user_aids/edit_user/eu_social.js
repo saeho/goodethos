@@ -57,7 +57,7 @@ Template.eu_social.events({
 					prev_state = cur_obj
 					// Set Popup In Popup msg
 					var popup = Session.get('popup')
-					popup.data.pip = { msg: 'Your profile was updated.'}
+					popup.data.pip = { msg: 'Your blog was updated.'}
 					Session.set('popup', popup)
 					$(e.currentTarget).removeClass('perm')
 				})

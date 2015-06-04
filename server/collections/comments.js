@@ -22,14 +22,11 @@ Comments.allow({
 })
 
 
-Meteor.publish('comments', function( args) {
+Meteor.publish('comments', function (args) {
 
     // args Template
     // args._id
-    // args.o_id
     // args.page_type
-
-    check( args._id, String )
 
     var cond = {
       $query: { page_id: args._id },
@@ -38,10 +35,6 @@ Meteor.publish('comments', function( args) {
     // args.page_type is usually used for Profile page commenting
     if( args.page_type)
       cond.$query.page_type = args.page_type
-
-    // args.o_id is not necessary, but is used to narrow down the Page comments
-    if ( args.o_id)
-      cond.$query.o_id = args.o_id
 
     var comments = Comments.find( cond)
     var users = comments.map( function(c) { return c.user })

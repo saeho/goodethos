@@ -5,13 +5,13 @@
 			{{#if not_popup}}
 			<header id="cn-title">
 				<h1 class="sub center title-size">New {{page_type}}</h1>
-				<p class="ebony condensed bigger spaced">Setup your title page (don't worry, this can be changed at any time)</p>
+				<p class="ebony condensed">Setup your title page (don't worry, this can be changed at any time)</p>
 			</header>
 			{{else}}
 			{{/if}}
 
-			<section class="center condensed charcoal bigger spaced cn-choices transition-opacity cn-layout cur" data-switch="layout">
-				<!-- <buttons> are an inline-block, don't let any spaces between #each -->
+			<section class="center condensed charcoal smaller cn-choices transition-opacity cn-layout cur" data-switch="layout">
+				{{!--<buttons> are an inline-block, don't let any spaces between #each--}}
 				{{#each layout_options}}<div class="shadow-soft cn-option transition-basic {{this.cur}} pop-in" id="{{this.id}}" data-layout="{{this.id}}">
 					<span class="director ebony transition">{{this.desc}}</span>
 					<div class="stage abs-full overflow">

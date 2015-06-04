@@ -7,7 +7,7 @@
 
 .eu-icons {
 	width: 35px;
-	background: #fff url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/edit-user.png) no-repeat; background-size: 315px 35px;
+	background: #fff url(/packages/saeho_goodethos/img/editor/edit-user.png) no-repeat; background-size: 315px 35px;
 	position: absolute; right: 1px; top: 1px; bottom: 1px; }
 
 	.eu-icons.email-verified { background-position: 0 50%; }
@@ -52,4 +52,4 @@
 .choose-brand-bg, .eu-logo-container { width: 132px; height: 132px; position: relative; float: left; padding: 12px; }
 .eu-logo-container {
 	margin: 0 14px 0 0;
-	background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/no-logo.png); background-color: #eee; }
+	background-image: url(/packages/saeho_goodethos/img/editor/no-logo.png); background-color: #eee; }

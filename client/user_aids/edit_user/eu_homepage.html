@@ -7,7 +7,7 @@
 		{{/each}}
 
 		<label class="{{label_class}}">Description</label><span class="{{label_class}}" id="chars-remaining"></span>
-		<textarea class="no-enter {{#if disabled}}stripes{{/if}}" data-max="170" maxlength="170" id="mission" name="mission" disabled="{{disabled}}">{{mission}}</textarea>
+		<textarea class="no-enter {{#if disabled}}stripes{{/if}}" data-max="170" maxlength="170" id="description" name="description" disabled="{{disabled}}">{{description}}</textarea>
 
 		{{#if show_button}}
 			{{>button}}
@@ -15,36 +15,6 @@
 
 	{{else}}
 		<div class="small-line with-text">
-		{{#if user.isO}}
-			<p class="margin-b">
-				<strong>Thank you for joining!</strong><br />
-				Finish your registration process by completing this form.
-			</p>
-			<label class="normal-label" for="info.type">
-				How will you use Good Ethos?
-			</label>
-			<div class="invis-select block crawl-t">
-				<span class="ref block normal">Personal blog or portfolio.</span>
-				<select class="organization" id="info.type" name="info.type">
-					<option value="Blog">Personal blog or portfolio.</option>
-					<option value="Company">Publication or blog for a for-profit organization.</option>
-					<option value="Nonprofit">Publication or blog for a not-for-profit organization.</option>
-				</select>
-			</div>
-
-			<label class="normal-label" for="name.full">
-				What is your publication's name?
-			</label>
-			<input type="text" value="" id="name.full" name="name.full" placeholder="Publication Name"/>
-
-			<label class="normal-label" for="name.short">
-				Is there a short name for your publication?
-			</label>
-			<input type="text" value="" id="name.short" name="name.short" maxlength="5" placeholder="i.e. GE"/>
-
-			{{>button button_text='Create'}}
-
-		{{else}}
 			{{#if user.invited}}
 				<p>
 					<strong>You were invited to join <span class="blue">{{user.invited.o_name}}</span></strong><br />
@@ -74,7 +44,6 @@
 					Your user ID is <strong>{{user._id}}</strong>.
 				</p>
 			{{/if}}
-		{{/if}}
 		</div>
 	{{/if}}
 

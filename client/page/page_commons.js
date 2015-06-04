@@ -263,12 +263,10 @@ var common_events = {
 				## Upload/replace the header image
 				var "args"
 				args.id = The ID for the MongoDB document being edited.
-				args.o_id = The ID of the organization that this page belongs to. (All members of this organization can view this file, and if they have enough permissions, they can edit the file too.)
 				args.page_type = This Page's type (i.e. Story, Blog, Event)
 			*/
 			var args = {
 				id: t.data.page._id,
-				o_id: t.data.organization._id,
 				page_type: t.data.page.info.type,
 			}
 
@@ -298,9 +296,6 @@ var common_events = {
 				insert: {
 					split: split,
 				}}
-
-			if( _.has( t.data, 'organization'))
-				args.o_id = t.data.organization._id
 
 			var uploader = new ge_uploader()
 			t.editor.new_block_hide()

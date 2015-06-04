@@ -16,11 +16,11 @@
 					{{/if}}
 
 					<h1 class="master-title title {{title.size}}">{{title.val}}</h1>
+					{{#if brand 'description'}}
 					<p class="house-desc serif short-line spaced">
-					{{#if brand 'mission'}}
-						{{brand 'mission'}}
-					{{/if}}
+						{{brand 'description'}}
 					</p>
+					{{/if}}
 				</header>
 
 				{{#if contributors}}

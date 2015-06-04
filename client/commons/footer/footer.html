@@ -10,9 +10,9 @@
 					<h4 class="serif">{{nav_about.title}}</h4>
 					{{#each nav_about.submenu}}
 						{{#if url }}
-							<a href="{{ url }}" class="block bigger">{{title}}</a>
+							<a href="{{ url }}" class="block">{{title}}</a>
 						{{ else }}
-							<span class="block silver bigger">{{title}}</span>
+							<span class="block silver">{{title}}</span>
 						{{/if}}
 					{{/each}}
 				</div>
@@ -21,7 +21,7 @@
 				<div class="inline-block footer-section">
 					<h4 class="serif">{{nav_social.title}}</h4>
 					{{#each nav_social.submenu}}
-						<a href="{{ url }}" target="_blank" class="block bigger">{{title}}</a>
+						<a href="{{ url }}" target="_blank" class="block">{{title}}</a>
 					{{/each}}
 				</div>
 				<!-- /social -->

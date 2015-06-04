@@ -28,9 +28,6 @@
 	width: 50px; height: 50px; color: #404040; }
 .co-logo.has-logo { background-color: #2a2a2a; background-size: cover; background-position: 50%; }
 
-.nav-by .co-logo:not(.has-logo), .nav-by .ge-logo:before { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/nav-door.png); background-repeat: no-repeat; background-size: 50px 150px; }
-.nav-by .co-logo .sub { position: absolute; left: 1px; right: 0; top: 13px; }
-
 .ge-logo {
 	position: absolute; top: 0; left: 0; z-index: 1;
 	width: 30px; height: 30px; padding: 10px; overflow: hidden; }
@@ -57,7 +54,7 @@
 			#nav-gateway .menu .sub {
 				font-size: 15px; line-height: 1;
 				border: solid 1px rgba(0,0,0,0); color: #fff;
-				height: 20px; padding: 7px 3px 0 7px; margin: 11px 1% 0; }
+				height: 21px; padding: 6px 3px 0 7px; margin: 11px 1% 0; }
 			#nav-gateway .menu a.inline-block:hover, #nav-gateway .menu span.cursor:hover, #nav-gateway .menu .on { border-color: #fff; }
 
 					#nav-gateway.nav-white-perm .menu .inline-block, #overlord.nav-switch #nav-gateway .menu .sub,
@@ -86,7 +83,7 @@
 			#page-editing { text-align: right; width: 400px; }
 			#nav-gateway .sides, #nav-gateway .sides a, #nav-gateway .sides span, #nav-gateway .menu #save-message {
 				word-wrap: normal; white-space: nowrap;
-				font-size: 16px; line-height: 25px; color: rgba(255,255,255,.55); }
+				font-size: 14px; line-height: 25px; color: rgba(255,255,255,.55); }
 			#nav-gateway .sides a:hover, #nav-gateway .sides .dotted-link:hover, #nav-gateway .sides span.serif,
 			#nav-gateway .ge-home { color: #fff; }
 			#nav-gateway .menu #save-message { padding-top: 2px; margin: 0 5px 0 0; }

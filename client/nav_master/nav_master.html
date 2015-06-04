@@ -1,24 +1,17 @@
 
 <template name="nav_master">
-	<section class="sub white smaller unselect shadow-inset right background" id="nav-master">
+	<section class="white smaller unselect shadow-inset right background" id="nav-master">
 
 		{{#if brand 'logo_thumb'}}
 			{{>co_logo}}
 		{{/if}}
+
 		<div class="overflow abs-full bg-ge">
 			<a href="/">
-				<figure class="logo-top {{#unless brand 'logo_thumb'}}logo-ge{{/unless}} transition-mid relative"><img src="https://s3-us-west-2.amazonaws.com/goodethos/assets/logos/nav-special.png" class="transition-mid" /></figure>
+				<figure class="logo-top {{#unless brand 'logo_thumb'}}logo-ge{{/unless}} transition-mid relative"><img src="/packages/saeho_goodethos/img/logos/nav-special.png" class="transition-mid" /></figure>
 			</a>
 
-			<div class="scroll overlay-scroll">
-				{{#if nav.msg}}
-				<div class="bigger condensed center transition" id="nav-message">
-					<div class="inner">
-						{{{nav.msg}}}
-					</div>
-				</div>
-				{{/if}}
-
+			<div class="scroll overlay-scroll sub">
 				<nav class="menu" id="nav-master-priority">
 					{{#each o_nav}}
 						{{#if url}}
@@ -41,7 +34,7 @@
 				{{#if nav.user}}
 					<span class="break transition"></span>
 					<nav class="menu" id="nav-master-user">
-					{{#if is.logged_in}}
+					{{#if isLoggedIn}}
 						{{#each nav.user}}
 							{{>nav_master_single}}
 						{{/each}}
@@ -54,14 +47,14 @@
 
 				<nav class="center transition-opacity" id="nav-auth">
 					<span class="tiny" id="ana-guide"></span>
-					{{#if is.logged_in}}
+					{{#if isLoggedIn}}
 						<a href="#" class="auth-signout ana invis-70" data-desc="Sign Out"></a>
 					{{/if}}
 				</nav>
 
 			</div>
 
-			<a href="https://s3-us-west-2.amazonaws.com/goodethos/assets/VERSION_LOG.md" target="_blank" class="version center transition-opacity">{{version}}</a>
+			<a href="https://goodethos.com" target="_blank" class="version condensed center transition-opacity">Powered by Good Ethos</a>
 		</div>
 
 	</section>
@@ -72,12 +65,6 @@
 <template name="co_logo">
 	<figure class="nav-by">
 		<!--<a href="#" class="nav-door">-->
-			<!-- GE Logo -->
-			<!--
-			<div class="ge-logo bg-ge-solid-reverse shadow-inset">
-				<img src="https://s3-us-west-2.amazonaws.com/goodethos/assets/logos/white-boxed.png" class="transition" />
-			</div>
-			-->
 			<!-- CO Logo -->
 			<div class="co-logo overflow transition-mid shadow-soft {{#if brand.logo_thumb}}has-logo{{/if}}" style="{{brand 'logo_thumb'}}">
 				{{#unless brand 'logo_thumb'}}
@@ -94,7 +81,7 @@
 <template name="nav_master_single">
 	<div class="link-wrap">
 		{{#if url}}
-		<a href="{{pathFor url.route _action=url.action}}" class="{{class}}">{{name}}</a>
+		<a href="{{#if url.route}}{{pathFor url.route _action=url.action}}{{else}}{{url}}{{/if}}" class="{{class}}">{{name}}</a>
 		{{else}}
 		<span class="{{class}}">{{{name}}}</span>
 		{{/if}}

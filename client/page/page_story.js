@@ -115,7 +115,7 @@ Template.page_story.created = function() {
 	this.action = Router.current().params._action || 'view'
 	this.editor = new ge_editor({ page_type: this.data.page.info.type, page_id: this.data.page._id })
 	this.uploader = new ge_uploader()
-	this.subscribe('futureImages', this.data.organization._id)
+	this.subscribe('futureImages')
 
 	this.autorun( (function(){
 		var data = Template.currentData()
@@ -184,7 +184,6 @@ Template.page_story.created = function() {
 			if( !this.comment_subscription){
 				this.comment_subscription = Meteor.subscribe('comments', {
 					_id: this.data.page._id,
-					o_id: this.data.page.organization,
 				})
 			}
 		} else if( this.comment_subscription){

@@ -86,7 +86,7 @@ Template.popup_media.helpers({
 
 				if( this.type=='img') {
 					// * * * * Image
-					pmc.caption.attr = { class: 'pm-figcaption sans-serif-thin tiny' }
+					pmc.caption.attr = { class: 'pm-figcaption sans-serif-thin smaller' }
 					pmc.img = this_value
 				} else {
 					// * * * * Video

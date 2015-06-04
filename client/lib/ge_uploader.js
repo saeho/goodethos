@@ -75,7 +75,6 @@ ge_uploader.prototype = {
 		if (!_.isObject(args)) args = {}
 		var fsFile = new FS.File(files[0])
 		fsFile.owner = Meteor.userId() // Set owner
-		if (args.o_id) fsFile.o_id = args.o_id
 
 		// Before upload, dim it and add working class
 		if (self.container && self.container.length) self.container.addClass('working')

@@ -31,7 +31,6 @@ Template.eu_homepage.helpers({
 
 		return {
 			_id: (user._id || ''),
-			isO: GE_Help.nk( user, 'services.password') ? true : false,
 			invited: invited,
 		}
 	}
@@ -88,21 +87,6 @@ Template.eu_homepage.events({
 					Session.set('popup', popup)
 				})
 			}
-		} else if( cur_obj['name.full'] && cur_obj['name.full'].length>=4 && (cur_obj['name.short'].length==0 || cur_obj['name.short'].length>1)) {
-			// New Account
-			Session.set('popup', popup)
-			Meteor.call('createOrganization', cur_obj, function(err,res){
-				if( res) {
-					popup.data.pip = { msg: 'Thank you for registering!' }
-					Session.set('popup', popup)
-					// Because the Organization was just created, Tracker.autorun will not run. So manually do a findOne().
-					Meteor.subscribe('user-o') // Re-Subscribe
-					Meteor.call( 'notify', 'created-o')
-				} else {
-					popup.data.pip = { msg: 'Sorry, something went wrong. Please try again or contact us at hello@goodethos.com.' }
-					Session.set('popup', popup)
-				}
-			})
 		} else {
 			// New Account but organization name is too short
 			popup.data.pip = { msg: cur_obj['name.full'].length<4 ? 'The name of your organization is too short.' : 'The organization short name must be at least 2 characters long.', ok: 'bg-red' }
@@ -117,9 +101,9 @@ Template.eu_homepage.events(
 
 Template.eu_homepage.created = function(){
 	this.chars_remaining = function(){
-		if($('#mission').length){
-			var max = $('#mission').attr('data-max')
-			var chars = $('#mission').val().length
+		if($('#description').length){
+			var max = $('#description').attr('data-max')
+			var chars = $('#description').val().length
 			$('#chars-remaining').html('&nbsp;'+(max-chars)+' Characters Remaining')
 		}
 	}
@@ -133,9 +117,9 @@ Template.eu_homepage.created = function(){
 Template.eu_homepage.rendered = function(){
 	prev_state = state()
 
-	if($('#mission').length){
+	if($('#description').length){
 		this.chars_remaining()
-		$('#mission').autosize()
+		$('#description').autosize()
 	}
 }
 

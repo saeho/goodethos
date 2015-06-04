@@ -7,17 +7,6 @@ PostsSchema = new SimpleSchema({
       else
         this.unset()
     }},
-  organization: { type: String,
-    autoValue: function(){
-      var status = this.field('status').value
-      if (this.isInsert || (_.isNumber(status) && status>=4)) {
-        var user = Meteor.user() || {}
-        if (user.organization)
-          return user.organization
-        this.unset()
-      } else
-        this.unset()
-    } },
   slug: { type: String, optional: true, // Unpublished posts may not have slugs
     autoValue: function() {
       var status = this.field('status').value
@@ -27,14 +16,10 @@ PostsSchema = new SimpleSchema({
         return null
       else {
         var title = this.field('content.title').value
-        var this_o = this.field('organization').value
         var slug = GE_Help.create_slug(title, 2)
         var new_slug = slug
-        var slug_condition = {
-          $and: [
-            { slug: new_slug }, // Always make sure this is the first item so the while() condition can match
-            { organization: this_o }
-          ]}
+        var slug_condition = { slug: new_slug } // Always make sure this is the first item so the while() condition can match
+
         // Loop DB check until an empty slug is found.
         while(Posts.findOne(slug_condition)) {
           new_slug = slug+GE_Help.random_string()
@@ -170,7 +155,7 @@ Posts.allow({
     if (!doc.user || doc.status<=0) return false // Must be logged in; the post must not be in trash.
     else if (doc.user !== userId) {
       var user = Meteor.user()
-      if (user.organization!=doc.organization) return false
+      if (!user.isStaff) return false
     }
     var modifierTest = _.every(modifier, function(op){
       var test = _.map(op, function(val, key){
@@ -188,7 +173,7 @@ Posts.allow({
     if (!userId || !doc.user || !_.contains(['blog','note'], doc.info.type)) return false
     else if (doc.user!==userId){
       var user = Meteor.user()
-      if(!user.organization || user.organization!=doc.organization) return false
+      if(!user.isStaff && user.level) return false
     }
     if(doc.info.type=='blog'){
       // Check if page is empty before deleting
@@ -224,10 +209,9 @@ Meteor.methods({
    */
   createPost: function(data) {
     var user = Meteor.user()
-    if(!user || !user.organization) throw new Meteor.Error("not-authorized") // Exit if user doesn't belong to any organization
+    if(!user || !user.isStaff) throw new Meteor.Error("not-authorized") // Exit if user doesn't belong to any organization
 
-    var o = Organizations.findOne(user.organization)
-    if (!o || !_.contains( o.users, user._id)) throw new Meteor.Error("not-authorized") // Exit if user is not part of this organization
+    if (!ge.user_can('write', user.level)) throw new Meteor.Error("not-authorized") // Exit if user is not part of this organization
 
     Posts.attachSchema(PostsSchema)
 
@@ -248,7 +232,7 @@ Meteor.methods({
     }
 
     var created_id = Posts.insert(data)
-    return '/'+user.organization+'/'+created_id+'/edit'
+    return created_id
   },
   /**
    * Split the content (text) block at position and insert new content in between them.
@@ -261,13 +245,12 @@ Meteor.methods({
     var user = Meteor.user()
     if (!field) field = 'content.body'
 
-    if (!user || !user.organization) throw new Meteor.Error("not-authorized")
+    if (!user || !user.isStaff) throw new Meteor.Error("not-authorized")
 
-    var cond = { $and: [{ _id: page_id }, { organization: user.organization }] }
     Posts.attachSchema (PostsSchema)
 
     var update_data = {}
-    var cur_data = Posts.findOne (cond, { field : field })
+    var cur_data = Posts.findOne (page_id, { field : field })
     cur_data = GE_Help.nk (cur_data, field)
     if (!_.isArray(cur_data)) throw new Meteor.Error("not_found", "Could not find the post data.")
 
@@ -277,7 +260,7 @@ Meteor.methods({
 
     cur_data.splice (loc, 1, before, insert, after)
     update_data[field] = cur_data
-    Posts.update (cond, { $set: update_data })
+    Posts.update (page_id, { $set: update_data })
 
     return {
       before: before,
@@ -294,12 +277,11 @@ Meteor.methods({
     var user = Meteor.user()
     var field = field || 'content.body'
 
-    if (!user || !user.organization)
+    if (!user || !user.isStaff)
       throw new Meteor.Error("not-authorized")
 
     var cond = { $and: [
       { _id: page_id },
-      { organization: user.organization },
       { status: { $lt: 4 } }
     ]}
 
@@ -337,15 +319,14 @@ Meteor.methods({
     check (deleteKeys, Match.OneOf(String, Array))
 
     var user = Meteor.user()
-    if (!user || !user.organization) throw new Meteor.Error("not-authorized")
+    if (!user || !user.isStaff) throw new Meteor.Error("not-authorized")
 
     var field = field || 'content.body'
     if (blockIndex!==false) field += '.'+blockIndex+'.group'
 
-    var cond = { $and: [{ _id: page_id }, { organization: user.organization }] }
     Posts.attachSchema (PostsSchema)
 
-    var data = Posts.findOne (cond, { field: field })
+    var data = Posts.findOne (page_id, { field: field })
     data = GE_Help.nk (data, field)
     if (!data) return false
 
@@ -361,7 +342,7 @@ Meteor.methods({
     var pullObj = {}
     pullObj[ field] = { key: { $in: deleteKeys } }
 
-    return Posts.update (cond, { $pull: pullObj }, function(err,res){
+    return Posts.update (page_id, { $pull: pullObj }, function(err,res){
       if (!err)
         _.each (deleteArray, function( key){
           Images.remove(key)
@@ -374,9 +355,9 @@ Meteor.methods({
     check (updateObj, Object)
 
     var user = Meteor.user()
-    if (!user || !user.organization) throw new Meteor.Error("not-authorized")
+    if (!user || !user.isStaff) throw new Meteor.Error("not-authorized")
 
-    var cond = { $and: [{ _id: page_id },{ organization: user.organization }] }
+    var cond = { $and: [{ _id: page_id }] }
     var cond_pf = {}; cond_pf[field] = { $exists: true }
     cond.$and.push(cond_pf)
 
@@ -402,9 +383,7 @@ Meteor.methods({
       // #### i.e. { $push: { 'content.gallery': { $each: [extra], $position: index }}}
 
     var user = Meteor.user()
-    if (!user || !user.organization) throw new Meteor.Error("not-authorized")
-
-    var cond = { $and: [{ _id: page_id },{ organization: user.organization }] }
+    if (!user || !user.isStaff) throw new Meteor.Error("not-authorized")
 
     // Find Order and Field Name
     var field = _.map( field, function(field) {
@@ -423,7 +402,7 @@ Meteor.methods({
     }))
 
     // Get cur data and push
-    var data = Posts.findOne( cond, { field : get })
+    var data = Posts.findOne(page_id, { field : get })
     var return_obj = []
     var update_data = { $set: {} }
     var return_check = false
@@ -451,7 +430,7 @@ Meteor.methods({
 
     // Update
     if( return_check){
-      Posts.update( cond, update_data)
+      Posts.update(page_id, update_data)
       return return_obj.length>1 ? return_obj : return_obj[0]
     }
     return false
@@ -461,15 +440,10 @@ Meteor.methods({
    */
   updatePage: function( page_id, data ) {
     var user = Meteor.user()
-    if (!user || !user.organization) throw new Meteor.Error("not-authorized")
+    if (!user || !user.isStaff) throw new Meteor.Error("not-authorized")
 
-    var cond = {
-      $and: [
-        { _id: page_id },
-        { organization: user.organization }
-      ]}
     Posts.attachSchema (PostsSchema)
-    Posts.update( cond, { $set: data })
+    Posts.update(page_id, { $set: data })
   },
   /**
    * Publish or Draft Page (POD)
@@ -496,7 +470,6 @@ Meteor.methods({
 
     var cond = [
       { 'info.type': args.type },
-      { organization: user.organization },
       { _id: args._id }]
 
     // If level is 3 or 4, then the page in question MUST be owned by the user
@@ -542,40 +515,17 @@ Meteor.methods({
 Meteor.publish('single-page', function(args) {
   check(args, Object)
 
-  if (args.o_id && args.p_id) {
-    // Find Single Page by ID
-    var p_cond = { '$and' : [
-        { organization: args.o_id },
-        { _id: args.p_id},
-      ]}
-    var organization = Organizations.find(args.o_id)
+  if (args.p_id)
+    var p_cond = args.p_id // Find Single Page by ID
+  else if (args.p_slug)
+    var p_cond = { slug: args.p_slug } // Find Single Page by Slug
+  else
+    return this.ready()
 
-  } else if (args.o_slug && args.p_slug) {
-    // Find Single Page by Slug
-    var o_cond = { slug: args.o_slug }
-    var organization = Organizations.find(o_cond, {
-      fields: {
-        'info.featured': 0,
-        'address': 0,
-      } })
-
-    if(!organization.count())
-      return this.ready()
-    else {
-      var o_id = organization.fetch()[0]._id
-      var p_cond = { '$and' : [
-          { organization: o_id },
-          { slug: args.p_slug},
-        ]}
-    }
-  }
-
-  return [
-    Posts.find( p_cond, {
-      fields: {
-        'info.featured': 0,
-      }
-    }), organization]
+  return Posts.find( p_cond, {
+    fields: {
+      'info.featured': 0,
+    } })
 })
 
 /**
@@ -585,7 +535,6 @@ Meteor.publish('o-pubs', function() {
   var cond = {
     $query: {
       // user: this.userId, // If you want to disallow shared company-wide publications
-      // organization: o_id
     },
     $orderby: { 'date.published': -1, 'date.edited': -1 }}
   var o_pubs = Posts.find( cond, { fields: {
@@ -599,8 +548,8 @@ Meteor.publish('o-pubs', function() {
     },{
     fields: {
       'level': 1,
+      'isStaff': 1,
       'emails': 1,
-      'organization': 1,
       'services': 1,
       'name': 1,
     }})

@@ -1,7 +1,6 @@
 // Helpers
 Template.user_team.helpers({
 	team: function() {
-		var o_slug = this.o.slug
 		var sortBy = Session.get('sort') || 'Alphabetical'
 		var user = Meteor.user()
 
@@ -9,30 +8,28 @@ Template.user_team.helpers({
 
 		// # # # #
 		// Sort
+		var cond = {}
 		switch( sortBy){
 			case 'Managers Only':
 				// Managers
-				var cond = { level: { $gte: 8 } }
+				cond.level = { $gte: 8 }
 				break
 			case 'Editors Only':
 				// Editors
-				var cond = { level: 5 }
+				cond.level = 5
 				break
 			case 'Writers Only':
 				// Writers
-				var cond = { level: 3 }
+				cond.level = 3
 				break
 			case 'Staff Only':
 				// Staffs
-				var cond = { level: 1 }
+				cond.level = 1
 				break
 			case 'Assistants Only':
 				// Assistants
-				var cond = { level: 0 }
+				cond.level = 0
 				break
-			default:
-				// Default = Alphabetical
-				var cond = { organization: user.organization }
 		}
 
 		var team = Meteor.users.find( cond ).fetch()

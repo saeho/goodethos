@@ -4,8 +4,6 @@ Template.user_all.helpers({
 		return Posts.find().count()
 	},
 	posts: function(){
-		var o_slug = this.o.slug
-
 		// # # # #
 		// Sort
 		var andCond = [{ 'info.type': { $in: ['story','blog']} }]
@@ -46,7 +44,7 @@ Template.user_all.helpers({
 			page.author = authors[page.user] || {}
 			page.status_name = ge.status( page.status)
 			page.url = page.status>=4
-				? '/'+o_slug+'/'+page.slug
+				? '/blog/'+page.slug
 				: false
 			return page
 		})

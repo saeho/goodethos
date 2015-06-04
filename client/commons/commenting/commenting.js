@@ -11,7 +11,7 @@ Template.commenting_service.helpers({
 // Helpers
 Template.commenting.helpers({
 	animate: function(){
-		return this.page_type!='profile'
+		return this.page_type!='blog'
 	},
 	user: function(){
 		var user = Meteor.user()
@@ -63,7 +63,7 @@ Template.commenting.helpers({
 	enabled: function(){
 		var parent = Template.parentData()
 
-		if( this.page_type!='profile' && GE_Help.nk( parent, 'page.info.comment')===false )
+		if( this.page_type!='blog' && GE_Help.nk( parent, 'page.info.comment')===false )
 			return false
 
 		return true

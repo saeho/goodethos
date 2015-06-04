@@ -11,11 +11,11 @@
 				<span class="popup-close small"></span>
 
 				<p class="bigger ep-nav unselect">
-					<span class="popup-profile target inline-block {{#if is 'profile'}}cur{{/if}}">Profile</span>
-					<span class="popup-organization target inline-block {{#if is 'organization'}}cur{{/if}}">Publication</span>
+					<span class="popup-profile target inline-block {{#if is cur 'profile'}}cur{{/if}}">Profile</span>
 					{{#if form_data.has_o}}
-						<span class="popup-social target inline-block {{#if is 'social'}}cur{{/if}}">Social</span>
-						{{#unless device_is 'phone'}}<span class="popup-brand target inline-block {{#if is 'brand'}}cur{{/if}}">Photo</span>{{/unless}}
+						<span class="popup-organization target inline-block {{#if is cur 'organization'}}cur{{/if}}">Blog</span>
+						<span class="popup-social target inline-block {{#if is cur 'social'}}cur{{/if}}">Social</span>
+						{{#unless device_is 'phone'}}<span class="popup-brand target inline-block {{#if is cur 'brand'}}cur{{/if}}">Photo</span>{{/unless}}
 					{{/if}}
 				</p>
 

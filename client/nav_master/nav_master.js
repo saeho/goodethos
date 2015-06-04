@@ -1,45 +1,33 @@
 
 /* Header */
 Template.nav_master.helpers({
-	is: function() {
-		var user = Meteor.user()
-
-		return {
-			logged_in: user ? true : false,
-		}
-	},
-	version: function() {
-		return Meteor.settings.public.version
+	isLoggedIn: function() {
+		return Meteor.userId()
 	},
 	o_nav: function() {
     var user = Meteor.user() || {}
-    var o = Organizations.findOne( user.organization)
+    var o = Organizations.findOne(user.organization)
 
 		var a_class = 'block main-link wi transition-bg-color'
 		var cur = Router.current().route ? Router.current().route.getName() : null
+		var o_name = 'Unknown'
 
-		if(o){
+		if (o) {
 			// User belongs in an organization
 			var full = GE_Help.nk( o, 'name.full') || ''
 			var short = GE_Help.nk( o, 'name.short') || ''
-			var o_name = full.length<=12
-				? full
-				: (short.length ? short : GE_Help.shorten( full, { len: 12, end_at_space: false }))
-
-			var o_nav = [{
-				name: o_name,
-				url: { route: 'profile', o_slug: o.slug },
-				class: a_class+' lmi-home'+(cur=='profile' ? ' cur' : '')
-			}]
-		} else {
-			var o_nav = []
+			var o_name = full.length<=12 ? full : (short.length ? short : GE_Help.shorten( full, { len: 12, end_at_space: false }))
 		}
 
-		o_nav.push({
-			name: 'Good Ethos',
-			url: 'https://goodethos.com',
-			class: a_class+' lmi-goodethos'
-		})
+		var o_nav = [{
+			name: o_name,
+			url: '/',
+			class: a_class+' lmi-home'
+		},{
+			name: 'Blog',
+			url: '/blog',
+			class: a_class+' lmi-blog'+(cur=='blog' ? ' cur' : '')
+		}]
 
 		return o_nav
 	},
@@ -79,19 +67,13 @@ Template.nav_master.helpers({
 	nav: function() {
 		var user = Meteor.user() || {}
 
-		var msg = (user && GE_Help.nk( user, 'services.password') && !_.has( user, 'organization'))
-		? '<a href="#" class="popup-organization">\
-			<img src="https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/signup-initial.png" width="55" height="55" /><br />\
-			Click here to finish your<br />registration process.</a>'
-		: false
-
 		// # # # # Create Nav
 		// .wi is for "WITH-ICON", that means it has an icon and should be highlighted even when <nav> is hidden in user mode
 		var a_class = 'block main-link wi transition-bg-color'
 		var sa_class = 'block sub-link wi transition-bg-color'
 		var cur = Router.current().params._action
 
-		if( user.organization){
+		if (user.isStaff){
 			// User belong in an organization
 			var create_nav = [
 				/*{
@@ -133,7 +115,7 @@ Template.nav_master.helpers({
 			},{
 				name: 'Edit Profile',
 				url: '#',
-				class: a_class+' popup-'+(user.organization ? 'profile' : 'organization')+' lmi-profile'
+				class: a_class+' popup-'+(user.isStaff ? 'profile' : 'organization')+' lmi-profile'
 			}]
 		} else {
 			// User does not belong in any organization
@@ -141,12 +123,11 @@ Template.nav_master.helpers({
 			var user_nav = [{
 				name: 'Edit Profile',
 				url: '#',
-				class: a_class+' popup-'+(user.organization ? 'profile' : 'organization')+' lmi-profile'
+				class: a_class+' popup-profile lmi-profile'
 			}]
 		}
 
 		return {
-			msg: msg,
 			create: create_nav,
 			user: user_nav
 		}
@@ -186,11 +167,11 @@ Template.nav_master.events({
 				$(e.currentTarget).addClass('create-new-blog')
 			}, 2000)
 
-			if (err){
+			if (err) {
 				console.warn(err)
 				Router.go('/user/all')
 			} else
-				Router.go(res)
+				Router.go('post', { _page: res, _action: 'edit' })
 		})
 	}
 })

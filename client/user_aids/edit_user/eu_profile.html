@@ -3,7 +3,7 @@
 	<label class="{{label_class}}">Your Name</label>
 	<div class="clear">
 		{{#each name}}
-			<div class="half float-l">
+			<div class="half float-{{#if is key 'name.last'}}r{{else}}l{{/if}}">
 			{{#if allow_edit}}
 			<input class="{{input_class}}" value="{{value}}" type="text" name="{{key}}" placeholder="{{placeholder}}" />
 			{{else}}
@@ -35,7 +35,7 @@
 		<div class="half float-l">
 			<input class="{{input_class}}" type="password" name="pwd" placeholder="Password" />
 		</div>
-		<div class="half float-l">
+		<div class="half float-r">
 			<input class="{{input_class}}" type="password" name="pwd_repeat" placeholder="Repeat Password" />
 		</div>
 	</div>

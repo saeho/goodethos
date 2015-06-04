@@ -13,7 +13,7 @@ Template.signin.helpers({
 	signup_link: function() {
 		return this.overlay ?
 			{ class: 'smaller auth-signup' }
-			: { class: 'smaller', href: '/signup' }
+			: { class: 'smaller', href: Router.routes['GE_signup'].url() }
 	},
 	error: function() {
 		var error = Session.get('error') || {}

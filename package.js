@@ -31,6 +31,7 @@ Package.onUse(function(api) {
     'cfs:s3@0.1.3',
     'cfs:standard-packages@0.5.9',
 
+    'meteorhacks:fast-render@2.5.0',
     'meteorhacks:subs-manager@1.4.0',
 
     'iron:router@1.0.7',
@@ -119,10 +120,13 @@ Package.onUse(function(api) {
     'client/blog/redesign/blog_redesign.js',
     'client/blog/redesign/blog_redesign.css',
 
-    // No Devices
-    'client/no/no.css',
+    // No Templates
+    'client/no/no_staff.html',
+    'client/no/no_staff.js',
     'client/no/no_device.html',
     'client/no/no_device.js',
+    'client/no/no.css',
+
 
     // Nav Master
     'client/nav_master/nav_master.html',
@@ -173,6 +177,54 @@ Package.onUse(function(api) {
     'client/commons/mobile/mobile_nav.js',
     'client/commons/mobile/mobile_nav.css',
 
+    // User
+    'client/user/all/all.html',
+    'client/user/all/all_aids.html',
+    'client/user/team/user_team.html',
+    'client/user/team/user_team_aids.html',
+    'client/user/all/all.js',
+    'client/user/all/all_aids.js',
+    'client/user/team/user_team.js',
+    'client/user/team/user_team_aids.js',
+    'client/user/all/all.css',
+    'client/user/team/user_team.css',
+    'client/user/search.html',
+
+    // New Page
+    'client/user/new_page/new_page.html',
+    'client/user/new_page/new_page.js',
+    'client/user/new_page/new_page.css',
+
+    // Edit User
+    'client/user_aids/edit_user/edit_user.html',
+    'client/user_aids/edit_user/edit_user.js',
+    'client/user_aids/edit_user/edit_user.css',
+    'client/user_aids/edit_user/eu_brand.html',
+    'client/user_aids/edit_user/eu_brand.js',
+    'client/user_aids/edit_user/eu_homepage.html',
+    'client/user_aids/edit_user/eu_homepage.js',
+    'client/user_aids/edit_user/eu_profile.html',
+    'client/user_aids/edit_user/eu_profile.js',
+    'client/user_aids/edit_user/eu_social.html',
+    'client/user_aids/edit_user/eu_social.js',
+
+    // Page Comments
+    'client/user_aids/page_comments/page_comments.html',
+    'client/user_aids/page_comments/page_comments.js',
+    'client/user_aids/page_comments/page_comments.css',
+
+    // Page POD
+    'client/user_aids/page_pod/page_draft.html',
+    'client/user_aids/page_pod/page_draft.js',
+    'client/user_aids/page_pod/page_publish.html',
+    'client/user_aids/page_pod/page_publish.js',
+    'client/user_aids/page_pod/page-pod.css',
+
+    // Page Settings
+    'client/user_aids/page_settings/page_settings.html',
+    'client/user_aids/page_settings/page_settings.js',
+    'client/user_aids/page_settings/page_settings.css',
+
     // Helpers
     'client/commons/helpers/time.html',
     'client/commons/helpers/time.js',
@@ -205,4 +257,57 @@ Package.onUse(function(api) {
     'server/packages/accounts.js',
     'server/social_media.js',
   ], 'server')
+
+  api.addFiles([
+   // Editor
+   'img/editor/no-user.png',
+   'img/editor/toolbar.png',
+   'img/editor/layout-controls.png',
+   'img/editor/page-type-icons.png',
+   'img/editor/lmi-icons.png',
+   'img/editor/if-buttons.png',
+   'img/editor/popup-save.png',
+   'img/editor/pmc-new.png',
+   'img/editor/big-icons.png',
+   'img/editor/gal-controls.png',
+   'img/editor/pmc-area.png',
+   'img/editor/ana.png',
+   'img/editor/lmi-bigger.png',
+   'img/editor/edit-user.png',
+   'img/editor/no-logo.png',
+
+   // Core
+   'img/core/profile-sm.png',
+   'img/core/404.jpg',
+   'img/core/404-mobile.jpg',
+   'img/core/stripes.png',
+   'img/core/sm-tiny.png',
+   'img/core/share-social.png',
+   'img/core/nav-master.jpg',
+   'img/core/search-small.png',
+   'img/core/search-big.png',
+   'img/core/mobile-auth.png',
+   'img/core/line-height-32.png',
+   'img/core/linepaper.png',
+   'img/core/commenting-dark-dots.png',
+   'img/core/commenting-light-dots.png',
+   'img/core/switch-social.png',
+
+   // Logos
+   'img/logos/nav-special.png',
+   'img/logos/white-boxed.png',
+   'img/logos/black.png',
+   'img/logos/white.png',
+
+   // Sections
+   'img/sections/quick-post.png',
+
+   // No Templates
+    'img/no/no-staff.jpg',
+    'img/no/no-device-phone.jpg',
+    'img/no/no-device-tablet-tall.jpg',
+    'img/no/no-device-tablet.jpg',
+    'img/no/no-device.jpg',
+
+ ], 'client', { isAsset: true })
 })

@@ -13,17 +13,13 @@
 
 				{{#if overlay}}
 					{{#unless device_is 'phone'}}<span class="popup-close small"></span>{{/unless}}
-					<img src="https://s3-us-west-2.amazonaws.com/goodethos/assets/logos/black.png" class="ge-logo-std" />
+					<img src="/packages/saeho_goodethos/img/logos/black.png" class="ge-logo-std" />
 				{{else}}
-					<a href="{{pathFor route='blog'}}"><img src="https://s3-us-west-2.amazonaws.com/goodethos/assets/logos/black.png" class="ge-logo-std" /></a>
+					<a href="{{pathFor route='blog'}}"><img src="/packages/saeho_goodethos/img/logos/black.png" class="ge-logo-std" /></a>
 				{{/if}}
 
 				{{#if signup}}
-					{{#if signup 'organization'}}
-						{{>signup_organization}}
-					{{else}}
-						{{>signup_user}}
-					{{/if}}
+					{{>signup_organization}}
 				{{else}}
 					{{>signup_choose}}
 				{{/if}}
@@ -58,39 +54,25 @@
 </template>
 <!-- /signup organization -->
 
-<template name="signup_user">
-
-	<div class="sucp-big smaller small-line">
-		<p>
-			{{{msg}}}
-		</p>
-		<div class="signup-services margin-t">
-			<span class="share-social ss-fb pop-in"></span>
-			<span class="share-social ss-tw pop-in"></span>
-			<span class="share-social ss-is pop-in"></span>
-		</div>
-	</div>
-
-</template>
-
 <template name="signup_choose">
 
 	<div class="sucp smaller small-line">
 		<p>
-			Thank you for using Good Ethos!
-		</p>
-		<p>
-			If your organization is already signed up, please sign in as a user.
+			In order to write on this blog, you must be invited by an administrator after creating an account.
 		</p>
 	</div>
 
+	<div class="signup-services margin-t">
+		<span class="share-social ss-fb pop-in"></span>
+		<span class="share-social ss-tw pop-in"></span>
+		<span class="share-social ss-is pop-in"></span>
+	</div>
+
 	<p class="trigger bigger condensed cursor signup-option relative transition-fast unselect" id="option-organization">
-		<span class="invis bg-ge transition-fast"></span>
-		<span class="relative">New <strong>Publication</strong></span>
-	</p>
-	<p class="trigger bigger condensed cursor signup-option relative transition-fast unselect" id="option-user">
-		<span class="invis bg-ge transition-fast"></span>
-		<span class="relative">Sign In as a <strong>User</strong></span>
+		<!-- <span class="invis bg-ge transition-fast"></span> -->
+		<span class="bg-ge transition-fast"></span>
+		<!-- <span class="relative">Create Account</span> -->
+		<span class="white relative">Create Account</span>
 	</p>
 
 </template>

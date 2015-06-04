@@ -16,13 +16,13 @@ ul.list-comments, .list-comments li, #commenting textarea { margin: 0; list-styl
 
 #commenting textarea {
   border: none;
-  background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/commenting-dark-dots.png);
+  background-image: url(/packages/saeho_goodethos/img/core/commenting-dark-dots.png);
   background-color: transparent; background-position: 0 0; background-size: 9px 32px;
   font-size: 18px; line-height: 32px;
   padding: 0; margin: 20px 0; min-height: 140px; }
 .brand-light #commenting textarea {
   color: #fff;
-  background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/commenting-light-dots.png); }
+  background-image: url(/packages/saeho_goodethos/img/core/commenting-light-dots.png); }
 
 #commenting .nca, .comment-single .nca { padding: 1px 0 0; }
 .comment-single:not(.edit-mode) .message p { font-size: 1.078em; }
@@ -88,14 +88,14 @@ ul.list-comments, .list-comments li, #commenting textarea { margin: 0; list-styl
         /* Switch Social */
         .switch-social {
             display: block; float: left;
-            background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/switch-social.png); background-size: 200px 40px;
+            background-image: url(/packages/saeho_goodethos/img/core/switch-social.png); background-size: 200px 40px;
             width: 40px; height: 40px; }
         #switch-to-fb { background-color: #3b5998; background-position: 0 0; }
         #switch-to-tw { background-color: #55acee; background-position: -40px 0; }
         #switch-to-ig { background-color: #1d6e9e; background-position: -80px 0; }
         #switch-to-ge { background-color: #00a097; background-position: -120px 0; }
 
-        #new-comment .login-msg { padding: 10px 0 0 12px; }
+        #new-comment .login-msg { padding: 11px 0 0 12px; }
 
 @media screen and (max-width: 1024px) {
     #commenting { padding-top: 50px; padding-bottom: 50px; }

@@ -25,7 +25,7 @@ Images.allow({
 Meteor.methods({
   upload_img: function(args) {
     var user = Meteor.user()
-    if ( !user._id || !user.organization ) { throw new Meteor.Error("not-authorized") }
+    if ( !user._id || !user.isStaff ) { throw new Meteor.Error("not-authorized") }
     if ( !args.id || _.isUndefined(args.page_type) ) { throw new Meteor.Error("Invalid args") }
 
     // Defaults
@@ -41,13 +41,8 @@ Meteor.methods({
         case 'event':
         case 'blog':
             var collection = Posts
-            collection.attachSchema( PostsSchema)
-            var cond = { $and: [ { _id: args.id }, { organization: user.organization } ] }
-            break
-        case 'organization':
-            var collection = Organizations
-            collection.attachSchema( Organizations_Schema)
-            var cond = args.id
+            collection.attachSchema(PostsSchema)
+            var cond = { _id: args.id }
             break
         default:
             return false // Match not found, exit
@@ -389,9 +384,9 @@ var do_src_array = function( collection, cond, img_obj, args) {
 /**
  * Future Images Publication
  */
-Meteor.publish("futureImages", function(o_id, small) {
+Meteor.publish("futureImages", function(small) {
   // Only return images uploaded in the future from the moment of subscription
-  var cond = o_id ? { $or: [ { o_id: o_id }, { owner: this.userId } ] } : { owner: this.userId }
+  var cond = { owner: this.userId }
 
   var date = new Date()
   var date_minus = new Date()

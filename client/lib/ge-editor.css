@@ -29,7 +29,7 @@
 		.geeb {
 			width: 35px; height: 35px; display: block; float: left;
 			border-right: solid 1px #2a2a2a;
-			background: #2a2a2a url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/toolbar.png) no-repeat; background-size: 385px 70px; }
+			background: #2a2a2a url(/packages/saeho_goodethos/img/editor/toolbar.png) no-repeat; background-size: 385px 70px; }
 
 		.geeb-break { width: 1px; height: 35px; float: left; }
 		.geeb.hide { display: none; }
@@ -76,7 +76,7 @@
 .layout-controls.fixed { margin-top: 58px; }
 .working .layout-controls { display: none; }
 
-.layout-controls .round, .egi-twitter .helper, .egi-instagram .helper, .service { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/layout-controls.png); background-repeat: no-repeat; background-size: 176px 44px; }
+.layout-controls .round, .egi-twitter .helper, .egi-instagram .helper, .service { background-image: url(/packages/saeho_goodethos/img/editor/layout-controls.png); background-repeat: no-repeat; background-size: 176px 44px; }
 .layout-controls .round {
 	display: inline-block; cursor: pointer;
 	background-color: rgba(0,0,0,.35);
@@ -104,7 +104,7 @@
 	display: none; padding: 3px 5px 4px;
 	-webkit-box-shadow: 0 0 4px rgba(0,0,0,.3); -moz-box-shadow: 0 0 4px rgba(0,0,0,.3); box-shadow: 0 0 4px rgba(0,0,0,.3);
 	position: absolute; z-index: -1;
-	line-height: 1.2; word-wrap: normal; white-space: nowrap;
+	font-size: 14px; line-height: 1.2; word-wrap: normal; white-space: nowrap;
 	background: #333; }
 
 #tooltip-info.on { display: block; z-index: 49; }
@@ -120,7 +120,7 @@
 
 	.if-button {
 		position: relative; display: block; float: left;
-		background: #fff url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/if-buttons.png) no-repeat; background-size: 150px 60px;
+		background: #fff url(/packages/saeho_goodethos/img/editor/if-buttons.png) no-repeat; background-size: 150px 60px;
 		-webkit-box-shadow: 0 0 4px rgba(0,0,0,.4); -moz-box-shadow: 0 0 4px rgba(0,0,0,.4); box-shadow: 0 0 4px rgba(255,255,255,.4);
 		height: 28px; width: 28px; padding: 0; margin: 0 5px 0 0;
 		border: solid 1px #bbb; }
@@ -136,14 +136,14 @@
 /* Big Icons */
 .big-icon {
 	width: 100px; height: 100px;
-	background: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/big-icons.png) no-repeat; background-size: 200px 300px; }
+	background: url(/packages/saeho_goodethos/img/editor/big-icons.png) no-repeat; background-size: 200px 300px; }
 .big-icon.img { background-position: 0 0; }
 .big-icon.all-media { width: 200px; background-position: 0 -100px; }
 .big-icon.all-media-white { width: 200px; background-position: 0 -200px; }
 
 /* Pik Cal */
 .pika-single {
-	font-family: 'Slate W01 Bk', sans-serif; font-weight: normal; color: #444;
+	font-family: 'PT Sans', sans-serif; font-weight: normal; color: #444;
 	border: none; width: 210px; }
 .pika-label { font-size: 14px; }
 .pika-table th, .pika-button { font-size: 12px; line-height: 17px; }
@@ -239,7 +239,7 @@
 	}
 	.img-editor .target {
 		-webkit-box-shadow: 0 0 0 2px rgba(255,255,255,.2); -moz-box-shadow: 0 0 0 2px rgba(255,255,255,.2); box-shadow: 0 0 0 2px rgba(255,255,255,.2);
-		background-color: rgba(0,0,0,.5); background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/gal-controls.png); background-repeat: no-repeat; background-size: 32px 96px;
+		background-color: rgba(0,0,0,.5); background-image: url(/packages/saeho_goodethos/img/editor/gal-controls.png); background-repeat: no-repeat; background-size: 32px 96px;
 		width: 32px; height: 32px; margin: 0 2px; position: relative; }
 	.img-editor:hover .target, .img-editor:hover .x { display: inline-block; }
 	.img-editor .desc {
@@ -250,7 +250,7 @@
 
 	.working .img-editor, .img-editor .target, .img-editor .x { display: none; }
 	.img-editor .x { position: absolute; top: 7px; right: 7px; z-index: 100; }
-	.img-editor .x, .content-gallery .ltc-remove:hover { background-color: #2e9b3d; }
+	.img-editor .x, .content-gallery .ltc-remove:hover { background-color: #ed3c3c; }
 	.img-editor .target:hover .desc, .img-editor:hover .x { opacity: 1; filter: alpha(opacity=100); -khtml-opacity: 1; }
 
 	.content-gallery .ltc-remove {

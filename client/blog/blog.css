@@ -33,7 +33,7 @@
 	padding: 13px 4%; }
 #house-warmer .social {
 	width: 24px; height: 24px; margin: 0 7px;
-	background: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/profile-sm.png) no-repeat; background-size: 210px 70px; }
+	background: url(/packages/saeho_goodethos/img/core/profile-sm.png) no-repeat; background-size: 210px 70px; }
 #house-warmer .social:first-child { margin-left: -4px;  }
 
 #house-warmer.brand-light .social.facebook { background-position: -5px -5px; }
@@ -78,7 +78,9 @@
 	position: absolute; top: 0; bottom: auto; left: 0; right: 0; z-index: 11;
 	padding: 5px 14px 0; }
 
-.info .you { width: 24px; height: 24px; float: left; margin: 0 5px 0 -3px; }
+.info .you {
+	width: 24px; height: 24px; float: left; margin: 0 5px 0 -3px;
+	background-image: url(/packages/saeho_goodethos/img/editor/no-user.png); background-size: 24px 24px; }
 .info .service { display: none; }
 
 	/* Loop - With Big Img */
@@ -126,7 +128,7 @@
 	#quick-post { padding-top: 0; padding-bottom: 0; }
 	#quick-post .inner {
 		padding: 15px 15px 20px;
-		background: #d5ebd8 url(https://s3-us-west-2.amazonaws.com/goodethos/assets/sections/quick-post.png) repeat-x 50% 100%; background-size: 14px 8px; }
+		background: #d5ebd8 url(/packages/saeho_goodethos/img/sections/quick-post.png) repeat-x 50% 100%; background-size: 14px 8px; }
 	#quick-post.on .inner {
 		border-bottom: solid 2px #d7d7d7;
 		padding: 15px; background-image: none; }
@@ -201,69 +203,11 @@
 		.inner-close:before { height: 2px; width: 18px; margin: -1px 0 0 -9px; }
 		.inner-close:after { height: 18px; width: 2px; margin: -9px 0 0 -1px; }
 
-/* Profile - Images */
-#profile-images {
-	overflow-y: hidden; overflow-x: auto;
-	background: #1a1a1a;
-	padding: 15px 0 15px 15px; }
-
-#profile-images img { height: 200px !important; width: auto !important; max-width: none; z-index: 10; position: relative; display: inline-block; }
-#profile-images-drag { white-space: nowrap; z-index: 5; }
-#profile-images-drag p { white-space: normal; }
-
-.pi-block { height: 200px; display: inline-block; }
-.pi-block .text {
-	width: 350px; height: 100px; margin: -50px 0 0;
-	position: absolute; top: 50%; left: 15px; }
-
-.pi-figure.gal-add { border: dashed 2px #444; width: 220px; }
-.pi-figure {
-	background: #222;
-	height: 200px; display: inline-block; margin: 0 5px 0 0; }
-#profile-images-drag .pi-figure:last-child { margin-right: 15px; }
-.pi-figure.has-cap { margin: 0; }
-.pi-figure .none-text {
-	margin: 10px 0 0; color: #4d4d4d;
- 	position: absolute; top: 50%; left: 0; right: 0; }
-
-.pi-figure.is-loading { min-width: 150px; }
-
-.pi-figcap {
-	font-size: 1.05em; line-height: 1.25;
-	margin: 0 15px 0 0; padding: 20px 0 0; width: auto; max-width: 200px; min-width: 100px;
-	display: inline-block; vertical-align: top; white-space: normal !important; }
-.pi-figcap .pi-title { padding: 6px 7px 1px; line-height: 23px; }
-.pi-figcap .pi-arrow {
-	position: absolute; left: -15px; top: 20px; z-index: 11;
-	content: ' '; display: block;
-	width: 0; height: 0;
-	border-top: 15px solid transparent !important; border-bottom: 15px solid transparent !important; border-right: 15px solid #333; }
-.pi-figcap p { padding: 10px 8px 0; }
-
-.pi-figcap .dotted-link { border-color: #888; margin: 0 5px 0 0; }
-.pi-figcap .dotted-link:hover { color: #fff; border-color: #fff; }
-.pi-figcap .hl { color: #ff1; border-color: #ff1; }
-.pi-figcap .saved { color: #fff; border-color: #fff; }
-
 /* Commons */
-.stripes { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/stripes.png); background-size: 10px 10px; }
-.stripes-dark { background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/core/stripes-dark.png); background-size: 10px 10px; }
+.stripes { background-image: url(/packages/saeho_goodethos/img/core/stripes.png); background-size: 10px 10px; }
 
-.icon-on-black {
-	display: block; width: 70px; height: 70px; margin: -55px 0 0 -35px;
-	position: absolute; left: 50%; top: 50%;
-	background-image: url(https://s3-us-west-2.amazonaws.com/goodethos/assets/editor/icons-on-black.png); background-size: 70px 210px; }
-
-
-@media screen and (max-width: 1280px) {
-	.pi-block, .pi-figure { height: 200px; }
-	#profile-images img { height: 200px !important; }
-}
 @media screen and (max-width: 1140px) {
 	#house { width: 50%; padding: 25px 0; }
-
-	.pi-block, .pi-figure { height: 180px; }
-	#profile-images img { height: 180px !important; }
 }
 @media screen and (max-width: 900px) {
 	.pi-figcap { max-width: 178px; }
@@ -282,26 +226,4 @@
 	.house-loops { padding: 4%; }
 
 	#house-book { right: 0; z-index: 10; margin: 0; }
-
-	.pi-block, .pi-figure { height: 170px; }
-	#profile-images img { height: 170px !important; }
-}
-@media screen and (max-width: 650px) {
-	/* Profile - Images */
-	#profile-images-drag .pi-figure:last-child { margin-right: 15px; }
-
-	.pi-block, .pi-figure { height: 160px; }
-	#profile-images img { height: 160px !important; }
-}
-@media screen and (max-width: 500px) {
-	/* Profile - Images */
-	#profile-images { padding: 10px 0 10px 10px; }
-	#profile-images-drag .pi-figure:last-child { margin-right: 10px; }
-
-	.pi-block, .pi-figure { height: 140px; }
-	#profile-images img { height: 140px !important; }
-}
-@media screen and (max-width: 450px) {
-	.pi-block, .pi-figure { height: 120px; }
-	#profile-images img { height: 120px !important; }
 }
