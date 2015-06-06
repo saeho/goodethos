@@ -4,12 +4,12 @@ Template.user_team.helpers({
 		var sortBy = Session.get('sort') || 'Alphabetical'
 		var user = Meteor.user()
 
-		if( !user || !user.organization) return false
+		if (!user || !user.isStaff) return false
 
 		// # # # #
 		// Sort
 		var cond = {}
-		switch( sortBy){
+		switch (sortBy){
 			case 'Managers Only':
 				// Managers
 				cond.level = { $gte: 8 }
@@ -41,7 +41,7 @@ Template.user_team.helpers({
 			var isUser = user._id==person._id
 
 			person.role = ge.get_role( person.level)
-			person.name = name
+			person.name = name || 'Unknown'
 			person.isUser = isUser
 			person.name_raw = service=='tw' ? name.substr(1) : name
 			person.user_level = user_level

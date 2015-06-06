@@ -5,7 +5,6 @@
  */
 
 var aws_inputs = ['accessKeyId','secretAccessKey','bucket','folder','root','region']
-var email_inputs = ['email_username','email_password','email_server','email_port']
 
 var error_helper = {
   isValid: function(val){
@@ -39,13 +38,11 @@ Template.GE_install_one.helpers(error_helper)
 Template.GE_install_two.helpers(error_helper)
 Template.GE_install_three.helpers(error_helper)
 Template.GE_install_four.helpers(error_helper)
-Template.GE_install_five.helpers(error_helper)
 
 Template.GE_install_one.events(install_events)
 Template.GE_install_two.events(install_events)
 Template.GE_install_three.events(install_events)
 Template.GE_install_four.events(install_events)
-Template.GE_install_five.events(install_events)
 
 Template.GE_install_two.helpers({
   button_text: function(){
@@ -57,20 +54,10 @@ Template.GE_install_two.helpers({
   }
 })
 
-Template.GE_install_three.helpers({
-  button_text: function(){
-    var sessionData = Session.get('GE_install') || {}
-    var test = _.every(email_inputs, function(email){
-      return sessionData[email] && sessionData[email].length
-    })
-    return test ? 'Next' : 'Skip E-mail'
-  }
-})
-
-Template.GE_install_four.events({
+Template.GE_install_three.events({
   'click #create-admin': function(){
     var session = Session.get('GE_install') || {}
-    session.stage = 'GE_install_five'
+    session.stage = 'GE_install_four'
 
     $('.install-block').removeClass('pop-in-soft').addClass('pop-out-soft')
     Meteor.setTimeout(function(){
@@ -108,14 +95,6 @@ Template.GE_install.events({
       })
       var text = _.contains(test,true) ? 'Next' : 'Skip AWS'
       $('#aws-button').html(text)
-
-    } else if ($('#email-button').length) {
-      var test = _.map(email_inputs, function(email){
-        var input = $('input[name='+email+']').length ? $('input[name='+email+']').val() : ''
-        return input.length ? true : false
-      })
-      var text = _.contains(test,true) ? 'Next' : 'Skip E-mail'
-      $('#email-button').html(text)
     }
   },
   'submit': function(e,t) {
@@ -134,10 +113,6 @@ Template.GE_install.events({
       var input = $('input[name='+aws+']').length ? $('input[name='+aws+']').val() : ''
       return !input.length
     })
-    var skipEmail = _.every(email_inputs, function(email){
-      var input = $('input[name='+email+']').length ? $('input[name='+email+']').val() : ''
-      return !input.length
-    })
     var validate = _.object( _.map( formData, function(v,k){
       var test = true // Default
       switch(k){
@@ -154,12 +129,6 @@ Template.GE_install.events({
         case 'root':
         case 'region':
           test = skipAWS || v.length
-          break
-        case 'email_username':
-        case 'email_password':
-        case 'email_server':
-        case 'email_port':
-          test = skipEmail || v.length
           break
         case 'username':
           test = v.length>4
@@ -248,37 +217,23 @@ Template.GE_install_two.rendered = function() {
 Template.GE_install_three.rendered = function() {
   $('#ge-install-form')
   .data('prev','GE_install_two')
-  .data('next','GE_install_four')
-
-  var session = Session.get('GE_install') || {}
-  session.msg = '<p>Enter your e-mail credentials if you want to be able to send automatic e-mails (for verifications, etc). You can also set this using the settings.json file (see Readme.md).</p>'
-  Session.set('GE_install', session)
-}
-
-Template.GE_install_four.rendered = function() {
-  $('#ge-install-form')
-  .data('prev','GE_install_three')
   .data('next',false)
 
   var session = Session.get('GE_install') || {}
   var skipAWS = _.every(aws_inputs, function(aws){
     return !_.has(session, aws) || !session[aws].length
   })
-  var skipEmail = _.every(email_inputs, function(email){
-    return !_.has(session, email) || !session[email].length
-  })
 
   session.msg =
-  '<p>Your blog will be created <strong class="'+(skipAWS ? 'red' : 'green')+'">with'+(skipAWS ? 'out' : '')+' Amazon s3</strong>\
-  and <strong class="'+(skipEmail ? 'red' : 'green')+'">with'+(skipEmail ? 'out' : '')+' E-mail</strong> setup.\
+  '<p>Your blog will be created <strong class="'+(skipAWS ? 'red' : 'green')+'">with'+(skipAWS ? 'out' : '')+' Amazon s3</strong> setup.\
   You may also add these settings using your settings.json file.</p>\
   <p>Do you want to create an admin account?</p>'
   Session.set('GE_install', session)
 }
 
-Template.GE_install_five.rendered = function() {
+Template.GE_install_four.rendered = function() {
   $('#ge-install-form')
-  .data('prev','GE_install_four')
+  .data('prev','GE_install_three')
   .data('next',false)
 
   var session = Session.get('GE_install') || {}

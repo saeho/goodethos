@@ -7,22 +7,32 @@ GE_Settings_Schema = new SimpleSchema({
       return new Date()
     }
   },
+
+  // Site Info
+  "site_name": { type: String, max: 255, optional: true },
+  "site_shortname": { type: String, max: 255, optional: true },
+
+  // Amazon s3
+  "accessKeyId": { type: String, max: 350, optional: true },
+  "bucket": { type: String, max: 125, optional: true },
+  "folder": { type: String, max: 125, optional: true },
+  "root": { type: String, max: 125, optional: true },
+  "region": { type: String, max: 125, optional: true },
 })
 
 Meteor.publish('user-o', function() {
-  Meteor._sleepForMs(5000)
-    return [
-      Meteor.users.find({_id: this.userId}, {
-        fields: {
-          'level': 1,
-          'isStaff': 1,
-          'invited': 1,
-          'services': 1,
-          'name': 1,
-          }
-        }),
-      GE_Settings.find({ type: 'site_info' })
-    ]
+  return [
+    Meteor.users.find({_id: this.userId}, {
+      fields: {
+        'level': 1,
+        'isStaff': 1,
+        'invited': 1,
+        'services': 1,
+        'name': 1,
+        }
+      }),
+    GE_Settings.find({ type: 'site_info' })
+  ]
 })
 
 // Methods
@@ -33,35 +43,27 @@ Meteor.methods({
   install_goodethos: function(data) {
     GE_Settings.attachSchema(GE_Settings_Schema)
 
-    var data = _.filter( data, function(v){
-      return v.length
+    _.map( data, function(v,k){
+      if (!v.length)
+        delete data[k]
     })
 
     if (!_.has(data, 'site_name') || !_.has(data, 'site_shortname'))
       throw new Meteor.Error("Incomplete")
 
-    // GE_Settings.insert({
-    //   type: 'site_info',
-    //   site_name: data.site_name,
-    //   site_shortname: data.site_shortname,
-    // })
+    GE_Settings.insert({
+      type: 'site_info',
+      site_name: data.site_name,
+      site_shortname: data.site_shortname,
+    })
 
     var keys = _.keys(data)
     var awsInput = ['accessKeyId','secretAccessKey','bucket','folder','root','region']
-    var eInput = ['email_username','email_password','email_server','email_port']
 
-    if (_.difference(awsInput, keys).length) {
+    if (_.intersection(awsInput, keys).length==awsInput.length) {
       var col = { type: 'aws' }
-      _.extend( col, _.filter(data, function(v,k){
+      _.extend(col, GE_Help.filterObj(data, function(v,k){
         return _.contains(awsInput, k)
-      }))
-      GE_Settings.insert(col)
-    }
-
-    if (_.difference(eInput, keys).length) {
-      var col = { type: 'smtp' }
-      _.extend( col, _.filter(data, function(v,k){
-        return _.contains(eInput, k)
       }))
       GE_Settings.insert(col)
     }

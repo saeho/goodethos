@@ -21,7 +21,7 @@ var get_img_obj = function( key, name) {
     var sizes = ['medium','small','thumb']
     var url_obj = { key: key }
     _.each( sizes, function( size){
-        url_obj[ size] = Meteor.settings.AWS.root+Meteor.settings.AWS.folder+'/'+size+'/sImages/'+key+'-'+name
+        url_obj[ size] = Meteor.settings.AWS.root+'/'+Meteor.settings.AWS.bucket+Meteor.settings.AWS.folder+'/'+size+'/sImages/'+key+'-'+name
     })
     return url_obj
 }

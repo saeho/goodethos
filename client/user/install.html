@@ -62,23 +62,6 @@
 <template name="GE_install_three">
 	<section class="input-wide re-wrapper pop-in-soft install-block">
 
-		<input type="text" name="email_username" class="{{isValid 'email_username'}}" placeholder="hello@your-company.com" value="{{savedVal 'email_username'}}" />
-		<input type="password" name="email_password" class="{{isValid 'email_password'}}" placeholder="Password" value="{{savedVal 'email_password'}}" />
-		<input type="text" name="email_server" class="{{isValid 'email_server'}}" placeholder="E-mail Server" value="{{savedVal 'email_server'}}" />
-		<input type="text" name="email_port" class="{{isValid 'email_port'}}" placeholder="E-mail Port" value="{{savedVal 'email_port'}}" />
-
-		<div class="button-back re-wrapper margin-b">
-			<button type="submit" class="sub submit-button" id="email-button">{{button_text}}</button>
-		</div>
-
-		<span class="go-back cursor smaller silver dotted-link">Go Back</span>
-
-	</section>
-</template>
-
-<template name="GE_install_four">
-	<section class="input-wide re-wrapper pop-in-soft install-block">
-
 		<div class="button-back re-wrapper margin-b" id="create-admin">
 			<p class="sub submit-button transition unselect">Create Admin Account</p>
 		</div>
@@ -91,7 +74,7 @@
 	</section>
 </template>
 
-<template name="GE_install_five">
+<template name="GE_install_four">
 	<section class="input-wide re-wrapper pop-in-soft install-block">
 
 		<div class="signup-organization">
@@ -104,7 +87,7 @@
 				<div class="half float-r"><input class="re-wrapper {{isValid 'confirm'}}" type="password" name="confirm" placeholder="Repeat" value="{{savedVal 'confirm'}}" /></div>
 			</div>
 
-			<div class="button-back re-wrapper">
+			<div class="button-back re-wrapper margin-b">
 				<button type="submit" class="sub submit-button">Create Account &amp; Finish</button>
 			</div>
 			<span class="go-back cursor smaller silver dotted-link">Go Back</span>
