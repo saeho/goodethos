@@ -16,14 +16,13 @@ Meteor.users.deny({
 })
 
 Meteor.publish('team', function(){
-  return Meteor.users.find({ isTeam: true }, {
+  return Meteor.users.find({ isStaff: true }, {
     fields: {
       'level': 1,
       'isStaff': 1,
       'emails': 1,
       'services': 1,
-      'name': 1,
-      'isTeam': 1
+      'name': 1
     }})
 })
 

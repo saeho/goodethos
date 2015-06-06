@@ -72,7 +72,6 @@ Template.user_aids_page_publish.events({
 
 		var user = Meteor.user()
 		var page = t.data.page
-		var o = Template.parentData().o
 
 		var page_content = []
 		_.each( page.content.body, function( block, index){
@@ -122,8 +121,7 @@ Template.user_aids_page_publish.events({
 				pip.msg = 'Sorry, something went wrong.<br />This page could not be published.'
 				pip.ok = 'bg-red'
 			} else if (res) {
-				var abs_url = Meteor.absoluteUrl()+o.slug+'/'+res.slug
-
+				var abs_url = Router.url('GE_post', {_page: res.slug} )
 				pip.msg = 'This page was published to:<br /><a href="'+abs_url+'" class="dotted-link">'+abs_url+'</a>'
 				pip.ok = 'bg-green pc-close'
 			}
@@ -138,7 +136,7 @@ Template.user_aids_page_publish.events({
 Template.user_aids_page_publish.created = function(){
 	Session.set('query',0)
 	this.autorun( (function(){
-		this.data.page = Posts.findOne( this.data.page_id)
+		this.data.page = GE_Posts.findOne( this.data.page_id)
 		this.data.imgs = GE_Help.nk( this.data,'page.content') ? ge.extract_imgs (this.data.page.content) : []
 	}).bind(this))
 }

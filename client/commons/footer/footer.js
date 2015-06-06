@@ -14,15 +14,6 @@ Template.footer.helpers({
 		}
 		return null // Else
 	},
-	// nav_main: function(){
-	// 	var this_menu = globals.nav_main
-	//
-	// 	this_menu.submenu = _.map( this_menu.submenu, function(menu){
-	// 		menu.url = menu.route ? Router.routes[ menu.route].path( menu.params || {} ) : false
-	// 		return menu
-	// 	})
-	// 	return this_menu
-	// },
 	nav_about: function(){
 		var this_menu = globals.nav_about
 

@@ -195,44 +195,42 @@ Template.page_story.created = function() {
 }
 
 Template.page_story.rendered = function() {
-	if( this.action=='edit'){
-		/*
-			## Non-Reactive
-			Meteor's reactivity is great but it has a problem handling contenteEditable elements.
-			I don't want to get into the problem here but if you're curious what that problem is, just let me know and I'll explain.
+	var self = this
+	this.key_func = (function(e){
+		var cmd_plus = [
+			82, // "R" Key
+			83, // "S" Key
+		]
+		if ( _.contains( cmd_plus, e.keyCode) && (e.metaKey || e.ctrlKey) ) {
+			// User presses CMD+ Key
+			e.preventDefault()
+			switch (e.keyCode){
+				case 83: // Save
+					if( !Session.get('saving')) this.editor.save_state = this.editor.save()
+				break
+				case 82: // Refresh
+					// Should I allow refresh? Currently refresh attempt is denied.
+				break
+			}
+			// Do toolbar buttons check
+			this.editor.toolbar_button()
+			return
+		}
+	}).bind(this)
 
-			To avoid this problem, I have made it so that all content is returned "null" when in edit-mode.
-			Then, this autorun is used to manually update every DOM element using JQuery .html() function.
-		*/
-	  this.autorun( function(){
+  this.autorun( function(){
+		var action = Router.current().params._action
+		if (action=='edit') {
+			/**
+			 * Non-Reactive
+			 * Meteor's reactivity is great but it has a problem handling contenteEditable elements.
+			**/
 			var page = Template.currentData().page
 			ge.non_reactive( page.content) // All content related information is contained in page.content object which holds the title, summary, and body.
-	  })
-
-		// Document Level Key Events
-		this.key_func = (function(e){
-			var cmd_plus = [
-				82, // "R" Key
-				83, // "S" Key
-			]
-			if ( _.contains( cmd_plus, e.keyCode) && (e.metaKey || e.ctrlKey) ) {
-				// User presses CMD+ Key
-				e.preventDefault()
-				switch (e.keyCode){
-					case 83: // Save
-						if( !Session.get('saving')) this.editor.save_state = this.editor.save()
-					break
-					case 82: // Refresh
-						// Should I allow refresh? Currently refresh attempt is denied.
-					break
-				}
-				// Do toolbar buttons check
-				this.editor.toolbar_button()
-				return
-			}
-		}).bind(this)
-		$(document).on('keydown', this.key_func)
-	} // END: IF Edit-Mode
+			$(document).on('keydown', self.key_func)
+		} else
+			$(document).off('keydown', self.key_func)
+  })
 
 	this.editor.restructure()
 	var $header = $('#page-'+this.editor.page_type+'-header')
@@ -279,7 +277,7 @@ Template.page_story.rendered = function() {
 			if( $header.data('layout')!=session.style){
 				var setObj = {}
 				setObj[ 'layout.style'] = session.style
-				Posts.update( this.editor.page_id, { $set: setObj } )
+				GE_Posts.update( this.editor.page_id, { $set: setObj } )
 
 				// Update Session so the header Template can change accordingly
 				// i.e. Some layout styles require black header bar, some require white.
@@ -297,22 +295,23 @@ Template.page_story.rendered = function() {
 	}).bind(this)
 	$('#page-save').on('click', this.doc_save_func)
 
-	// If this is published (and editing), create popup message
-	if( !Session.get('popup') && this.action=='edit' && this.data.page.status>=4) {
-		// If editing and the page is published
-		Session.set('popup', {
-			template: 'user_aids_page_draft',
-			style: 'middle',
-			class: 'bg-dim fade-in fixed-full show-header',
-			data: {
-				page_type: this.data.page.info.type,
-				page_id: this.data.page._id
-			}
-		})
-	} else if( this.data.page.status>0 && this.data.page.status<4) {
-		// Edit Mode
-		this.editor.save_state = this.editor.page_body()
-	}
+	this.autorun((function(){
+		var action = Router.current().params._action
+		var data = Template.currentData()
+		var status = data.page.status
+		if (action=='edit' && status>=4) {
+			Session.set('popup', {
+				template: 'user_aids_page_draft',
+				style: 'middle',
+				class: 'bg-dim fade-in fixed-full show-header',
+				data: {
+					page_type: this.data.page.info.type,
+					page_id: this.data.page._id
+				}
+			})
+		} else if (status>0 && status<4)
+			this.editor.save_state = this.editor.page_body() // Edit Mode
+	}).bind(this))
 
 	/*
 		At the start of every page render, my check_imgs() function loops through all the request
@@ -350,7 +349,7 @@ Template.page_story.destroyed = function() {
 	$('#page-save').off('click', this.doc_save_func)
 	$(window).off('resize', this.canvas_func)
 	$(window).off('beforeunload', this.unload_func)
-	if( this.key_func) $(document).off('keydown', this.key_func)
+	$(document).off('keydown', this.key_func)
 
 	delete Session.keys['new_imgs'] // Delete Session for Future Images
 

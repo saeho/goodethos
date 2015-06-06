@@ -100,7 +100,7 @@ Template.all_preview.helpers({
 
 			var cond = { $or: or }
 
-			var posts = Posts.find(cond).fetch()
+			var posts = GE_Posts.find(cond).fetch()
 			var count = posts.length
 			if( !count) return false
 			count = 'Found '+posts.length+' Match'+( posts.length==1 ? '' : 'es')

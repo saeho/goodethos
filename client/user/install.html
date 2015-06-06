@@ -1,0 +1,114 @@
+
+<template name="GE_install">
+	<main class="table delay-fade-in" id="ge-install-master">
+		<div class="inside center">
+			<div class="padding wrapper-block normal">
+
+				<img src="/packages/saeho_goodethos/img/logos/black.png" class="ge-logo-std" />
+
+				<div class="normal-line padding-t margin-t">
+					{{{install.msg}}}
+				</div>
+
+				<div class="relative">
+
+					{{#if install.loading}}
+					<div class="loading-master abs-full bg-alt-overlay fade-in">
+						<span class="loading spin-inifinite"></span>
+					</div>
+					{{/if}}
+
+					<form class="padding-t" id="ge-install-form">
+						{{> Template.dynamic template=install.tmpl }}
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</main>
+</template>
+
+
+<template name="GE_install_one">
+	<section class="input-big re-wrapper pop-in-soft install-block">
+		<input type="text" name="site_name" class="{{isValid 'site_name'}}" placeholder="App or Site Name" value="{{savedVal 'site_name'}}" />
+		<input type="text" name="site_shortname" class="{{isValid 'site_shortname'}}" placeholder="Short Name (i.e. GE)" value="{{savedVal 'site_shortname'}}" />
+
+		<div class="button-back re-wrapper">
+			<button type="submit" class="sub submit-button" data-next="GE_install_two">Next</button>
+		</div>
+	</section>
+</template>
+
+<template name="GE_install_two">
+	<section class="input-wide re-wrapper pop-in-soft install-block">
+
+		<input type="text" name="accessKeyId" class="{{isValid 'accessKeyId'}}" placeholder="Access Key Id" value="{{savedVal 'accessKeyId'}}" />
+		<input type="text" name="secretAccessKey" class="{{isValid 'secretAccessKey'}}" placeholder="Secret Access Key" value="{{savedVal 'secretAccessKey'}}" />
+		<input type="text" name="bucket" class="{{isValid 'bucket'}}" placeholder="Bucket" value="{{savedVal 'bucket'}}" />
+		<input type="text" name="folder" class="{{isValid 'folder'}}" placeholder="Folder" value="{{savedVal 'folder'}}" />
+		<input type="text" name="root" class="{{isValid 'root'}}" placeholder="Root (https://s3-us-west-2.amazon...)" value="{{savedVal 'root'}}" />
+		<input type="text" name="region" class="{{isValid 'region'}}" placeholder="Region (us-west-2)" value="{{savedVal 'region'}}" />
+
+		<div class="button-back re-wrapper margin-b">
+			<button type="submit" class="sub submit-button" id="aws-button">{{button_text}}</button>
+		</div>
+
+		<span class="go-back cursor smaller silver dotted-link">Go Back</span>
+
+	</section>
+</template>
+
+<template name="GE_install_three">
+	<section class="input-wide re-wrapper pop-in-soft install-block">
+
+		<input type="text" name="email_username" class="{{isValid 'email_username'}}" placeholder="hello@your-company.com" value="{{savedVal 'email_username'}}" />
+		<input type="password" name="email_password" class="{{isValid 'email_password'}}" placeholder="Password" value="{{savedVal 'email_password'}}" />
+		<input type="text" name="email_server" class="{{isValid 'email_server'}}" placeholder="E-mail Server" value="{{savedVal 'email_server'}}" />
+		<input type="text" name="email_port" class="{{isValid 'email_port'}}" placeholder="E-mail Port" value="{{savedVal 'email_port'}}" />
+
+		<div class="button-back re-wrapper margin-b">
+			<button type="submit" class="sub submit-button" id="email-button">{{button_text}}</button>
+		</div>
+
+		<span class="go-back cursor smaller silver dotted-link">Go Back</span>
+
+	</section>
+</template>
+
+<template name="GE_install_four">
+	<section class="input-wide re-wrapper pop-in-soft install-block">
+
+		<div class="button-back re-wrapper margin-b" id="create-admin">
+			<p class="sub submit-button transition unselect">Create Admin Account</p>
+		</div>
+		<div class="button-back re-wrapper margin-b">
+			<button type="submit" class="sub submit-button">Finish</button>
+		</div>
+
+		<span class="go-back cursor smaller silver dotted-link">Go Back</span>
+
+	</section>
+</template>
+
+<template name="GE_install_five">
+	<section class="input-wide re-wrapper pop-in-soft install-block">
+
+		<div class="signup-organization">
+
+			<input class="re-wrapper {{isValid 'username'}}" type="text" name="username" placeholder="Username" value="{{savedVal 'username'}}" />
+			<input class="re-wrapper {{isValid 'email'}}" type="email" name="email" placeholder="E-mail" value="{{savedVal 'email'}}" />
+
+			<div class="clear">
+				<div class="half float-l"><input class="re-wrapper {{isValid 'password'}}" type="password" name="password" placeholder="Password" value="{{savedVal 'password'}}" /></div>
+				<div class="half float-r"><input class="re-wrapper {{isValid 'confirm'}}" type="password" name="confirm" placeholder="Repeat" value="{{savedVal 'confirm'}}" /></div>
+			</div>
+
+			<div class="button-back re-wrapper">
+				<button type="submit" class="sub submit-button">Create Account &amp; Finish</button>
+			</div>
+			<span class="go-back cursor smaller silver dotted-link">Go Back</span>
+		</div>
+
+	</section>
+</template>

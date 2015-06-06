@@ -76,7 +76,7 @@
 .house-loops .info {
 	background: #fff; border-bottom: solid 1px #e7e7e7;
 	position: absolute; top: 0; bottom: auto; left: 0; right: 0; z-index: 11;
-	padding: 5px 14px 0; }
+	padding: 5px 14px 0; height: 27px; }
 
 .info .you {
 	width: 24px; height: 24px; float: left; margin: 0 5px 0 -3px;

@@ -91,26 +91,4 @@ Meteor.methods({
 			}, 2000)
 		}
 	},
-	notify: function( action){
-		var user = Meteor.user()
-		if( !user) return false
-
-		switch( action){
-			case 'created-o':
-				var subject = user.username+' Created an Organization'
-				var msg = 'User ID is '+user._id+' name is '+GE_Help.nk( user, 'name.first')+' '+GE_Help.nk( user, 'name.last')+' and the O-ID is '+user.organization
-				break
-			case 'logged-in':
-			default:
-				var subject = user.username+' Logged In'
-				var msg = GE_Help.nk( user, 'name.first')+' '+GE_Help.nk( user, 'name.last')+'\'s ID is '+user._id
-		}
-
-		Email.send({
-			from: 'notifier@goodethos.com',
-			to: 'hello@goodethos.com',
-			subject: subject,
-			text: msg
-		})
-	},
 })

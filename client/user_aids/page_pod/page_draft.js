@@ -13,9 +13,9 @@ Template.user_aids_page_draft.helpers({
 	published_url: function(){
 		var user = Meteor.user()
 		var data = Template.parentData()
-		if (!user || !user.organization || !data) return false
+		if (!user || !data) return false
 
-		return data.o ? Meteor.absoluteUrl()+data.o.slug+'/'+data.page.slug : false
+		return Router.url('GE_post', {_page: data.page.slug})
 	},
 })
 
@@ -24,7 +24,7 @@ Template.user_aids_page_draft.events({
 	'submit': function(e,t){
 		e.preventDefault()
 		var user = Meteor.user()
-		var page = Posts.findOne(t.data.page_id)
+		var page = GE_Posts.findOne(t.data.page_id)
 
 		var page_content = []
 		var was_text = false

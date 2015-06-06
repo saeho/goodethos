@@ -13,7 +13,7 @@ Template.user_aids_page_comments.helpers({
 		}
 	},
 	comments: function(){
-		var comments = Comments.find({}, { sort: { 'date.commented': -1 }}).fetch()
+		var comments = GE_Comments.find({}, { sort: { 'date.commented': -1 }}).fetch()
 		return _.map( comments, function( c){
 			c.excerpt = true // This field cannot be manually updated/inserted, it is blocked from the deny() function
 			c.edit_mode = true // This field cannot be manually updated/inserted, it is blocked from the deny() function
@@ -41,7 +41,7 @@ Template.user_aids_page_comments.rendered = function(){
 		var data = Template.parentData()
 
 		if( data && data.page && !_.isUndefined( session) && data.page.info.comment!=session)
-			Posts.update( data.page._id, { $set: { 'info.comment': session } })
+			GE_Posts.update( data.page._id, { $set: { 'info.comment': session } })
 
 	}).bind(this)
 	$(window).on('beforeunload', this.unload_func)

@@ -57,7 +57,7 @@ Template.header.helpers({
 		return true
 	},
 	comments: function() {
-		var count = Comments.find().count()
+		var count = GE_Comments.find().count()
 		return count+' Comment'+( count>1 || count===0 ? 's' : '')
 	},
 })

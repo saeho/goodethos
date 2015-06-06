@@ -12,7 +12,7 @@ PostsSchema = new SimpleSchema({
       var status = this.field('status').value
       if(_.isUndefined(status))
         this.unset()
-      else if(this.isInsert || status<4)
+      else if (this.isInsert || status<4)
         return null
       else {
         var title = this.field('content.title').value
@@ -21,7 +21,7 @@ PostsSchema = new SimpleSchema({
         var slug_condition = { slug: new_slug } // Always make sure this is the first item so the while() condition can match
 
         // Loop DB check until an empty slug is found.
-        while(Posts.findOne(slug_condition)) {
+        while (GE_Posts.findOne(slug_condition)) {
           new_slug = slug+GE_Help.random_string()
           slug_condition.$and[0] = { slug: new_slug }
         }
@@ -147,7 +147,7 @@ PostsSchema = new SimpleSchema({
     }},
 })
 
-Posts.allow({
+GE_Posts.allow({
   insert: function(userId, doc) {
     return userId.length>2
   },
@@ -194,7 +194,7 @@ Posts.allow({
   }
 })
 
-Posts.deny({
+GE_Posts.deny({
   remove: function(userId, doc) {
     return doc.locked // can't remove locked documents
   },
@@ -213,7 +213,7 @@ Meteor.methods({
 
     if (!ge.user_can('write', user.level)) throw new Meteor.Error("not-authorized") // Exit if user is not part of this organization
 
-    Posts.attachSchema(PostsSchema)
+    GE_Posts.attachSchema(PostsSchema)
 
     data.user = user._id
     if (!_.has(data,'status'))
@@ -231,7 +231,7 @@ Meteor.methods({
       delete data['content.body']
     }
 
-    var created_id = Posts.insert(data)
+    var created_id = GE_Posts.insert(data)
     return created_id
   },
   /**
@@ -247,10 +247,10 @@ Meteor.methods({
 
     if (!user || !user.isStaff) throw new Meteor.Error("not-authorized")
 
-    Posts.attachSchema (PostsSchema)
+    GE_Posts.attachSchema (PostsSchema)
 
     var update_data = {}
-    var cur_data = Posts.findOne (page_id, { field : field })
+    var cur_data = GE_Posts.findOne (page_id, { field : field })
     cur_data = GE_Help.nk (cur_data, field)
     if (!_.isArray(cur_data)) throw new Meteor.Error("not_found", "Could not find the post data.")
 
@@ -260,7 +260,7 @@ Meteor.methods({
 
     cur_data.splice (loc, 1, before, insert, after)
     update_data[field] = cur_data
-    Posts.update (page_id, { $set: update_data })
+    GE_Posts.update (page_id, { $set: update_data })
 
     return {
       before: before,
@@ -285,8 +285,8 @@ Meteor.methods({
       { status: { $lt: 4 } }
     ]}
 
-    Posts.attachSchema (PostsSchema)
-    var content = Posts.findOne (cond)
+    GE_Posts.attachSchema (PostsSchema)
+    var content = GE_Posts.findOne (cond)
     content = GE_Help.nk (content, field)
     if (!content) throw new Meteor.Error("not_found", "Could not find the post data.")
 
@@ -309,7 +309,7 @@ Meteor.methods({
 
     var update = {}
     update[field] = content
-    return Posts.update( cond, { $set: update })
+    return GE_Posts.update( cond, { $set: update })
   },
   /**
    * Remove item from Gallery
@@ -324,9 +324,9 @@ Meteor.methods({
     var field = field || 'content.body'
     if (blockIndex!==false) field += '.'+blockIndex+'.group'
 
-    Posts.attachSchema (PostsSchema)
+    GE_Posts.attachSchema (PostsSchema)
 
-    var data = Posts.findOne (page_id, { field: field })
+    var data = GE_Posts.findOne (page_id, { field: field })
     data = GE_Help.nk (data, field)
     if (!data) return false
 
@@ -342,7 +342,7 @@ Meteor.methods({
     var pullObj = {}
     pullObj[ field] = { key: { $in: deleteKeys } }
 
-    return Posts.update (page_id, { $pull: pullObj }, function(err,res){
+    return GE_Posts.update (page_id, { $pull: pullObj }, function(err,res){
       if (!err)
         _.each (deleteArray, function( key){
           Images.remove(key)
@@ -361,8 +361,8 @@ Meteor.methods({
     var cond_pf = {}; cond_pf[field] = { $exists: true }
     cond.$and.push(cond_pf)
 
-    Posts.attachSchema (PostsSchema)
-		Posts.update (cond, { $set: updateObj })
+    GE_Posts.attachSchema (PostsSchema)
+		GE_Posts.update (cond, { $set: updateObj })
   },
   /**
    * DEPRECIATED
@@ -402,7 +402,7 @@ Meteor.methods({
     }))
 
     // Get cur data and push
-    var data = Posts.findOne(page_id, { field : get })
+    var data = GE_Posts.findOne(page_id, { field : get })
     var return_obj = []
     var update_data = { $set: {} }
     var return_check = false
@@ -430,7 +430,7 @@ Meteor.methods({
 
     // Update
     if( return_check){
-      Posts.update(page_id, update_data)
+      GE_Posts.update(page_id, update_data)
       return return_obj.length>1 ? return_obj : return_obj[0]
     }
     return false
@@ -442,8 +442,8 @@ Meteor.methods({
     var user = Meteor.user()
     if (!user || !user.isStaff) throw new Meteor.Error("not-authorized")
 
-    Posts.attachSchema (PostsSchema)
-    Posts.update(page_id, { $set: data })
+    GE_Posts.attachSchema (PostsSchema)
+    GE_Posts.update(page_id, { $set: data })
   },
   /**
    * Publish or Draft Page (POD)
@@ -490,14 +490,14 @@ Meteor.methods({
       return false // If publishing with no content, do not proceed
 
     var pod_func = function(cb) {
-      Posts.attachSchema(PostsSchema)
-      Posts.update( cond, { $set: set }, function(err,res){
+      GE_Posts.attachSchema(PostsSchema)
+      GE_Posts.update( cond, { $set: set }, function(err,res){
         if(err) {
           console.warn(err)
           var result = false
           cb && cb (null, result)
         } else {
-          var new_page = Posts.findOne( args._id, {content: 1, status: 1, slug: 1})
+          var new_page = GE_Posts.findOne( args._id, {content: 1, status: 1, slug: 1})
           // Return new page data (you need to return it because Meteor reactivity & contenteditables don't play well together.)
           cb && cb (null, new_page)
         }
@@ -522,7 +522,7 @@ Meteor.publish('single-page', function(args) {
   else
     return this.ready()
 
-  return Posts.find( p_cond, {
+  return GE_Posts.find( p_cond, {
     fields: {
       'info.featured': 0,
     } })
@@ -537,14 +537,14 @@ Meteor.publish('o-pubs', function() {
       // user: this.userId, // If you want to disallow shared company-wide publications
     },
     $orderby: { 'date.published': -1, 'date.edited': -1 }}
-  var o_pubs = Posts.find( cond, { fields: {
+  var o_pubs = GE_Posts.find( cond, { fields: {
     'info.featured': 0,
     'layout': 0,
   }})
 
   // Return all team info
   var team = Meteor.users.find({
-      isTeam: true
+      isStaff: true
     },{
     fields: {
       'level': 1,

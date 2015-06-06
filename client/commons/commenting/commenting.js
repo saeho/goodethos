@@ -58,7 +58,7 @@ Template.commenting.helpers({
 	},
 	comments: function(){
 		if( Template.instance().subscription && !Template.instance().subscription.ready()) return false
-		return Comments.find({}, { sort: { 'date.commented': -1 }}).fetch()
+		return GE_Comments.find({}, { sort: { 'date.commented': -1 }}).fetch()
 	},
 	enabled: function(){
 		var parent = Template.parentData()
@@ -82,7 +82,7 @@ Template.commenting.events({
 		if( _.has( t.data, '_id') && account && user && message.length){
 			var ts = new Date().getTime()
 			if( _.isUndefined( t.timestamp) || (ts-t.timestamp)>20000) {
-				Comments.insert({
+				GE_Comments.insert({
 					user: user._id,
 					organization: user.organization,
 

@@ -7,5 +7,5 @@
  */
 
 Meteor.publish("all-topics", function() {
-  return Topics.find()
+  return GE_Topics.find()
 })

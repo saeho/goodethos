@@ -1,5 +1,5 @@
 
-Comments.allow({
+GE_Comments.allow({
     insert: function(userId, document) {
         if( userId!=document.user || !document.message.length) return false
 
@@ -36,7 +36,7 @@ Meteor.publish('comments', function (args) {
     if( args.page_type)
       cond.$query.page_type = args.page_type
 
-    var comments = Comments.find( cond)
+    var comments = GE_Comments.find( cond)
     var users = comments.map( function(c) { return c.user })
     var organizations = comments.map( function(c) { return c.organization })
 

@@ -53,7 +53,7 @@ Template.signup.helpers({
 	signin_link: function() {
 		return this.overlay ?
       { class: 'smaller auth-signin' } :
-      { class: 'smaller', href: Router.routes['GE_signin'].url() }
+      { class: 'smaller', href: Router.url('GE_signin') }
 	},
   signup: function() {
       return Session.get('signup')
@@ -188,45 +188,22 @@ Template.signup_choose.events({
   'click .share-social': function(e,t){
 
     var callback = function(err){
-        if (err)
-            Session.set('error', {fields: false, msg: 'Sorry, we could not log you in.'})
-        else {
-            var has_o = false
-            var user = Meteor.user()
-            if( !t.data || !t.data.overlay){
-                var o = user.organization ? Organizations.findOne( user.organization) : false
-
-                if( o && o.slug){
-                    has_o = true
-                    Router.go('/blog')
-                } else
-                    Router.go('/')
-            } else if( user.organization){
-                has_o = true
-                Session.set('error', {fields: false, msg: 'Thank you for signing in!'})
-            }
-
-            // If no organization
-            if( !has_o){
-                Meteor.setTimeout( function(){
-                    Session.set('popup', {
-                        template: 'edit_user',
-                        class: 'bg-dim fade-in fixed-full',
-                        data: {
-                            cur: 'organization',
-                            overlay: true,
-                        }
-                    })
-                }, ( !t.data || !t.data.overlay ? 500 : 0))
-            }
-        }
+      if (err)
+        Session.set('error', {fields: false, msg: 'Sorry, we could not log you in.'})
+      else {
+        var user = Meteor.user()
+        if (!t.data || !t.data.overlay)
+          Router.go('/blog')
+        else if( user.organization)
+          Session.set('error', {fields: false, msg: 'Thank you for signing in!'})
+      }
     }
 
     if( $(e.currentTarget).hasClass('ss-fb'))
-        Meteor.loginWithFacebook( callback)
+      Meteor.loginWithFacebook( callback)
     else if( $(e.currentTarget).hasClass('ss-tw'))
-        Meteor.loginWithTwitter( callback)
+      Meteor.loginWithTwitter( callback)
     else if( $(e.currentTarget).hasClass('ss-is'))
-        Meteor.loginWithInstagram( callback)
+      Meteor.loginWithInstagram( callback)
   },
 })

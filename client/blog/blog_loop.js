@@ -34,6 +34,6 @@ Template.blog_note.helpers({
 Template.blog_note.events({
 	'click .close-small': function(e,t){
 		if(confirm('Are you sure you want to delete this note?'))
-			Posts.remove(t.data._id)
+			GE_Posts.remove(t.data._id)
 	},
 })

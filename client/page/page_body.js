@@ -116,7 +116,7 @@ Template.page_body_text.helpers({
 		// If in edit-mode, return NULL no matter what.
 		// Instead of relying on Meteor reactivity, do it manually using the autorun from page_story.js
 		var action = Router.current().params._action
-		if( action=='edit') return null
+		if (action=='edit') return null
 
 		var html = /<|>/.test(this.value) && this.value!='<br>' ? this.value : '<p>'+this.value+'</p>'
 		return html

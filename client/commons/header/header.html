@@ -34,7 +34,7 @@
 				{{#unless page.header}}
 				<div class="condensed sides page-commenting">
 					{{#if page.show_edit_url}}
-						<a href="/{{page.organization}}/{{page._id}}/edit" class="white dotted-link">Edit Page</a>
+						<a href="{{pathFor route='GE_post' _page=page._id _action='edit'}}" class="white dotted-link">Edit Page</a>
 						&nbsp;|&nbsp;
 					{{/if}}
 					<span class="white transition {{#if page.commenting}}dotted-link cursor open-comments{{/if}}">

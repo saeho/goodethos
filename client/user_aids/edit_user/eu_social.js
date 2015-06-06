@@ -74,7 +74,6 @@ Template.eu_social.events({
 					Session.set('popup', popup)
 					// Because the Organization was just created, Tracker.autorun will not run. So manually do a findOne().
 					Meteor.subscribe('user-o') // Re-Subscribe
-					Meteor.call( 'notify', 'created-o')
 				} else {
 					popup.data.pip = { msg: 'Sorry, something went wrong. Please try again or contact us at hello@goodethos.com.' }
 					Session.set('popup', popup)

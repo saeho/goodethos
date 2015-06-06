@@ -171,7 +171,7 @@ Template.user_new_page.events({
 					}
 					Meteor.call("createPost", data, function(err, res){
 						if (err) console.warn(err)
-						else Router.go('post', { _page: res, _action: 'edit' })
+						else Router.go('GE_post', { _page: res, _action: 'edit' })
 					})
 				}
 			}

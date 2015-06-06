@@ -1,7 +1,7 @@
 // Helpers
 Template.user_all.helpers({
 	hasPosts: function(){
-		return Posts.find().count()
+		return GE_Posts.find().count()
 	},
 	posts: function(){
 		// # # # #
@@ -30,7 +30,7 @@ Template.user_all.helpers({
 		}
 
 		var cond = { $and: andCond }
-		var posts = Posts.find(cond, sort).fetch()
+		var posts = GE_Posts.find(cond, sort).fetch()
 		var authors_collection = Meteor.users.find({}, {
 			fields: {
 				name: 1,

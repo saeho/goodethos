@@ -8,7 +8,7 @@ Template.team_preview.helpers({
 	},
 	posts: function(){
 		// This is for preview when a user is clicked
-		var posts = Posts.find({ user: this._id },{sort: { 'date.edited': -1}}).fetch()
+		var posts = GE_Posts.find({ user: this._id },{sort: { 'date.edited': -1}}).fetch()
 
 		return _.map( posts, function(p){
 			var status = ge.status( p.status)
@@ -182,15 +182,15 @@ Template.user_team_single.helpers({
 		if( this.was_queried){
 			var parent = Template.parentData(2)
 			var o = parent.o
-			var isTeam = this.organization && o._id==this.organization
+			var isStaff = this.organization && o._id==this.organization
 			var invited = _.contains( o.users, this._id)
 
-			if( isTeam)
+			if (isStaff)
 				var msg = 'Already in your organization'
 			else
 				var msg = invited ? 'Team invite sent' : 'Not in your organization'
 
-			var color = isTeam ? 'green' : (invited ? 'blue' : 'red')
+			var color = isStaff ? 'green' : (invited ? 'blue' : 'red')
 
 			return {
 				msg: msg,

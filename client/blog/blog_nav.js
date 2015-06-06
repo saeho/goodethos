@@ -2,7 +2,7 @@
 // Helpers
 Template.blog_nav.helpers({
 	total_comments: function(){
-		return Comments.find().count()
+		return GE_Comments.find().count()
 	}
 })
 

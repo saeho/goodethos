@@ -4,7 +4,7 @@
 		<a href="{{url}}">
 		<div class="clear relative {{#if img.isBig}}with-big bg-black{{else}}inner bg-white{{/if}}">
 
-			<div class="condensed info transition">
+			<div class="condensed info transition smallest">
 				<span class="icon icon-{{type_raw}}"></span> {{>author_pic author}}
 				<strong class="charcoal transition">{{type}}</strong>
 				<span class="silver transition">by {{display_name author}} - {{time_ago}}</span>
@@ -35,7 +35,7 @@
 	<article class="loop relative {{type_raw}}">
 		<div class="clear relative inner bg-white">
 
-			<div class="condensed info transition">
+			<div class="condensed info transition smallest">
 				<span class="icon icon-{{type_raw}}"></span> {{>author_pic author}}
 				<strong class="charcoal transition">{{type}}</strong>
 				<span class="silver transition">by {{display_name author}} - {{time_ago}}</span>

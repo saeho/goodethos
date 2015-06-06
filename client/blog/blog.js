@@ -93,7 +93,7 @@ Template.blog.helpers({
 				})
 				cond.$and.push({ $or: or })
 			}
-			posts = Posts.find(cond, { sort: { 'date.published': -1 }}).fetch()
+			posts = GE_Posts.find(cond, { sort: { 'date.published': -1 }}).fetch()
 		}
 
 		if(o && posts.length){
@@ -113,7 +113,7 @@ Template.blog.helpers({
 			// 	}}).fetch()
 
 			var loop = _.map( posts, function( page, index){
-				var url = '/'+o.slug+'/'+page.slug
+				var url = Router.url('GE_post', { _page: page.slug })
 
 				//var date = page.date.published || page.date.edited || page.date.created
 				//date = moment(date)
@@ -206,5 +206,7 @@ Template.blog.rendered = function() {
 Template.blog.destroyed = function() {
   $(window).off( 'resize', this.canvas_func )
 
-	delete Session.keys['query','cur_date','quick_post']
+	delete Session.keys['cur_date']
+	delete Session.keys['query']
+	delete Session.keys['quick_post']
 }

@@ -171,7 +171,7 @@ Template.nav_master.events({
 				console.warn(err)
 				Router.go('/user/all')
 			} else
-				Router.go('post', { _page: res, _action: 'edit' })
+				Router.go('GE_post', { _page: res, _action: 'edit' })
 		})
 	}
 })

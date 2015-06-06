@@ -26,7 +26,7 @@ script, .hide { display: none; }
 .unselect, label:not(.normal-label) { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
 .unselect [contenteditable=true] { -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; }
 
-input, textarea, button, select, div, main, p, section, figcaption, h1, h2, h3, h4, h5, h6, strong, span {
+input, textarea, button, select, div, main, p, section, figcaption, h1, h2, h3, h4, h5, h6, strong, span, .submit-button {
 	width: auto; outline: none; border-radius: 0;
 	-mox-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
 input:not([type="checkbox"]):not([type="radio"]), textarea, button, select { -webkit-appearance: none; }
@@ -45,9 +45,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 .contain { background-repeat: no-repeat; background-size: contain; background-position: 50%; }
 img { max-width: 100%; height: auto; }
 
-.wrapper, .wrapper-blog, .wrapper-pop, .wrapper-narrow, .wrapper-wide, .re-wrapper { margin: 0 auto; }
+.wrapper, .wrapper-block, .wrapper-blog, .wrapper-pop, .wrapper-narrow, .wrapper-wide, .re-wrapper { margin: 0 auto; }
 
 	/* Wrappers */
+	.wrapper-block { max-width: 330px; }
 	.wrapper-blog { max-width: 670px; }
 	.wrapper-pop { max-width: 780px; }
 	.wrapper-narrow { max-width: 1078px; }
@@ -114,15 +115,14 @@ body { color: #404040; overflow: visible; line-height: 1.7; overflow-x: hidden; 
 	body.single-screen { margin-right: 0 !important; }
 	body.overflow .layout-controls { display: none; }
 
-body, input, textarea, select, option, button, .invis-select.block {
+body, input, textarea, select, option, button, .submit-button, .invis-select.block {
 	font-size: 15px; font-weight: 400;
 	-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-input, button { line-height: 1.35; }
+input, button, .submit-button { line-height: 1.35; }
 textarea { line-height: 1.6; }
-button, .normal, .sans-serif, .small-label, .ok { font-family: 'PT Sans', sans-serif; font-weight: normal; }
+button, .submit-button, .normal, .sans-serif, .small-label, .ok { font-family: 'PT Sans', sans-serif; font-weight: normal; }
 strong, b { font-weight: 700; }
 .subheading, .sans-serif-thin { font-family: 'PT Sans', sans-serif; font-weight: normal; }
-.normal strong, .normal b, .sans-serif strong, .sans-serif b, strong.normal, b.normal, strong.sans-serif, b.sans-serif { font-family: 'PT Sans', sans-serif_strong; font-weight: normal; }
 
 .uppercase { text-transform: uppercase; }
 .capitalize { text-transform: capitalize; }
@@ -263,7 +263,7 @@ h4, h5, h6 { font-family: 'PT Sans', sans-serif; font-weight: 700; color: #3d3d3
 		.bg-yellow { background-color: #fff247; }
 		.bg-maroon { background-color: #594146; }
 
-		.red, a.red { color: #2e9b3d; }
+		.red, a.red { color: #ed3c3c; }
 		.bg-red { background-color: #ca3342; }
 
 .bg-white, body { background-color: #fff; }
@@ -285,6 +285,7 @@ h4, h5, h6 { font-family: 'PT Sans', sans-serif; font-weight: 700; color: #3d3d3
 .bg-bright { background-color: rgba(255,255,255,.8); }
 .bg-popup { background-color: rgba(255,255,255,.9); }
 .bg-popup-alt { background-color: rgba(240,240,240,.8); }
+.bg-alt-overlay { background-color: rgba(240,240,240,.5); }
 
 .bg-ge, .trigger:hover .bg-ge-hover, .bg-ge-hover:hover {
 	background: #2e9b3d;
@@ -303,12 +304,12 @@ h4, h5, h6 { font-family: 'PT Sans', sans-serif; font-weight: 700; color: #3d3d3
 	background: linear-gradient(135deg, #00409f 0%, #0071a1 20%, #00978e 50%, #009f4c 100%) !important;
 	background: -webkit-linear-gradient(-405deg, #00409f 0%, #0071a1 20%, #00978e 50%, #009f4c 100%) !important;
 	background-repeat: no-repeat; }
-.bg-ge-solid-reverse,  .button-back {
+.bg-ge-solid-reverse, .button-back {
 	background: #2e9b3d !important;
 	background: linear-gradient(135deg, #009f4c 0%, #00a097 40%, #0071a1 100%) !important;
 	background: -webkit-linear-gradient(-405deg, #009f4c 0%, #00a097 40%, #0071a1 100%) !important;
 	background-repeat: no-repeat; }
-.button-back button.off { background: #ccc; cursor: default; }
+.button-back .off { background: #ccc; cursor: default; }
 
 /* Elements */
 .arroww-up:before, .arrowg-up:before, .arroww-down:before {
@@ -337,8 +338,8 @@ label.small-label, .small-label {
 label.normal-label { padding: 12px 0 4px; display: inline-block; }
 
 input, textarea, .invis-select.block, .input { padding: .6em .7em .55em; }
-button { padding: .6em .7em .7em; }
-input, textarea, button, .input {
+button, .submit-button { padding: .6em .7em .7em; }
+input, textarea, button, .submit-button, .input {
 	display: block; width: 100%; margin: 0;
 	border: none; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 input, textarea { font-size: 16px; background: #fff; color: #404040; border: solid 1px #fff; }
@@ -395,6 +396,7 @@ textarea { resize: none; }
 	.input-small { width: 150px; }
 	.input-medium { width: 200px; }
 	.input-big { width: 240px; }
+	.input-wide { width: 300px; }
 
 	.half.float-l input, .half.float-r input, .half.float-l .input, .half.float-r .input {
 		width: -moz-calc(100% - 1px);
@@ -404,7 +406,7 @@ textarea { resize: none; }
 	.half.float-r input, .half.float-r .input { margin-left: 1px; }
 
 	input.error, textarea.error, select.error,
-	input.error-active, textarea.error-active, select.error-active { border-color: #2e9b3d !important; }
+	input.error-active, textarea.error-active, select.error-active { border-color: #ed3c3c !important; }
 
 input, textarea, input.re-wrapper, textarea.re-wrapper { margin-bottom: 2px; }
 
@@ -429,9 +431,10 @@ input, textarea, input.re-wrapper, textarea.re-wrapper { margin-bottom: 2px; }
 	.center :-ms-input-placeholder { text-align: center; }
 
 .button-back { padding: 0; }
-button { background: #343434; color: #fff; cursor: pointer; }
-button:not(.off):hover, button:not(.off):focus { -webkit-box-shadow: 0 0 10px rgba(0,0,0,.15); -moz-box-shadow: 0 0 10px rgba(0,0,0,.15); box-shadow: 0 0 10px rgba(0,0,0,.15); }
-.button-back:hover button:not(.disabled):not(.off), button.perm { background-color: rgba(0,0,0,0) !important; color: #fff !important; }
+button, .submit-button { background: #343434; color: #fff; cursor: pointer; }
+button:not(.off):hover, button:not(.off):focus, .button-back:not(.off):hover, .button-back:not(.off):focus, { -webkit-box-shadow: 0 0 10px rgba(0,0,0,.15); -moz-box-shadow: 0 0 10px rgba(0,0,0,.15); box-shadow: 0 0 10px rgba(0,0,0,.15); }
+.button-back:hover button:not(.disabled):not(.off), button.perm,
+.button-back:hover .submit-button:not(.disabled):not(.off), .submit-button.perm { background-color: rgba(0,0,0,0) !important; color: #fff !important; }
 
 button.no-shadow:focus, button.no-shadow:hover { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; }
 

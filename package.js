@@ -190,6 +190,11 @@ Package.onUse(function(api) {
     'client/user/team/user_team.css',
     'client/user/search.html',
 
+    // Install
+    'client/user/install.html',
+    'client/user/install.js',
+    'client/user/install.css',
+
     // New Page
     'client/user/new_page/new_page.html',
     'client/user/new_page/new_page.js',
@@ -247,7 +252,7 @@ Package.onUse(function(api) {
     // Collections
     'server/collections/comments.js',
     'server/collections/images.js',
-    'server/collections/organizations.js',
+    'server/collections/settings.js',
     'server/collections/posts.js',
     'server/collections/sImages.js',
     'server/collections/topics.js',

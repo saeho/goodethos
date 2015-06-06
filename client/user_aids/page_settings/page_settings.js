@@ -11,7 +11,7 @@ Template.user_aids_page_settings.helpers({
 		var cur_id = GE_Help.nk( parentData, 'page.info.topic')
 		var cur = 'None'
 
-		var all_topics = _.map( Topics.find().fetch(), function( topic){
+		var all_topics = _.map( GE_Topics.find().fetch(), function( topic){
 			if( topic._id==cur_id) cur = topic.name
 			return {
 				val: topic._id,
@@ -132,7 +132,7 @@ Template.user_aids_page_settings.rendered = function(){
 			if( session.topic!=this.saved_topic ) setObj.$set['info.topic'] = session.topic
 
 			if( !_.isEmpty( setObj.$set) && this.data.page_id && this.data.page_id==this.page_id)
-				Posts.update( this.data.page_id, setObj)
+				GE_Posts.update( this.data.page_id, setObj)
 		}
 	}).bind(this)
 	$(window).on('beforeunload', this.unload_func)

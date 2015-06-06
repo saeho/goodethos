@@ -13,7 +13,7 @@ Template.signin.helpers({
 	signup_link: function() {
 		return this.overlay ?
 			{ class: 'smaller auth-signup' }
-			: { class: 'smaller', href: Router.routes['GE_signup'].url() }
+			: { class: 'smaller', href: Router.url('GE_signup') }
 	},
 	error: function() {
 		var error = Session.get('error') || {}
@@ -80,17 +80,9 @@ Template.signin.events({
 							var user = Meteor.user()
 							var route = Router.current().route.getName()
 
-							if(route=='signin'){
-								if(user.organization){
-									// Do the findOne(). Session is not always ready in time.
-									var o = Organizations.findOne( user.organization)
-									if( o && o.slug)
-										Router.go('/'+o.slug)
-								} else
-									Router.go('/')
-							}
+							if(route=='signin')
+								Router.go('/')
 						}
-						Meteor.call( 'notify', 'logged-in')
 					}
 				})
 			} // END : NO Errors
@@ -100,49 +92,25 @@ Template.signin.events({
   'click .share-social': function(e,t){
 
       var callback = function(err){
-          if (err)
-              Session.set('error', {fields: false, msg: 'Sorry, we could not log you in.'})
-          else {
-              var has_o = false
-              var user = Meteor.user()
-              if( !t.data || !t.data.overlay){
-                  var o = user.organization ? Organizations.findOne( user.organization) : false
-
-                  if( o && o.slug){
-                      has_o = true
-                      Router.go('/'+o.slug)
-                  } else
-                      Router.go('/')
-              } else if( user.organization){
-                  has_o = true
-                  Session.set('error', {fields: false, msg: 'Thank you for signing in!' })
-              }
-
-              // If no organization
-              if( !has_o){
-                  Meteor.setTimeout( function(){
-                      Session.set('popup', {
-                          template: 'edit_user',
-                          class: 'bg-dim fade-in fixed-full',
-                          data: {
-                              cur: 'organization',
-                              overlay: true,
-                          }
-                      })
-                  }, ( !t.data || !t.data.overlay ? 500 : 0))
-              }
-          }
+        if (err)
+          Session.set('error', {fields: false, msg: 'Sorry, we could not log you in.'})
+        else {
+          var user = Meteor.user()
+          if (!t.data || !t.data.overlay)
+            Router.go('/')
+          else if( user.isStaff)
+            Session.set('error', {fields: false, msg: 'Thank you for signing in!' })
+        }
       }
-
-      if( $(e.currentTarget).hasClass('ss-fb'))
-          Meteor.loginWithFacebook( callback)
-      else if( $(e.currentTarget).hasClass('ss-tw'))
-          Meteor.loginWithTwitter( callback)
-      else if( $(e.currentTarget).hasClass('ss-is'))
-          Meteor.loginWithInstagram( callback)
+			// TODO : Switch this to data()
+      if ($(e.currentTarget).hasClass('ss-fb'))
+        Meteor.loginWithFacebook( callback)
+      else if ($(e.currentTarget).hasClass('ss-tw'))
+        Meteor.loginWithTwitter( callback)
+      else if ($(e.currentTarget).hasClass('ss-is'))
+        Meteor.loginWithInstagram( callback)
   },
 })
-
 
 Template.signin.created = function() {
 	delete Session.keys['error']

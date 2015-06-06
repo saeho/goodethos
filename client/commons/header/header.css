@@ -54,7 +54,7 @@
 			#nav-gateway .menu .sub {
 				font-size: 15px; line-height: 1;
 				border: solid 1px rgba(0,0,0,0); color: #fff;
-				height: 21px; padding: 6px 3px 0 7px; margin: 11px 1% 0; }
+				height: 21px; padding: 6px 3px 0 5px; margin: 11px 1% 0; }
 			#nav-gateway .menu a.inline-block:hover, #nav-gateway .menu span.cursor:hover, #nav-gateway .menu .on { border-color: #fff; }
 
 					#nav-gateway.nav-white-perm .menu .inline-block, #overlord.nav-switch #nav-gateway .menu .sub,

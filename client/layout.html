@@ -1,17 +1,19 @@
 
-<template name="layout">
-	<div class="{{nav_state}} {{device_is}} {{#unless brand 'logo_thumb'}}no-logo{{/unless}} transition" id="overlord">
+<template name="GE_layout">
+<div class="{{nav_state}} {{device_is}} {{#unless brand 'logo_thumb'}}no-logo{{/unless}} transition bg-alt" id="overlord">
+	<div id="master">
+		<div id="master-wrapper">
+		{{#if Template.subscriptionsReady}}
+			{{#if isInstalled}}
 
-		{{#unless device_is 'mobile'}}
-			{{> nav_master}}
-		{{/unless}}
+				{{#unless device_is 'mobile'}}
+					{{> nav_master}}
+				{{/unless}}
 
-		<div id="master">
-			{{#if display_popup}}
-				{{>popup_master}}
-			{{/if}}
+				{{#if display_popup}}
+					{{>popup_master}}
+				{{/if}}
 
-			<div class="bg-alt" id="master-wrapper">
 				{{#unless hide_header}}
 					{{>header}}
 				{{/unless}}
@@ -26,7 +28,13 @@
 				<div class="transition" id="mobile-nav-open"></div>
 				{{/if}}
 
-			</div>
+			{{else}}
+				{{> GE_install}}
+			{{/if}}
+		{{else}}
+			{{>loading}}
+		{{/if}}
 		</div>
 	</div>
+</div>
 </template>

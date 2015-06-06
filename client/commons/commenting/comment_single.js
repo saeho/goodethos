@@ -52,7 +52,7 @@ Template.comment_single.events({
 		if( t.data.edit_mode){
 			Meteor.clearTimeout( this.abuse_timer)
 			this.abuse_timer = Meteor.setTimeout( function(){
-				Comments.update( t.data._id, { $set: { hidden: $(e.currentTarget).hasClass('on') }})
+				GE_Comments.update( t.data._id, { $set: { hidden: $(e.currentTarget).hasClass('on') }})
 			},500)
 		}
 	},
