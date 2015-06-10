@@ -17,13 +17,11 @@
 		<div class="small-line with-text">
 			{{#if user.invited}}
 				<p>
-					<strong>You were invited to join <span class="blue">{{user.invited.o_name}}</span></strong><br />
-					You shouldn't accept invitations from unknown people.
+					<strong>You were invited to join <span class="blue">{{user.invited.o_name}}</span></strong>
 				</p>
 
 				<div class="your-co-container inline-block small-line">
-					<figure class="your-co round overflow shadow-soft background" style="{{#if user.invited.o_photo}}background-image: url({{user.invited.o_photo}});{{/if}} {{#if user.invited.logo_back}}background-color: {{user.invited.logo_back}};{{/if}} margin-top: -5px;"></figure>
-              Company: <strong>{{user.invited.o_name}}</strong><br />
+					<figure class="your-co round overflow shadow-soft background" style="{{#if user.invited.o_photo}}background-image: url({{user.invited.o_photo}});{{/if}} margin-top: -5px;"></figure>
               Your Role: <strong>{{user.invited.role.name}}</strong>
           </div>
 
@@ -33,12 +31,11 @@
 				</p>
 
 			{{else}}
-				<p class="margin-b">
-					<strong>Welcome to Good Ethos!</strong><br />
-					You do not belong to any publications.
+				<p class="margin-t">
+					<strong>You are not a staff for this publication.</strong>
 				</p>
-				<p class="margin-b">
-					If your organization is already signed up, your administrator can add you by searching your name or user ID.
+				<p>
+					Your administrator can invite you to be a staff by searching your name or user ID.
 				</p>
 				<p>
 					Your user ID is <strong>{{user._id}}</strong>.

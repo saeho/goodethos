@@ -552,6 +552,7 @@ Meteor.publish('o-pubs', function() {
       'emails': 1,
       'services': 1,
       'name': 1,
+      'username': 1,
     }})
   return [o_pubs, team]
 })

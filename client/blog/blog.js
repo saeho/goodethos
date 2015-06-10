@@ -1,33 +1,32 @@
 
 // Helpers
-Template.blog.helpers({
+Template.GE_blog.helpers({
 	/*
 		Comments (Guestbook)
 	*/
 	comments: function(){
 		return {
 			_id: null,
-			page_type: 'blog',
-			o_id: 'something',
+			page_type: 'profile',
 			overlay: true, // This stops duplicate subscriptions
 		}
 	},
 	/*
 		Branded (Right) Side
 	*/
-	title: function(){
+	site_info: function(){
 		var o = this.o
-		if(!o) return false
-		var title = GE_Help.nk(o, 'name.full') || GE_Help.nk(o, 'name.short') || 'Blog'
+		var title = o.site_name || o.site_shortname || 'Blog'
 		var size = ge.title_size( title)
 		return {
-			val: title,
-			size: size
+			title: title,
+			size: size,
+			description: o.description
 		}
 	},
 	social: function(){
 		var o = this.o
-		if( !o || !o.social_media) return false
+		if (!o.social_media) return false // No social media info found, Exit
 		var sm = _.map( o.social_media, function( item, key){
 			return item
 				? {
@@ -40,63 +39,45 @@ Template.blog.helpers({
 		})
 	},
 	contributors: function(){
-		var o = this.o
-
-		return []
-
-		// TODO : THIS!!
-
-		var team = Meteor.users.find({
+		return Meteor.users.find({
 			$and: [
-				{ _id: { $in: o.users }},
+				{ isStaff: true },
+				{ level: { $gte: 1 }}
 			]
 		})
-		return team.count() > 1 ? team.fetch() : false
 	},
-	profile: function(){
-		var o = this.o
-		var isOwner =
-			Meteor.Device.isDesktop() && _.isArray(o.users)
-				? _.contains( o.users, Meteor.userId())
-				: false
-		var data = Template.instance().data
-
-		return {
-			users: o.users,
-			o_id: o._id,
-			isOwner: isOwner,
-		}
+	isOwner: function(){
+		var user = Meteor.user() || {}
+		if (Meteor.Device.isDesktop() && user.isStaff)
+			return ge.user_can('control_profile', user.level)
+		else
+			return false
 	},
 	query: function(){
 		return Session.get('query')
 	},
 	loop: function(){
-		var o = this.o
-		var posts
+		var query = Session.get('query')
+		var cond = {
+			$and: [
+				{ 'status' : { '$gte': 4 } },
+				{ 'date.published': { $lt: Session.get('cur_date') }}
+			]}
 
-		if(o){
-			var query = Session.get('query')
-			var cond = {
-				$and: [
-					{ 'status' : { '$gte': 4 } },
-					{ 'date.published': { $lt: Session.get('cur_date') }}
-				]}
-
-			if(_.isString(query) && query.trim().length>=2){
-				query = query.trim()
-				var or = []
-				var query_array = query.split(' ').splice(0,3) // Maximum search of up to 3 words
-				_.each(query_array, function(q){
-					var regex = new RegExp( '.*'+GE_Help.regexEsc(q)+'.*', 'i' )
-					or.push({ 'content.title': regex })
-					or.push({ 'content.summary': regex })
-				})
-				cond.$and.push({ $or: or })
-			}
-			posts = GE_Posts.find(cond, { sort: { 'date.published': -1 }}).fetch()
+		if(_.isString(query) && query.trim().length>=2){
+			query = query.trim()
+			var or = []
+			var query_array = query.split(' ').splice(0,3) // Maximum search of up to 3 words
+			_.each(query_array, function(q){
+				var regex = new RegExp( '.*'+GE_Help.regexEsc(q)+'.*', 'i' )
+				or.push({ 'content.title': regex })
+				or.push({ 'content.summary': regex })
+			})
+			cond.$and.push({ $or: or })
 		}
+		var posts = GE_Posts.find(cond, { sort: { 'date.published': -1 }}).fetch()
 
-		if(o && posts.length){
+		if(posts.length){
 			var authors_list = _.map( posts, function(p){
 				return p.user
 			})
@@ -144,7 +125,7 @@ Template.blog.helpers({
 	},
 })
 
-Template.blog.events({
+Template.GE_blog.events({
 	'input #search-profile': function(e,t){
 		Meteor.clearTimeout(this.timer)
 		this.timer = Meteor.setTimeout( function(){
@@ -158,10 +139,8 @@ Template.blog.events({
 		}, 1500)
 	},
 	'click .edit-brand': function(e,t){
-		var isAllowed =
-			Meteor.Device.isDesktop() && GE_Help.nk( t.data, 'o.users') && _.isArray( t.data.o.users)
-				? _.contains( t.data.o.users, Meteor.userId())
-				: false
+		var user = Meteor.user() || {}
+		var isAllowed = Meteor.Device.isDesktop() && user.isStaff && ge.user_can('control_profile', user.level)
 
 		if( isAllowed){
 			Session.set('popup', {
@@ -176,7 +155,7 @@ Template.blog.events({
 })
 
 // Created
-Template.blog.created = function(){
+Template.GE_blog.created = function(){
 	// Init Sessions
 	Session.set('quick_post', false)
 	Session.set('query', false)
@@ -187,12 +166,11 @@ Template.blog.created = function(){
 	this.subscribe('comments', {
 		_id: null,
 		page_type: 'blog',
-		o_id: 'something'
 	})
 }
 
 // Rendered
-Template.blog.rendered = function() {
+Template.GE_blog.rendered = function() {
 	this.canvas = new GE_Canvas('#house', { min_height: true })
 	this.canvas.calc()
 	this.canvas_func = (function(){
@@ -203,7 +181,7 @@ Template.blog.rendered = function() {
 }
 
 // Destroyed
-Template.blog.destroyed = function() {
+Template.GE_blog.destroyed = function() {
   $(window).off( 'resize', this.canvas_func )
 
 	delete Session.keys['cur_date']

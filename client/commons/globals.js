@@ -5,66 +5,50 @@ Template.registerHelper('brand', function( val, check){
      * Currently "brand" session is semi-pointless.
      * At a later time, each user/team member will be able to have their own blog, at which point they will have their own branding options.
      */
-    var o = Session.get('brand')
-    if (!o) {
-      var user = Meteor.user() || {}
-      o = Organizations.findOne( user.organization) || {}
-    }
-    var brand = o.brand
+    var o = GE_Settings.findOne({ type: 'site_info' }) || {}
 
-    if (brand){
-    	// Logos
-        var logo_thumb = ge.responsive_img( brand.logo, 'thumb')
-        var logo_thumb = logo_thumb ? 'background-image: url(\''+logo_thumb+'\');' : ''
-        var logo_big = ge.responsive_img( brand.logo, 'small') // For logos, small is big
-        var logo_big = logo_big ? 'background-image: url(\''+logo_big+'\');' : ''
+  	var defaults = {
+  		logo_thumb: null,
+  		logo_big: null,
 
-      // Colors
-      // First BG
-    	var brand_color = brand.bg || '#2e9b3d'
-    	var bg = brand_color ? 'background-color: '+brand_color+';' : ''
-    	var border = brand_color ? 'border-color: '+brand_color+';' : ''
+      bg: '#2e9b3d',
+      bg_second: '#2d2d2d',
 
-      // Second BG
-      var bg_second = brand.bg_second ? 'background-color: '+brand.bg_second+';' : ''
+      text: 'brand-light',
 
-      // Logo Images
-      var text = brand.text || 'brand-light'
-      var description = o.description || null
+      site_name: 'Unknown',
+      site_shortname: 'Unknown',
+      description: null,
+  	}
+  	var brand = _.isObject(o.brand) ? _.defaults(o.brand, defaults) : defaults
 
-      // Get shorter name
-      var full_name = GE_Help.nk(o, 'name.full') || 'Unknown'
-      var short_name = GE_Help.nk(o, 'name.short') || 'Unknown'
-      var o_name = GE_Help.return_shorter( full_name, short_name)
+  	// Logos
+    var logo_thumb = ge.responsive_img( brand.logo, 'thumb')
+    brand.logo_thumb = logo_thumb ? 'background-image: url(\''+logo_thumb+'\');' : ''
+    var logo_big = ge.responsive_img( brand.logo, 'small') // For logos, small is big
+    brand.logo_big = logo_big ? 'background-image: url(\''+logo_big+'\');' : ''
 
-      var o_data = {
-          slug: o.slug,
-          o_name: o_name,
-          ideal_name: full_name.length<15 && full_name.length>2 ? full_name : o_name,
-          description: description,
+    // First BG
+  	brand.bg = 'background-color: '+brand.bg+';'
 
-          bg: bg,
-          bg_second: bg_second,
-          border: border,
-          text: text,
+    // Second BG
+    brand.bg_second = 'background-color: '+brand.bg_second+';'
 
-          logo_thumb: logo_thumb,
-          logo_big: logo_big,
-      }
+    // Get shorter name
+    var site_name = o.site_name || ''
+    var short_name = o.site_shortname || ''
+    brand.o_name = GE_Help.return_shorter( site_name, short_name)
+    brand.ideal_name = site_name.length<15 && site_name.length>2 ? site_name : brand.o_name
 
-      var return_val = val && _.has( o_data, val) ? o_data[ val] : o_data
-      return !_.isUndefined( check) && _.isString( check) && _.isString( return_val)
-          ? check==return_val
-          : return_val
-    }
-    // If you want to use conditions to do something, use val
-    //return val?"checked":"";
-    return false
+    var return_val = val && _.has(brand, val) ? brand[val] : brand
+    return !_.isUndefined( check) && _.isString(check) && _.isString(return_val)
+    ? check==return_val
+    : return_val
 })
 
 Template.registerHelper('display_name', function(user){
   var user = user || Meteor.user()
-	return ge.get_name(user)
+	return ge.get_name(user) || 'Unknown'
 })
 
 Template.registerHelper('user_can', function(action){
@@ -81,13 +65,13 @@ Template.registerHelper('master_title_class', function(val){
 */
 Template.registerHelper('device_is', function(val){
     if( _.isUndefined(val)) {
-        //return 'phone' // DEVELOPMENT MODE
+        // return 'phone' // DEVELOPMENT MODE
         if( Meteor.Device.isPhone()) return 'phone'
         else if( Meteor.Device.isTablet()) return 'tablet'
         else return 'desktop'
     }
 
-    //return true // DEVELOPMENT MODE
+    // return true // DEVELOPMENT MODE
 
     switch( val){
         case 'mobile':

@@ -22,16 +22,16 @@ Template.blog_redesign.helpers({
 	},
 	profile: function(){
 		var user = Meteor.user()
-		var o = Organizations.findOne( user.organization )
-		if( !o) return false
+		var o = GE_Settings.findOne({ type: 'site_info' })
+		if (!o) return false
 
-		var brand = o.brand
+		var brand = o.brand || {}
 
 		// Main BG
 		var main_pg = this.main_pg || 0
 		var main = {
 			input: {
-				value: brand.bg,
+				value: brand.bg || '#2e9b3d',
 				class: 'eucc-input',
 				type: 'text'
 			},
@@ -44,7 +44,7 @@ Template.blog_redesign.helpers({
 		var second_pg = this.second_pg || 0
 		var second = {
 			input: {
-				value: brand.bg_second,
+				value: brand.bg_second || '#2d2d2d',
 				class: 'eucc-input',
 				type: 'text'
 			},
@@ -52,6 +52,7 @@ Template.blog_redesign.helpers({
 			show_prev: second_pg>0,
 			show_next: second_pg<18,
 		}
+		if (!brand.text) brand.text = 'brand-light'
 
 		return {
 			main: main,
@@ -163,17 +164,14 @@ Template.blog_redesign.events({
 		if( equal_check) $(e.currentTarget).removeClass('perm')
 		else $(e.currentTarget).addClass('perm')
 
-		if( !equal_check){
-			Organizations.update( user.organization, {
-				$set: cur_obj
-			}, function(){
+		if (!equal_check)
+			Meteor.call('update_site_info', cur_obj, function(err,res){
 				prev_state = cur_obj // This is the state including the blob
 				// Set Popup In Popup msg
 				var session = Session.get('popup')
 				session.data.pip = true
 				Session.set('popup', session)
 			})
-		}
 	},
 })
 

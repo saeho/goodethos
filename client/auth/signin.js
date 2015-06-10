@@ -98,7 +98,7 @@ Template.signin.events({
           var user = Meteor.user()
           if (!t.data || !t.data.overlay)
             Router.go('/')
-          else if( user.isStaff)
+          else
             Session.set('error', {fields: false, msg: 'Thank you for signing in!' })
         }
       }

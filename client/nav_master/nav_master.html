@@ -64,22 +64,19 @@
 
 <template name="co_logo">
 	<figure class="nav-by">
-		<!--<a href="#" class="nav-door">-->
-			<!-- CO Logo -->
-			<div class="co-logo overflow transition-mid shadow-soft {{#if brand.logo_thumb}}has-logo{{/if}}" style="{{brand 'logo_thumb'}}">
-				{{#unless brand 'logo_thumb'}}
-				<div class="transition-mid center sub">
-						Menu
-				</div>
-				{{/unless}}
+		<div class="co-logo overflow transition-mid shadow-soft {{#if brand.logo_thumb}}has-logo{{/if}}" style="{{brand 'logo_thumb'}}">
+			{{#unless brand 'logo_thumb'}}
+			<div class="transition-mid center sub">
+					Menu
 			</div>
-		<!--</a>-->
+			{{/unless}}
+		</div>
 	</figure>
 </template>
 
 
 <template name="nav_master_single">
-	<div class="link-wrap">
+	<div class="link-wrap relative">
 		{{#if url}}
 		<a href="{{#if url.route}}{{pathFor url.route _action=url.action}}{{else}}{{url}}{{/if}}" class="{{class}}">{{name}}</a>
 		{{else}}

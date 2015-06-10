@@ -21,11 +21,8 @@ Template.comment_single.helpers({
 				break
 			case 'good ethos':
 				isImg = false
-				var o = Organizations.findOne( this.organization)
-        var img = ge.responsive_img( GE_Help.nk( o, 'brand.logo'), 'thumb')
-        var img = img ? 'background-image: url(\''+img+'\');' : ''
-
-				name = GE_Help.return_shorter( GE_Help.nk( o, 'name.full'), GE_Help.nk( o, 'name.short'))
+        var img = ge.responsive_img(author.profile_img,'thumb')
+				var name = ge.get_name(author)
 				break
 		}
 

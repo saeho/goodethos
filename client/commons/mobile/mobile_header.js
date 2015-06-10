@@ -7,10 +7,6 @@ Template.mobile_header.helpers({
 		var user = Meteor.user()
 		if( !user || _.isUndefined( user.services)) return false
 
-		// Later when we allow multi-accounts and organizations, we need to disable this
-		var brand = Session.get('brand')
-		if( !brand || brand._id==user.organization) return { show: false, isReader: true }
-
 		var service = false
 		var type = false
 
@@ -23,7 +19,7 @@ Template.mobile_header.helpers({
 			return true
 		})
 
-		switch( type){
+		switch(type){
 			case 'twitter':
 				var img = service.profile_image_url_https
 				break
@@ -34,8 +30,7 @@ Template.mobile_header.helpers({
 				var img = service.profile_picture
 				break
 			case 'password':
-				var o = Organizations.findOne( user.organization) || {}
-        var img = ge.responsive_img( GE_Help.nk( o, 'brand.logo'), 'thumb')
+        var img = user.profile_img
 				break
 			default:
 				var img = false // Technically, nothing should reach this
@@ -48,7 +43,6 @@ Template.mobile_header.helpers({
 			show: true,
 			isO: isO,
 			pic: img,
-			isReader: brand._id!=user.organization,
 
 			attr: {
 				//class: (isO ? 'background user-photo overflow' : 'lmi-icon')+' inline-block round',

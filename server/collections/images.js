@@ -36,16 +36,16 @@ Meteor.methods({
 
     // Find appropriate collection
     switch( args.page_type) {
-        case 'article': // Unused
-        case 'story':
-        case 'event':
-        case 'blog':
-            var collection = Posts
-            collection.attachSchema(PostsSchema)
-            var cond = { _id: args.id }
-            break
-        default:
-            return false // Match not found, exit
+      case 'article': // Unused
+      case 'story':
+      case 'event': // Unused
+      case 'blog':
+        var collection = Posts
+        collection.attachSchema(PostsSchema)
+        var cond = { _id: args.id }
+        break
+      default:
+        return false // Match not found, exit
     }
 
     // Proceed with function
@@ -53,15 +53,15 @@ Meteor.methods({
     else var img_obj = { key: GE_Help.random_string(12) }
 
     switch( args.img_type) {
-        case 'src':
-            img_obj = do_src( collection, cond, img_obj, args)
-        break
-        case 'src_array':
-            img_obj = do_src_array( collection, cond, img_obj, args)
-        break
-        case 'group':
-            img_obj = do_group( collection, cond, img_obj, args)
-        break
+      case 'src':
+        img_obj = do_src( collection, cond, img_obj, args)
+      break
+      case 'src_array':
+        img_obj = do_src_array( collection, cond, img_obj, args)
+      break
+      case 'group':
+        img_obj = do_group( collection, cond, img_obj, args)
+      break
     }
     return img_obj
   },
@@ -284,47 +284,6 @@ var do_src = function( collection, cond, img_obj, args) {
 var do_src_array = function( collection, cond, img_obj, args) {
 
     switch( args.func) {
-        /*
-        You don't need this function.
-        src_array() is used for single img SRC arrays only.
-        Unless you want to support multiple (i.e. admin specified) images for single images, "push" func shouldn't happen.
-        case 'push':
-            // # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-            // Push item to position of array  # # # # # # # # # # # # # # #
-            // # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-            args.index = Number(args.index) || 0
-            check( args.index, Number)
-
-            var nested_key = args.page_field
-            if( args.index>=0) nested_key += '.'+args.index+'.src'
-
-            var cur_data = collection.findOne( cond )
-            if(!cur_data) return false
-
-            var cur_array = cur_data[ nested_key]
-            var setObj = {}
-
-            var new_obj = _.extend({
-                key : GE_Help.random_string(12),
-            }, img_obj)
-
-            if( !cur_array || !cur_array.length){
-                // First image
-                setObj[ nested_key] = [new_obj]
-                collection.update( cond, { $set: setObj })
-                return img_obj
-            } else {
-                // Push
-                cur_array.splice( args.index, 0, new_obj)
-
-                var setObj = {}
-                setObj[ nested_key] = cur_array
-                collection.update( cond, { $set: setObj })
-                return img_obj
-
-            }
-            return false
-        */
         case 'update':
             // # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
             // Update existing array with new img and delete old imgs   #

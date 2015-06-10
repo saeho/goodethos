@@ -49,15 +49,6 @@ ge_media.prototype = {
 		$('#popup-media').removeClass('shake pop-in-soft')
 
 		if ( go_id>=0 && go_elem.length && ( !this.edit_mode || this.force || this.state() )) {
-			/*
-				# # # # # # # # Bring this back if you need it # # # # # # # #
-			Reset social medias before navigating
-			if( $('#pmc-social-search').length) $('#pmc-social-search').addClass('hide fade-out').removeClass('fade-in')
-			if( $('#pmc-social').length) $('#pmc-social').addClass('pop-in-soft').removeClass('hide pop-out-soft')
-			*/
-			// Manually reset the editable fields before proceeding
-			// ** If you write something in the text field but don't save and proceed,
-			// ** Meteor will keep the entered text if the next item is also empty
 			$(this.form_id+' .editable').html('')
 			go_elem.trigger('click')
 			this.pip_close()

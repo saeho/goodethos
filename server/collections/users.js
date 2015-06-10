@@ -22,7 +22,8 @@ Meteor.publish('team', function(){
       'isStaff': 1,
       'emails': 1,
       'services': 1,
-      'name': 1
+      'name': 1,
+      'profile_img': 1
     }})
 })
 
@@ -34,72 +35,57 @@ Meteor.methods({
 
     if (!this.userId) return false
     var user = Meteor.users.findOne(this.userId)
-    if (user.level<8 || !user.organization || changeLevel>8 || changeLevel<0) return false
+    if (user.level<8 || !user.isStaff || changeLevel>8 || changeLevel<0) return false
 
     Meteor.users.update({
       _id: user_id,
-      organization: user.organization
     },{
       $set: { level: changeLevel }
     })
     return true
   },
-  'user-invite': function( o_id, user_id, assignLevel ){
-    check (o_id, String)
+  'user-invite': function(user_id, assignLevel){
     check (user_id, String)
     check (assignLevel, Number)
 
     if (!this.userId) return false
     var user = Meteor.users.findOne(this.userId)
-    if (user.level<8 || user.organization!=o_id || assignLevel>8 || assignLevel<0) return false
+    if (user.level<8 || assignLevel>8 || assignLevel<0) return false
 
     Meteor.users.update( user_id, { $set: {
-      invited: o_id,
+      invited: true,
       level: assignLevel
     }})
-    Organizations.update({ _id: o_id,
-      users: { $nin: [ user_id ] }
-    }, {
-      $push: { users: user_id }
-    })
   },
-  'remove-invite': function( o_id, user_id ){
-    check (o_id, String)
+  'remove-invite': function(user_id){
     check (user_id, String)
 
     if (!this.userId) return false
-    var user = Meteor.users.findOne( this.userId)
-    if (user.level<8 || user.organization!=o_id) return false
+    var user = Meteor.users.findOne(this.userId)
+    if (!(user.level>=8 || (user._id==user_id && user.invited))) return false
 
     Meteor.users.update({ _id: user_id }, {
-      $unset: { level: "", invited: "", organization: "" }
-    })
-    Organizations.update( o_id, {
-      $pull: { users: user_id }
+      $unset: { level: "", invited: "" }
     })
   },
   'join-organization': function(){
     if (!this.userId) return false
     var user = Meteor.users.findOne(this.userId)
-    var o = Organizations.findOne({ users: { $in: [this.userId] }})
-    if (!o || !user || user.organization) return false // Exit if already in an organization
-
-    Meteor.users.update( this.userId, {
-      $set: { organization: o._id },
-      $unset: { invited: '' }
-    })
+    if (user.invited)
+      Meteor.users.update( this.userId, {
+        $set: { isStaff: true },
+        $unset: { invited: '' }
+      })
   },
-  'decline-organization': function(){
-    if( !this.userId) return false
-    var user = Meteor.users.findOne( this.userId)
-    var o = Organizations.findOne({ users: { $in: [this.userId] }})
-    if (!o || !user) return false
+  'update_profile_img': function(img){
+    if (!this.userId) return false
+    var user = Meteor.users.findOne(this.userId)
 
-    Meteor.users.update( this.userId, {
-      $unset: { level: "" }
-    })
-    Organizations.update( o._id, {
-      $pull: { users: this.userId }
-    })
+    if (GE_Help.nk(user, 'services.password')) {
+      console.log(img)
+      Meteor.users.update( this.userId, {
+        $set: { profile_img: img }
+      })
+    }
   },
 })

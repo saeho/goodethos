@@ -48,12 +48,10 @@ Template.eu_social.events({
 		if (equal_check) $(e.currentTarget).removeClass('perm')
 		else $(e.currentTarget).addClass('perm')
 
-		if (user.organization) {
+		if (user.isStaff) {
 			// Has Organization
-			if( !equal_check) {
-				Organizations.update( user.organization, {
-					$set: cur_obj
-				}, function( err,res){
+			if (!equal_check)
+				Meteor.call('update_site_info', cur_obj, function(err,res){
 					prev_state = cur_obj
 					// Set Popup In Popup msg
 					var popup = Session.get('popup')
@@ -61,28 +59,6 @@ Template.eu_social.events({
 					Session.set('popup', popup)
 					$(e.currentTarget).removeClass('perm')
 				})
-			}
-		} else if( cur_obj['name.full'] && cur_obj['name.full'].length>=4 && (cur_obj['name.short'].length==0 || cur_obj['name.short'].length>1)) {
-			// New Account
-			var popup = Session.get('popup')
-			popup.data.pip = { loading: true }
-			Session.set('popup', popup)
-
-			Meteor.call('createOrganization', cur_obj, function(err,res){
-				if( res) {
-					popup.data.pip = { msg: 'Thank you for registering!' }
-					Session.set('popup', popup)
-					// Because the Organization was just created, Tracker.autorun will not run. So manually do a findOne().
-					Meteor.subscribe('user-o') // Re-Subscribe
-				} else {
-					popup.data.pip = { msg: 'Sorry, something went wrong. Please try again or contact us at hello@goodethos.com.' }
-					Session.set('popup', popup)
-				}
-			})
-		} else {
-			// New Account but organization name is too short
-			popup.data.pip = { msg: cur_obj['name.full'].length<4 ? 'The name of your organization is too short.' : 'The organization short name must be at least 2 characters long.', ok: 'bg-red' }
-			Session.set('popup', popup)
 		}
 	}
 })

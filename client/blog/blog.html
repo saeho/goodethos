@@ -1,5 +1,5 @@
 
-<template name="blog">
+<template name="GE_blog">
 	{{#if Template.subscriptionsReady}}
 		{{#if o}}
 		<main class="bg-light" id="house">
@@ -11,14 +11,14 @@
 					</div>
 					{{/if}}
 
-					{{#if profile.isOwner}}
-						<span class="edit-brand inline-block smaller condensed cursor transition-opacity invis-50">Change Design</span>
+					{{#if isOwner}}
+					<span class="edit-brand inline-block smaller condensed cursor transition-opacity invis-50">Change Design</span>
 					{{/if}}
 
-					<h1 class="master-title title {{title.size}}">{{title.val}}</h1>
-					{{#if brand 'description'}}
+					<h1 class="master-title title {{site_info.size}}">{{site_info.title}}</h1>
+					{{#if site_info.description}}
 					<p class="house-desc serif short-line spaced">
-						{{brand 'description'}}
+						{{site_info.description}}
 					</p>
 					{{/if}}
 				</header>
@@ -26,7 +26,7 @@
 				{{#if contributors}}
 				<section class="brand-second relative" style="{{brand 'bg_second'}}" id="house-contributors">
 					<div class="contributors-list relative">
-						<h4 class="middle-title subtitle bigger inline-block brand-inner">Contributors</h4>
+						<h4 class="middle-title subtitle smaller inline-block brand-inner">Contributors</h4>
 						{{#each contributors}}
 							{{>author_pic}}
 						{{/each}}

@@ -5,7 +5,9 @@
 /* Loop - With Photo */
 .team-user .you { left: 0; z-index: 5; margin: -20px 0 0; }
 .you { position: relative; width: 40px; height: 40px; }
-.team-user .you { position: absolute; top: 50%; }
+.team-user .you {
+	position: absolute; top: 50%;
+	background-image: url(/packages/saeho_goodethos/img/editor/no-user.png); background-size: 40px 40px; }
 .you.profile { background-color: #222; }
 
 /* Loop - With Admin Options */
@@ -27,7 +29,7 @@
 		.service.ss-fb { background-position: -88px -22px; }
 		.service.ss-tw { background-position: -44px -22px; }
 		.service.ss-is { background-position: -66px -22px; }
-		.service.ss-profile { background-color: #00978e; background-position: -110px -22px; }
+		.service.ss-blog { background-color: #00978e; background-position: -110px -22px; }
 
 		/* For Loop - Override */
 		.sa-loop.team-user .you { left: 28px; }

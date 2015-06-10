@@ -26,9 +26,7 @@
 				name="{{name}}" />
 		</div>
 	{{/each}}
-	{{/if}}
 
-	{{#unless isDemo}}
 	<label class="{{label_class}}">Change Password</label>
 	<input class="{{input_class}}" type="password" name="cur_pwd" placeholder="Current Password" />
 	<div class="clear">
@@ -39,7 +37,7 @@
 			<input class="{{input_class}}" type="password" name="pwd_repeat" placeholder="Repeat Password" />
 		</div>
 	</div>
-	{{/unless}}
+	{{/if}}
 
 	{{#if show_button}}
 		{{>button}}

@@ -20,11 +20,7 @@
 
 
 <template name="comment_single_author_pic">
-	{{#if isImg}}
-		<figure class="inline-block author-pic round overflow">
-			{{#if img}}<img src="{{img}}" />{{/if}}
-		</figure>
-	{{else}}
-		<figure class="author-pic relative shadow-soft background round" style="{{img}}"></figure>
-	{{/if}}
+	<figure class="inline-block author-pic round overflow" style="{{#unless isImg}}{{img}}{{/unless}}">
+		{{#if img}}<img src="{{img}}" />{{/if}}
+	</figure>
 </template>

@@ -41,15 +41,16 @@
 		position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
 }
 
-.your-co-container { padding: 14px 0; }
+.your-co-container { padding: 14px 0; min-width: 200px; }
 .your-co-container .your-co {
+	background-color: #444;
 	width: 48px; height: 48px; float: left; margin: 0 8px 0 0;
 }
 
 
 /* Brand */
 .brand-bg-container { margin-top: 10px; }
-.choose-brand-bg, .eu-logo-container { width: 132px; height: 132px; position: relative; float: left; padding: 12px; }
-.eu-logo-container {
+.eu-logo-container, .eu-photo-container {
+	width: 120px; height: 120px; position: relative; float: left; padding: 12px;
 	margin: 0 14px 0 0;
-	background-image: url(/packages/saeho_goodethos/img/editor/no-logo.png); background-color: #eee; }
+	background-color: #fff; }

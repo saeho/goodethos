@@ -8,7 +8,7 @@ Template.user_team.helpers({
 
 		// # # # #
 		// Sort
-		var cond = {}
+		var cond = { isStaff: true }
 		switch (sortBy){
 			case 'Managers Only':
 				// Managers
@@ -60,10 +60,10 @@ Template.user_team.helpers({
 		var query = Session.get('query')
 		if( _.isObject(query) && query._id){
 			var queried_user = Meteor.users.findOne( query._id )
-			if( queried_user){
+			if (queried_user){
 				query.level = queried_user.level
 				query.role = ge.get_role( queried_user.level)
-				query.organization = queried_user.organization
+				query.invited = queried_user.invited
 			}
 		}
 		return query

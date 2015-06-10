@@ -14,7 +14,7 @@
 		#nav-master {
 			background-color: #111111; background-image: url(/packages/saeho_goodethos/img/core/nav-master.jpg);
 			width: 200px; margin: 0 0 0 -200px;
-			position: fixed; top: 0; left: 0; right: auto; bottom: 0; z-index: 10; }
+			position: fixed; top: 0; left: 0; right: auto; bottom: 0; z-index: 780; }
 		#nav-master .scroll { position: absolute; top: 50px; bottom: 40px; left: 0; right: 0; padding: 0 0 50px; }
 
 #nav-master .menu { padding: 25px 0 0; width: 200px; } /* Must be 200px width */
@@ -57,6 +57,14 @@
 
 		.lmi-signin { background-position: 5px -387px; }
 		.lmi-signup { background-position: 5px -420px; }
+
+		#nav-master .popup-organization:before {
+			display: block; content: ' ';
+			position: absolute; top: 4px; left: 35px;
+			-webkit-border-radius: 50%; -moz-border-radius: 50%; -ms-border-radius: 50%; border-radius: 50%;
+			width: 8px; height: 8px;
+			background: #ff0;
+		}
 
 /* Additionals */
 .logo-top {

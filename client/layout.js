@@ -3,7 +3,7 @@ Template.GE_layout.helpers({
 	nav_state: function() {
 		var nav_state = Session.get('nav_state')
 		var nav_mini = Meteor.Device.isPhone() || Meteor.Device.isTablet() ? '' : 'nav-mini'
-		//var nav_mini = '' // DEVELOPMENT MODE
+		// var nav_mini = '' // DEVELOPMENT MODE
 
 		if (nav_state=='none')
 			return ''
@@ -32,8 +32,10 @@ Template.GE_layout.events({
 	'click .anchor': function(e,t){
 		// Immitate <A> actions
 		var url = $(e.currentTarget).data('url')
-		if(url && url!='#')
-			Router.go( url)
+		if(url && url!='#') {
+			Router.go(url)
+			ge.close_popup()
+		}
 	},
 	// Commenting
 	'click .sign-guestbook': function(e,t){
@@ -51,7 +53,6 @@ Template.GE_layout.events({
 				data: {
 					_id: data.page._id,
 					page_type: data.page.info.type,
-					o_id: data.page.organization,
 					overlay: true,
 				}
 			})
@@ -75,14 +76,15 @@ Template.GE_layout.events({
 		this_sel.parent().find('.ref').html( this_sel.find(':selected').text())
 	},
 	// LAYOUT-WIDE : Popup Templates
+	// Just use these classes anywhere on the layout to call this popup
 	// Edit Profile
 	'click .popup-profile, click .popup-organization, click .popup-social, click .popup-brand': function(e) {
 		if(Meteor.userId()) {
 			var elem = $(e.currentTarget)
 
-			if( elem.hasClass('popup-profile')) var cur = 'profile'
-			else if( elem.hasClass('popup-organization')) var cur = 'organization'
-			else if( elem.hasClass('popup-social')) var cur = 'social'
+			if (elem.hasClass('popup-profile')) var cur = 'profile'
+			else if (elem.hasClass('popup-organization')) var cur = 'organization'
+			else if (elem.hasClass('popup-social')) var cur = 'social'
 			else var cur = 'brand'
 
 			e.preventDefault()
@@ -146,7 +148,7 @@ Template.GE_layout.events({
 	},
 	// LAYOUT-WIDE : Nav (master) related events
 	'click .nav-door': function(event, template) {
-		//if( Meteor.Device.isDesktop()) // DEVELOPMENT MODE
+		// if( Meteor.Device.isDesktop()) // DEVELOPMENT MODE
 		if( !Meteor.Device.isDesktop())
 			Session.set('popup', {
 				template: 'mobile_nav',
@@ -198,72 +200,6 @@ Template.GE_layout.rendered = function() {
     this.canvas.calc()
   }).bind(this)
   $(window).on('resize', this.canvas_func)
-
-	if( Meteor.Device.isDesktop()){
-		/*
-			This MUST be done inside rendered() callback.
-			Meteor events do not support hover.
-			If you try to do this using Meteor even "mouseover/mouseout" it will create unexpected behaviours
-			because that event will fire on ALL of its inner child elems.
-		*/
-		var timeout = null
-		var timeout_func = function(){
-			//var nav_state = Session.get('nav_state')
-			//if( Meteor.Device.isDesktop() && !nav_state){ // Optional
-			if( !$('#overlord').hasClass('nav-open')){
-				Session.set('nav_state', true)
-
-				$('#overlord').addClass('moving')
-				$('#nav-name').hide()
-
-				// GE Editor Only
-				if( $('#ge-editor').length)
-					$('#ge-editor, #if-form').removeClass('on pop-in').attr('style','')
-
-				Meteor.setTimeout(function(){
-					$('#overlord').removeClass('moving')
-					// Galleries need resizing
-					if ($('.content-gallery').length) GE_Gallery()
-				}, 350)
-			}
-		} // END : Timeout Func
-
-		$('#nav-master').on( 'click', function(){
-			Meteor.clearTimeout( timeout)
-			timeout = Meteor.setTimeout( timeout_func, 1350)
-		})
-		$('#nav-master').hover( function(){
-			Meteor.clearTimeout( timeout)
-			timeout = Meteor.setTimeout( timeout_func, 500)
-		})
-		var mouseout_func = function(){
-			//var nav_state = Session.get('nav_state')
-			//if( Meteor.Device.isDesktop() && nav_state){ // Optional
-			if( !$('#nav-master:hover').length){ // This check is necessary, don't remove it
-				Meteor.clearTimeout( timeout)
-				timeout = Meteor.setTimeout( function(){
-					if($('#overlord').hasClass('nav-open')){
-						Session.set('nav_state', false)
-
-						$('#overlord').addClass('moving')
-						$('#nav-name').hide()
-
-						// GE Editor Only
-						if( $('#ge-editor').length)
-							$('#ge-editor, #if-form').removeClass('on pop-in').attr('style','')
-
-						Meteor.setTimeout(function(){
-							$('#overlord').removeClass('moving')
-							// Galleries need resizing
-							if ($('.content-gallery').length) GE_Gallery()
-						}, 350)
-					}
-				}, 350)
-			}
-		}
-		$(':not(#nav-master)').on('mouseover', mouseout_func)
-		$('#nav-master').on('mouseout', mouseout_func)
-	} // END : Desktop only hover event
 }
 
 Template.GE_layout.destroyed = function() {

@@ -14,24 +14,21 @@ var state = function( edit_type){
 Template.eu_homepage.helpers({
 	user: function(){
 		var user = Meteor.user() || {}
-		var invited = Session.get('eu_homepage')
+		var o = GE_Settings.findOne({ type: 'site_info' })
 
-		if( invited && user.level){
+		if (user.invited && o) {
       // Get shorter name
-      var full_name = GE_Help.nk( invited, 'name.full')
-      var short_name = GE_Help.nk( invited, 'name.short')
-      var o_name = GE_Help.return_shorter( full_name, short_name)
-
-			invited.o_name = full_name.length<15 && full_name.length>2 ? full_name : o_name
-			invited.role = ge.get_role( user.level )
-			invited.o_photo = ge.responsive_img( GE_Help.nk( invited, 'brand.logo'))
-			invited.logo_back = GE_Help.nk( invited, 'brand.logo_back')
+			var blog = {
+				o_name: o.site_name,
+				role: ge.get_role(user.level),
+				o_photo: ge.responsive_img( GE_Help.nk( o, 'brand.logo'))
+			}
 		} else
-			invited = false
+			blog = false
 
 		return {
 			_id: (user._id || ''),
-			invited: invited,
+			invited: blog,
 		}
 	}
 })
@@ -53,12 +50,9 @@ Template.eu_homepage.events({
 		Meteor.call('join-organization')
 	},
 	'click #decline-link': function(e,t){
-		var o = Session.get('eu_homepage')
 		var user_id = Meteor.userId()
-		if( o._id && user_id) {
-			Meteor.call( 'remove-invite', o._id, user_id )
-			Meteor.call('decline-organization')
-		}
+		if (user_id)
+			Meteor.call('remove-invite', user_id )
 	},
 	'click #save-button': function(e,t){
 		e.preventDefault()
@@ -71,16 +65,14 @@ Template.eu_homepage.events({
 		popup.data.pip = { loading: true }
 
 		var equal_check = _.isEqual( prev_state, cur_obj)
-		if( equal_check) $(e.currentTarget).removeClass('perm')
+		if (equal_check) $(e.currentTarget).removeClass('perm')
 		else $(e.currentTarget).addClass('perm')
 
-		if (user.organization) {
+		if (user.isStaff) {
 			// Has Organization
 			if (!equal_check) {
 				Session.set('popup', popup)
-				Organizations.update (user.organization, {
-					$set: cur_obj
-				}, function (err,res){
+				Meteor.call('update_site_info', cur_obj, function(err,res){
 					prev_state = cur_obj
 					// Set Popup In Popup msg
 					popup.data.pip = { msg: 'Your profile was updated.' }
@@ -89,7 +81,7 @@ Template.eu_homepage.events({
 			}
 		} else {
 			// New Account but organization name is too short
-			popup.data.pip = { msg: cur_obj['name.full'].length<4 ? 'The name of your organization is too short.' : 'The organization short name must be at least 2 characters long.', ok: 'bg-red' }
+			popup.data.pip = { msg: cur_obj.site_name.length<4 ? 'The name of your organization is too short.' : 'The organization short name must be at least 2 characters long.', ok: 'bg-red' }
 			Session.set('popup', popup)
 		}
 	},
@@ -107,11 +99,6 @@ Template.eu_homepage.created = function(){
 			$('#chars-remaining').html('&nbsp;'+(max-chars)+' Characters Remaining')
 		}
 	}
-	this.autorun( function(){
-		var user = Meteor.user()
-		var invited = user && user.level>=0 ? Organizations.findOne({ users: { $in: [user._id] } }) : false
-		Session.set( 'eu_homepage', invited)
-	})
 }
 
 Template.eu_homepage.rendered = function(){

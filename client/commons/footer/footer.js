@@ -14,19 +14,10 @@ Template.footer.helpers({
 		}
 		return null // Else
 	},
-	nav_about: function(){
-		var this_menu = globals.nav_about
-
-		this_menu.submenu = _.map( this_menu.submenu, function(menu){
-			menu.url = menu.route ? Router.routes[ menu.route].path( menu.params || {} ) : false
-			return menu
-		})
-		return this_menu
-	},
-	nav_social: globals.nav_social,
 })
 
-/* Footer Events */
+/*
+UNUSED
 Template.footer.events({
 	'click #footer-up-down': function(e,t) {
 		var speed = 300
@@ -48,12 +39,8 @@ Template.footer.events({
 		t.$('#main-footer-wrapper').animate({ height: footer_height+'px' }, speed, function(){
 			$(e.currentTarget).toggleClass('on')
 		})
-		/*
-		t.$('#main-footer-wrapper').slideToggle( speed, function(){16px
-			$(e.currentTarget).toggleClass('on')
-		})*/
 
 		if( !check) $('html,body').stop().animate({scrollTop: $(document).height() }, speed)
-		//t.$('#footer-ghost').animate({ height: real_height+'px' }, speed)
 },
 })
+*/

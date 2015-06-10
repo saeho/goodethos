@@ -13,37 +13,36 @@ Template.edit_user.helpers({
 	},
 	form_data: function(){
 		var user = Meteor.user()
-		if( !user) return false
-		var o = Organizations.findOne( user.organization)
+		if (!user) return false
+		var o = GE_Settings.findOne({ type: 'site_info' })
 
 		var disabled = !ge.user_can('control_profile', (user.level || 0))
 
 		if( this.cur=='profile')
 			var show_button = GE_Help.nk( user, 'services.password') ? true : false
 		else
-			var show_button = !_.has(user, 'organization') && this.cur=='organization' ? false : true
+			var show_button = user.isStaff
 
+		var isProfile = GE_Help.nk( user, 'services.password') ? true : false
 		var form_data = {
-			has_o: user.organization ? true : false,
-			isDemo: user.username=='demo-public',
+			has_o: user.isStaff,
 			input_class: 're-wrapper',
 			label_class: 'small-label',
 			disabled: disabled,
 			show_button: show_button && (!disabled || this.cur=='profile')
 		}
 
-		switch( this.cur){
+		switch(this.cur){
 			case 'profile':
 				// # # # #
 				// Profile
-				var allow_edit = GE_Help.nk( user, 'services.password') ? true : false
 				var name = [{
-					allow_edit: allow_edit,
+					allow_edit: isProfile,
 					value: ge.get_name(user, 'first'),
 					key: 'name.first',
 					placeholder: 'First Name'
 				},{
-					allow_edit: allow_edit,
+					allow_edit: isProfile,
 					value: ge.get_name(user, 'last'),
 					key: 'name.last',
 					placeholder: 'Last Name',
@@ -88,17 +87,17 @@ Template.edit_user.helpers({
 		case 'organization':
 			// # # # #
 			// Organization
-			if(o){
+			if (o && user.isStaff){
 				var name = [{
-					label: 'Publication Name',
+					label: 'App or Site Name',
 					label_class: form_data.label_class,
-					value: GE_Help.nk(o, 'name.full'),
-					key: 'name.full',
-					placeholder: 'Full Name',
+					value: o.site_name,
+					key: 'site_name',
+					placeholder: 'Full Publication Name',
 					disabled: disabled
 				},{
-					value: GE_Help.nk(o, 'name.short'),
-					key: 'name.short',
+					value: o.site_shortname,
+					key: 'site_shortname',
 					placeholder: 'Short Name',
 					class: 'input-small',
 					disabled: disabled
@@ -112,55 +111,22 @@ Template.edit_user.helpers({
 				// # # # #
 				// Brand
 				if(o){
-					var logo_style = 'background-color: '+(GE_Help.nk(o, 'brand.logo_back') || '#333')+';'
-					var logo_url = ge.responsive_img( o.brand.logo, 'small')
-					var bg_style = GE_Help.nk(o, 'brand.bg') || '#333'
-					var brand_text = GE_Help.nk(o, 'brand.text') || 'brand-light'
+					var logo_url = ge.responsive_img( GE_Help.nk(o, 'brand.logo'), 'small')
+					var logo_style = logo_url!=null ? 'background-image: url(\''+logo_url+'\');' : ''
 
-					if( logo_url!=null) logo_style += 'background-image: url(\''+logo_url+'\');'
-					bg_style = 'background-color: '+bg_style+';'
-
-					// Color Choices for Logo
-					var cc_page = this.cc_page || 0
-					var cc_cur_val = GE_Help.nk(o, 'brand.logo_back')
-
-					// Color Choices for Text
-					var ccb_page = this.ccb_page || 0
-					var ccb_cur_val = GE_Help.nk(o, 'brand.bg')
+					var photo_url = ge.responsive_img(user.profile_img, 'small')
+					var photo_style = photo_url!=null ? 'background-image: url(\''+photo_url+'\');' : ''
 
 					return _.extend( form_data, {
-						bg_style: bg_style,
-						text: brand_text,
-						light_check: brand_text=='brand-light',
-						dark_check: brand_text=='brand-dark',
-
-						back: {
-							type: 'text',
-							id: 'eu-brand-back',
-							class: 'eucc-input',
-							name: 'brand.bg',
-							'data-color': ccb_cur_val,
-							value: ccb_cur_val,
-							maxlength: 7
-						},
-						back_cc: ge.color_choices( ccb_page, 22),
-						ccb_show_prev: ccb_page>0,
-						ccb_show_next: ccb_page<25,
 
 						logo_key: GE_Help.nk(o, 'brand.logo.key'),
 						logo_style: logo_style,
-						logo_back: {
-							type: 'text',
-							id: 'eu-logo-back',
-							class: 'eucc-input',
-							name: 'brand.logo_back',
-							'data-color': cc_cur_val,
-							value: cc_cur_val,
-							maxlength: 7
-						},
-						logo_cc: ge.color_choices( cc_page, 22),
-						cc_show_prev: cc_page>0,
-						cc_show_next: cc_page<25,
+
+						photo_key: GE_Help.nk(user, 'photo.key'),
+						photo_style: photo_style,
+
+						isProfile: isProfile,
+						showButton: !disabled || isProfile,
 					})
 				} else return false
 		}
@@ -188,20 +154,31 @@ Template.edit_user.created = function(){
 	if (user.isStaff) this.subscribe('futureImages', true)
 
 	this.autorun( (function(){
-		var new_logo_img = Session.get('new_logo_img')
+		var newLogo = Session.get('new_logo_img')
+		var newPhoto = Session.get('new_photo_img')
 
-		if( new_logo_img){
-			var o = Organizations.findOne( user.organization)
+		if (newLogo || newPhoto){
+			var o = GE_Settings.findOne({ type: 'site_info' })
 			var future_images = sImages.find().fetch()
 
-			_.each( future_images, function( img){
-				if( img._id==GE_Help.nk( new_logo_img, 'key') && (img.hasStored('smedium') && img.hasStored('ssmall') && img.hasStored('sthumb'))) {
-					if( GE_Help.nk( o, 'brand.logo.key')) sImages.remove( o.brand.logo.key)
-					Organizations.update( o._id, {
-						$set: { 'brand.logo' : new_logo_img }
-					})
-					Session.set('saving',false)
-					Session.set('new_logo_img', false)
+			_.each( future_images, function(img){
+
+				if (img.hasStored('smedium') && img.hasStored('ssmall') && img.hasStored('sthumb')) {
+					if (img._id==GE_Help.nk( newLogo, 'key')) {
+						if (GE_Help.nk(o, 'logo.key')) sImages.remove( o.logo.key)
+						Meteor.call('update_site_info', { 'brand.logo': newLogo })
+
+						Session.set('saving',false)
+						Session.set('new_logo_img', false)
+
+					} else if (img._id==newPhoto.key) {
+						var user = Meteor.user() || {}
+						if (GE_Help.nk(user, 'profile_img.key')) sImages.remove(user.profile_img.key)
+						Meteor.call('update_profile_img', newPhoto)
+
+						Session.set('saving',false)
+						Session.set('new_photo_img',false)
+					}
 
 					var session = Session.get('popup')
 					session.data.pip = true
@@ -220,6 +197,7 @@ Template.edit_user.created = function(){
 Template.edit_user.rendered = function(){
 	Session.set('saving',false)
 	Session.set('new_logo_img',false)
+	Session.set('new_photo_img',false)
 }
 
 Template.edit_user.destroyed = function(){

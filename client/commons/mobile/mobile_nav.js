@@ -2,22 +2,15 @@
 Template.mobile_nav.helpers({
 	links: function(){
 		var user = Meteor.user()
+		var o = GE_Settings.findOne({ type: 'site_info' }) || {}
 
-		var prefix = 'mobile-'
-		var nav = _.map( globals.nav_about.submenu, function( menu){
-			menu.class = prefix+menu.ref
-			menu.url = menu.route ? Router.routes[ menu.route].path( menu.params || {}) : false
-			return menu
-		})
-		nav = _.filter( nav, function( menu){
-			return menu.url!==false
-		})
-		nav.push( { break: true })
+		var nav = [
+			{ class: 'mobile-home', url: '/', title: o.site_name || 'Homepage' },
+			{ class: 'mobile-blog', url: Router.path('GE_blog'), title: 'Blog' },
+			{ break: true }
+		]
 
-		if( user){
-			var o = Organizations.findOne( user.organization) || {}
-
-			if( o) nav.push({ class: 'mobile-home', url: Router.routes['blog'].path({_o_slug: o.slug}), title: 'Homepage' })
+		if (user.isStaff){
 			nav.push({ class: 'mobile-all', url: Router.routes['user'].path({ _action: 'all'}),  title: 'See All' })
 			nav.push({ class: 'popup-profile mobile-profile', url: '#', title: 'Edit Profile' })
 			nav.push({ class: 'auth-signout mobile-signout', url: '#', title: 'Sign Out' })
@@ -30,15 +23,14 @@ Template.mobile_nav.helpers({
 	},
 })
 
+/*
 Template.mobile_nav.rendered = function(){
 	if( Meteor.Device.isPhone() || Meteor.Device.isTablet()) {
-		$('#mobile-nav').swipe({
+		$('#mobile-nav').swipe({ // TODO
 			//allowPageScroll: 'vertical',
-			/*
-	        tap:function(e,t) {
-
-	        },
-			*/
+      // tap:function(e,t) {
+			//
+      // },
 			swipeUp: function(){
 				ge.close_popup()
 			},
@@ -49,5 +41,6 @@ Template.mobile_nav.rendered = function(){
 
 Template.mobile_nav.destroyed = function(){
 	if( Meteor.Device.isPhone() || Meteor.Device.isTablet())
-		$('#mobile-nav').swipe('destroy')
+		$('#mobile-nav').swipe('destroy') // TODO
 }
+*/

@@ -3,6 +3,7 @@ Package.describe({
   name: 'saeho:goodethos',
   summary: "Blog and longform publishing for Meteor. Demo at https://goodethos.com.",
   version: "0.5.9",
+  git: "https://github.com/saeho/goodethos.git"
 })
 
 Package.onUse(function(api) {
@@ -68,7 +69,6 @@ Package.onUse(function(api) {
     'client/lib/ge_js.js',
     'client/lib/ge_media.js',
     'client/lib/ge_uploader.js',
-    'client/lib/globals.js',
 
     'client/lib/core.css',
     'client/lib/animations.css',
@@ -266,6 +266,7 @@ Package.onUse(function(api) {
   api.addFiles([
    // Editor
    'img/editor/no-user.png',
+   'img/editor/no-user-big.png',
    'img/editor/toolbar.png',
    'img/editor/layout-controls.png',
    'img/editor/page-type-icons.png',
@@ -279,7 +280,6 @@ Package.onUse(function(api) {
    'img/editor/ana.png',
    'img/editor/lmi-bigger.png',
    'img/editor/edit-user.png',
-   'img/editor/no-logo.png',
 
    // Core
    'img/core/profile-sm.png',

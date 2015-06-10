@@ -13,7 +13,7 @@
 			</h2>
 
 			{{#if isO.inside}}
-				<p class="condensed bigger-heading {{#if isO.invited}}blue{{else}}red{{/if}}">
+				<p class="condensed bigger-title {{#if isO.invited}}blue{{else}}red{{/if}}">
 					{{#if isO.invited}}
 						Invitation sent <span class="master-title green">({{role.name}})</span>
 					{{else}}
@@ -22,7 +22,7 @@
 				</p>
 
 				<div class="upd-loop padding-b margin-b">
-					<h4 class="upd-loop-title bigger-heading condensed silver">
+					<h4 class="upd-loop-title bigger-title condensed silver">
 						{{#if isO.invited}}
 							If <a href="{{sm_url}}" target="_blank" class="red dotted-link">this person</a> is not part of your organization, you should <u class="ebony">cancel</u> the invitation immediately.
 						{{else}}
@@ -33,7 +33,7 @@
 				</div>
 
 				{{#unless isO.invited}}
-				<div class="padding-t padding-b bigger-heading condensed average-line">
+				<div class="padding-t padding-b bigger-title condensed average-line">
 					{{#each roles_opt}}
 					<p class="padding-none">
 						<input type="radio" name="role" value="{{level}}" id="radio-{{name}}" class="inline" checked="{{checked}}">
@@ -42,7 +42,7 @@
 					{{/each}}
 				</div>
 
-				<div class="padding-t padding-b silver condensed bigger-heading margin-b">
+				<div class="padding-t padding-b silver condensed bigger-title margin-b short-line">
 						After the invite is sent, he/she will receive a notification on the website.
 				</div>
 				{{/unless}}
@@ -60,7 +60,7 @@
 				</div>
 
 			{{else}}
-				<p class="condensed bigger-heading silver short-line">
+				<p class="condensed bigger-title silver short-line">
 					<strong class="ebony">{{role.name}}</strong> {{role.desc}}
 					{{#if isO.allow_remove}}<br /><span class="cursor red" id="remove-user">Remove User</span>{{/if}}
 				</p>
@@ -71,7 +71,7 @@
 					{{/each}}
 				{{else}}
 					<div class="upd-loop">
-						<h4 class="upd-loop-title condensed bigger-heading silver">{{name}} hasn't created anything yet.</h4>
+						<h4 class="upd-loop-title condensed bigger-title silver">{{name}} hasn't created anything yet.</h4>
 					</div>
 				{{/if}}
 			{{/if}}
@@ -100,7 +100,7 @@
 		{{>author_pic}}
 
 		{{#if was_queried}}
-			<span class="float-r condensed bigger {{isO.color}}">
+			<span class="float-r condensed {{isO.color}}">
 				{{isO.msg}}
 			</span>
 		{{else}}
@@ -116,7 +116,7 @@
 			{{/if}}
 		{{/if}}
 
-		<p class="charcoal master-title bigger-medium">{{name}}{{#if isUser}}&nbsp;&nbsp;<span class="blue">(You)</span>{{/if}}</p>
+		<p class="charcoal master-title bigger">{{name}}{{#if isUser}}&nbsp;&nbsp;<span class="blue">(You)</span>{{/if}}</p>
 
 	</div>
 </template>

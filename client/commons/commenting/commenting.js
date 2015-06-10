@@ -11,7 +11,7 @@ Template.commenting_service.helpers({
 // Helpers
 Template.commenting.helpers({
 	animate: function(){
-		return this.page_type!='blog'
+		return this.page_type!='profile'
 	},
 	user: function(){
 		var user = Meteor.user()
@@ -24,34 +24,26 @@ Template.commenting.helpers({
 		switch( account){
 			case 'facebook':
 				var img = 'http://graph.facebook.com/'+GE_Help.nk( user, 'services.facebook.id')+'/picture'
-				var name = GE_Help.nk( user, 'services.facebook.name')
 				break
 			case 'instagram':
 				var img = GE_Help.nk( user, 'services.instagram.profile_picture')
-				var name = GE_Help.nk( user, 'services.instagram.full_name')
 				break
 			case 'twitter':
 				var img = GE_Help.nk( user, 'services.twitter.profile_image_url_https')
-				var name = '@'+GE_Help.nk( user, 'services.twitter.screenName')
 				break
 			case 'good ethos':
-				var o = Organizations.findOne( user.organization) || {}
-				if( !o || o._id!=this.o_id) Session.set('account', false) // Only allow organization commenting if this is their own page
-				else {
-	        var img = ge.responsive_img( GE_Help.nk( o, 'brand.logo'), 'thumb')
-	        var img = img ? 'background-image: url(\''+img+'\');' : ''
-				}
+        var img = ge.responsive_img(user.profile_img,'thumb')
+        var img = img ? 'background-image: url(\''+img+'\');' : ''
 				isImg = false
-				var name = GE_Help.return_shorter( GE_Help.nk( o, 'name.full'), GE_Help.nk( o, 'name.short'))
 		}
 
 		return {
-			isAccepted: (account && account!='good ethos') || this.o_id==user.organization,
-			isOwner: this.o_id==user.organization,
+			isAccepted: (account && account!='good ethos') || user.isStaff,
+			isOwner: user.isStaff,
 
 			isImg: isImg,
 			img: img,
-			name: name,
+			name: ge.get_name(user) || 'Unknown',
 
 			service: GE_Help.capitalize( account, true)
 		}
@@ -84,11 +76,9 @@ Template.commenting.events({
 			if( _.isUndefined( t.timestamp) || (ts-t.timestamp)>20000) {
 				GE_Comments.insert({
 					user: user._id,
-					organization: user.organization,
 
 					page_id: t.data._id,
 					page_type: t.data.page_type,
-					o_id: t.data.o_id,
 
 					message: message,
 					account: account,
@@ -134,7 +124,7 @@ Template.commenting.events({
 							})
 							break
 						case 'good ethos':
-							if( user.organization==t.data.o_id){
+							if (user.isStaff){
 								Session.set('account', social)
 							}
 							break
@@ -147,10 +137,10 @@ Template.commenting.events({
 
 Template.commenting.created = function(){
 	if( !this.data.overlay) this.subscribe('comments', this.data || {} )
-	var o_id = this.data.o_id
+
 	this.getService = function( session, user){
-		if( !session && user){
-			if( user.organization==o_id) return 'good ethos'
+		if (!session && user){
+			if (user.isStaff) return 'good ethos'
 			_.every( user.services, function( service, name){
 				if( _.contains( ['instagram','twitter','facebook'], name)){
 					session = name

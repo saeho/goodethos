@@ -15,7 +15,7 @@ Template.team_preview.helpers({
 			var type = GE_Help.capitalize( p.info.type)
 			var status_name = p.status<4 ? '<strong>'+status+' '+type+'</strong>' : '<strong class="charcoal">'+status+' '+type+'</strong>'
 			var time_ago = moment( p.date.edited ).fromNow().replace('a few seconds', 'few seconds')
-			var url = '/'+p.organization+'/'+p._id+'/edit'
+			var url = Router.path('GE_post', { _page: p._id, _action: 'edit' })
 
 			return {
 				title: p.content.title,
@@ -44,11 +44,9 @@ Template.team_preview.helpers({
 		var user = Meteor.user()
 		if( this.was_queried){
 			// User is not in organization yet
-			var parent = Template.parentData(2)
-			var o = parent.o
 			return {
-				invited: _.contains( o.users, this._id),
-				inside: !this.organization || o._id!=this.organization
+				invited: this.invited,
+				inside: !this.isStaff
 			}
 		} else if( user){
 			// User is in organization already
@@ -65,7 +63,7 @@ Template.team_preview.helpers({
 		var admin_level = person.user_level || 0
 		var denied = _.range( admin_level, 11 )
 		var cur = this.level
-		var was_invited = _.contains( o.users, this._id)
+		var was_invited = this.invited
 
 		var roles = _.filter( ge.get_role('*'), function( role){
 			return !_.contains( denied, role.level)
@@ -80,24 +78,25 @@ Template.team_preview.helpers({
 	// # # # #
 	// For searching
 	search_query: function(){
-		return _.isString( this.data) ? this.data : ''
+		return _.isString(this.data) ? this.data : ''
 	},
 	search_result: function(){
 		var query = this.data
 		if( _.isString( query)){
 
-			var query_array = query.split(' ').splice(0,3)
 			var or = [{ _id: query }]
-			_.each( query_array, function( q){
+			var query_array = query.split(' ').splice(0,3)
+			_.each( query_array, function(q){
 				var regex = new RegExp( '.*'+q+'.*', 'i' )
 				or.push({ 'services.instagram.full_name': regex })
 				or.push({ 'services.facebook.first_name': regex })
 				or.push({ 'services.facebook.last_name': regex })
 				or.push({ 'services.twitter.screenName': regex })
+				or.push({ 'name.first': regex })
+				or.push({ 'name.last': regex })
+				or.push({ 'username': regex })
 			})
 
-			// Because Meteor.publish() only published users without an organization,
-			// We do *not* need to do that check.
 			var cond = { $or: or }
 
 			var res = Meteor.users.find( cond ).fetch()
@@ -112,7 +111,7 @@ Template.team_preview.helpers({
 				person.role = ge.get_role( person.level)
 				person.service = 'ss-'+service
 				person.photo = ge.get_photo( person)
-				person.name = name
+				person.name = name || 'Unknown'
 				person.isUser = isUser
 				person.name_raw = service=='tw' ? name.substr(1) : name
 				person.user_level = user_level
@@ -145,13 +144,11 @@ Template.team_preview.events({
 		var val = Number( elem.val() )
 		var person = Template.currentData()
 
-		if( val>=0 && val<=8 ){
-			var parent = Template.parentData()
-			var o = parent.o
-			Meteor.call( 'user-invite', o._id, person.data._id, val, function( err, res){
-				if( !err){
+		if (val>=0 && val<=8) {
+			Meteor.call('user-invite', person.data._id, val, function(err){
+				if (!err){
 					var query = Session.get('query')
-					query.role = ge.get_role( val)
+					query.role = ge.get_role(val)
 					Session.set('query', query)
 				}
 			})
@@ -159,11 +156,9 @@ Template.team_preview.events({
 	},
 	'click #cancel-button, click #remove-user': function(e,t){
 		e.preventDefault()
-		var parent = Template.parentData()
-		var o = parent.o
 		var was_removed = $(e.currentTarget).attr('id')=='remove-user'
-		Meteor.call('remove-invite', o._id, this._id, function(err){
-			if( !err && was_removed)
+		Meteor.call('remove-invite', this._id, function(err){
+			if (!err && was_removed)
 				Session.set('query',false)
 		})
 	},
@@ -182,8 +177,8 @@ Template.user_team_single.helpers({
 		if( this.was_queried){
 			var parent = Template.parentData(2)
 			var o = parent.o
-			var isStaff = this.organization && o._id==this.organization
-			var invited = _.contains( o.users, this._id)
+			var isStaff = this.isStaff
+			var invited = this.invited
 
 			if (isStaff)
 				var msg = 'Already in your organization'
@@ -239,12 +234,6 @@ Template.user_team_single.events({
 	'click .sa-loop': function(e,t){
 		var check = $(e.target).hasClass('change-roles')
 		if( !check){
-			/*
-			if( Meteor.Device.isPhone() || Meteor.Device.isTablet())
-				Router.go(t.data.url || '/'+t.data.organization+'/'+t.data._id+'/edit')
-			else
-				Session.set('query', t.data)
-			*/
 			// TODO : For mobile, allow user info to show
 			if( Meteor.Device.isDesktop())
 				Session.set('query', t.data)

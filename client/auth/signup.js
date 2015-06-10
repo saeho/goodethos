@@ -64,7 +64,7 @@ Template.signup.helpers({
 		? {
       back: this.overlay ? 'bg-white' : 'bg-alt',
 			msg: error.msg || null,
-			ok: error.fields ? 'bg-red' : 'bg-green',
+			ok: error.fields ? 'bg-red' : 'bg-green pc-close',
 			loading: error.loading || false,
 		} : false
 	},
@@ -194,7 +194,7 @@ Template.signup_choose.events({
         var user = Meteor.user()
         if (!t.data || !t.data.overlay)
           Router.go('/blog')
-        else if( user.organization)
+        else
           Session.set('error', {fields: false, msg: 'Thank you for signing in!'})
       }
     }

@@ -3,7 +3,10 @@
 	<div id="footer-ghost"></div>
 
 	<footer class="bg-white condensed {{style}}" id="main-footer">
-		<span class="cursor transition bg-white unselect" id="footer-up-down"></span>
+		{{!--<span class="cursor transition bg-white unselect" id="footer-up-down"></span>--}}
+
+		{{!--
+		UNUSED
 		<nav class="center bigger wrapper-narrow" id="main-footer-wrapper">
 
 				<div class="inline-block footer-section">
@@ -26,13 +29,11 @@
 				</div>
 				<!-- /social -->
 		</nav>
+		--}}
 
 		<div class="relative" id="cp">
 			<div class="relative clear">
-				{{#unless device_is 'phone'}}<span class="float-l">Follow Good Ethos:&nbsp;&nbsp;</span>{{/unless}}
-				{{#each nav_social.submenu}}
-					<a href="{{ url }}" target="_blank" class="sm-tiny smt-{{key}}"></a>
-				{{/each}}
+				{{#unless device_is 'phone'}}<span class="float-l">Powered by <a href="https://goodethos.com" target="_blank">Good Ethos</a></span>{{/unless}}
 				<span class="float-r master-title">&copy; {{#if brand}}{{brand.o_name}}{{else}}Good Ethos{{/if}}</span>
 			</div>
 		</div>

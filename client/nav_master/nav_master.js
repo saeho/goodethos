@@ -5,64 +5,24 @@ Template.nav_master.helpers({
 		return Meteor.userId()
 	},
 	o_nav: function() {
-    var user = Meteor.user() || {}
-    var o = Organizations.findOne(user.organization)
-
+    var o = GE_Settings.findOne({ type: 'site_info' }, { field: { site_name: 1, site_shortname: 1 }})
 		var a_class = 'block main-link wi transition-bg-color'
 		var cur = Router.current().route ? Router.current().route.getName() : null
-		var o_name = 'Unknown'
 
-		if (o) {
-			// User belongs in an organization
-			var full = GE_Help.nk( o, 'name.full') || ''
-			var short = GE_Help.nk( o, 'name.short') || ''
-			var o_name = full.length<=12 ? full : (short.length ? short : GE_Help.shorten( full, { len: 12, end_at_space: false }))
-		}
+		if (o)
+			var o_name = (o.site_name || '').length<=12 ? o.site_name : ((o.site_shortname || '').length ? o.site_shortname : GE_Help.shorten( o.site_name, { len: 12, end_at_space: false }))
+		else
+			var o_name = 'Blog'
 
-		var o_nav = [{
+		return [{
 			name: o_name,
 			url: '/',
 			class: a_class+' lmi-home'
 		},{
 			name: 'Blog',
 			url: '/blog',
-			class: a_class+' lmi-blog'+(cur=='blog' ? ' cur' : '')
+			class: a_class+' lmi-blog'+(cur=='GE_blog' ? ' cur' : '')
 		}]
-
-		return o_nav
-	},
-	ge_nav: function() {
-		// .hn is for "HIDE-NAV", it means it should not be visible when <nav> is collapsed
-		// var a_class = 'block transition hn'
-		var a_class = 'block main-link wi transition-bg-color'
-		var cur = Router.current().route ? Router.current().route.getName() : null
-
-		/*
-			Disabled for now, if bringing this back, use the following HTML code
-			<nav class="menu" id="nav-master-ge">
-				{{#each ge_nav}}
-					{{#if this.url}}
-					<a href="{{pathFor route=this.url.route}}" class="{{this.class}}">{{this.name}}</a>
-					{{else}}
-					<span class="{{this.class}}">{{{this.name}}}</span>
-					{{/if}}
-				{{/each}}
-			</nav>
-		*/
-
-		return [{
-				name: 'Good Ethos',
-				url: 'https://goodethos.com',
-				class: a_class+' lmi-goodethos'
-			},{
-				name: 'Good Company',
-				// url: { route: 'goodcompany' },
-				class: a_class+' lmi-goodcompany'+(cur=='goodcompany' ? ' cur' : '')
-			},{
-				name: 'Good Reads',
-				// url: { route: 'goodreads' },
-				class: a_class+' lmi-goodreads'+(cur=='goodreads' ? ' cur' : '')
-			}]
 	},
 	nav: function() {
 		var user = Meteor.user() || {}
@@ -125,6 +85,14 @@ Template.nav_master.helpers({
 				url: '#',
 				class: a_class+' popup-profile lmi-profile'
 			}]
+
+			if (user.invited) {
+				user_nav.push({
+					name: 'Invitation',
+					url: '#',
+					class: a_class+' popup-organization lmi-profile'
+				})
+			}
 		}
 
 		return {
@@ -175,3 +143,84 @@ Template.nav_master.events({
 		})
 	}
 })
+
+/**
+ * Nav Master Event handler (it cannot be done by Meteor events)
+ */
+
+var timeout = null
+var timeout_func = function(){
+	//var nav_state = Session.get('nav_state')
+	//if( Meteor.Device.isDesktop() && !nav_state){ // Optional
+	if( !$('#overlord').hasClass('nav-open')){
+		Session.set('nav_state', true)
+
+		$('#overlord').addClass('moving')
+		$('#nav-name').hide()
+
+		// GE Editor Only
+		if( $('#ge-editor').length)
+			$('#ge-editor, #if-form').removeClass('on pop-in').attr('style','')
+
+		Meteor.setTimeout(function(){
+			$('#overlord').removeClass('moving')
+			// Galleries need resizing
+			if ($('.content-gallery').length) GE_Gallery()
+		}, 350)
+	}
+} // END : Timeout Func
+
+Template.nav_master.rendered = function() {
+	if (Meteor.Device.isDesktop()){
+		/*
+			This MUST be done inside rendered() callback.
+			If you try to do this using Meteor even "mouseover/mouseout" it will create unexpected behaviours
+			because that event will fire on ALL of its inner child elems.
+		*/
+		this.click_func = function(){
+			Meteor.clearTimeout(timeout)
+			timeout = Meteor.setTimeout(timeout_func, 1350)
+		}
+		this.hover_func = function(){
+			Meteor.clearTimeout(timeout)
+			timeout = Meteor.setTimeout(timeout_func, 500)
+		}
+		this.mouseout_func = function(){
+			//var nav_state = Session.get('nav_state')
+			//if( Meteor.Device.isDesktop() && nav_state){ // Optional
+			if( !$('#nav-master:hover').length){ // This check is necessary, don't remove it
+				Meteor.clearTimeout( timeout)
+				timeout = Meteor.setTimeout( function(){
+					if($('#overlord').hasClass('nav-open')){
+						Session.set('nav_state', false)
+
+						$('#overlord').addClass('moving')
+						$('#nav-name').hide()
+
+						// GE Editor Only
+						if( $('#ge-editor').length)
+							$('#ge-editor, #if-form').removeClass('on pop-in').attr('style','')
+
+						Meteor.setTimeout(function(){
+							$('#overlord').removeClass('moving')
+							// Galleries need resizing
+							if ($('.content-gallery').length) GE_Gallery()
+						}, 350)
+					}
+				}, 350)
+			}
+		}
+		$('#nav-master').on('click', this.click_func)
+		$('#nav-master').on('mouseover', this.hover_func)
+		$(':not(#nav-master)').on('mouseover', this.mouseout_func)
+		$('#nav-master').on('mouseout', this.mouseout_func)
+	} // END : Desktop only hover event
+}
+Template.nav_master.destroyed = function() {
+	if (Meteor.Device.isDesktop()){
+		$('#nav-master').off('click', this.click_func)
+		$('#nav-master').off('hover', this.hover_func)
+		$(':not(#nav-master)').off('mouseover', this.mouseout_func)
+		$('#nav-master').off('mouseout', this.mouseout_func)
+	}
+}

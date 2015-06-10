@@ -52,6 +52,7 @@
 
 #house-warmer .you {
 	display: inline-block; vertical-align: bottom;
+	background-image: url(/packages/saeho_goodethos/img/editor/no-user-big.png); background-size: 51px 51px;
 	margin: 7px 1px 7px 0; }
 #house-warmer .you:hover { margin: 14px 1px 0 0; }
 

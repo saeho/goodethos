@@ -1,12 +1,12 @@
 <template name="eu_brand">
-	<div class="clear">
+	<div class="clear margin-b">
 		{{#unless disabled}}<input id="eu-logo-change" type="file" class="hide" />{{/unless}}
-		<figure id="{{logo_key}}" class="contain eu-logo-container change-logo {{#unless disabled}}cursor{{/unless}} shadow-soft" style="{{logo_style}}"></figure>
+		<figure id="{{logo_key}}" class="contain eu-logo-container change-logo {{#unless disabled}}cursor{{/unless}}" style="{{logo_style}}"></figure>
 
 		<div class="with-text" id="eu-logo-options">
-			<label class="small-label">Profile Photo or Logo</label>
+			<label class="small-label">Blog or App Logo</label>
 			{{#if disabled}}
-				<p>Only managers can change the profile photo/logo.</p>
+				<p>Only managers can change the logo.</p>
 			{{else}}
 				<p>
 					<span class="cursor dotted-link change-logo smaller">Change</span>
@@ -15,7 +15,21 @@
 		</div>
 	</div>
 
-	{{#unless disabled}}
+	{{#if isProfile}}
+	<div class="clear">
+		<input id="eu-photo-change" type="file" class="hide" />
+		<figure id="{{photo_key}}" class="contain eu-photo-container change-photo {{#unless disabled}}cursor{{/unless}}" style="{{photo_style}}"></figure>
+
+		<div class="with-text" id="eu-photo-options">
+			<label class="small-label">Personal Photo</label>
+			<p>
+				<span class="cursor dotted-link change-photo smaller">Change</span>
+			</p>
+		</div>
+	</div>
+	{{/if}}
+
+	{{#if showButton}}
 		{{>button}}
-	{{/unless}}
+	{{/if}}
 </template>

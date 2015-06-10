@@ -7,7 +7,7 @@ Template.author_pic.helpers({
 
 		return {
 			exists: service=='blog' || img,
-			url: img,
+			pic: img,
 			service: 'ss-'+service,
 			service_raw: service
 		}

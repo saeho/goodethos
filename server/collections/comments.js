@@ -38,11 +38,9 @@ Meteor.publish('comments', function (args) {
 
     var comments = GE_Comments.find( cond)
     var users = comments.map( function(c) { return c.user })
-    var organizations = comments.map( function(c) { return c.organization })
 
     return [
       comments,
-      Meteor.users.find({_id: {$in: users }}),
-      Organizations.find({_id: {$in: organizations }}),
+      Meteor.users.find({_id: { $in: users }}),
     ]
 })

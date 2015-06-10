@@ -73,15 +73,6 @@ Accounts.onCreateUser(function(options, user) {
 	return user
 })
 
-Accounts.onLogin( function(login){
-	var user = login.user
-	if (user.organization) {
-		var o = Organizations.findOne(user.organization)
-		if (!o || !_.contains( o.users, user._id))
-			Meteor.users.update({ _id: user._id }, { $set: { organization: null } })
-	}
-})
-
 Meteor.methods({
 	send_email_verification: function(user_id){
 		var user = Meteor.users.findOne(user_id)
