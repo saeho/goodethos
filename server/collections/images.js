@@ -1,9 +1,15 @@
 // Image Stores Options
-var get_img_obj = function(key, name) {
+var get_img_obj = function(file) {
+  var key = file._id
+  var name = file.name
+
   var sizes = ['big','medium','small','thumb']
   var url_obj = {key: key}
+
   _.each( sizes, function( size){
-    url_obj[ size] = Meteor.settings.AWS.root+Meteor.settings.AWS.bucket+'/'+Meteor.settings.AWS.folder+'/'+size+'/images/'+key+'-'+name
+    url_obj[ size] = GE_Help.nk(Meteor, 'settings.AWS')
+      ? Meteor.settings.AWS.root+Meteor.settings.AWS.bucket+'/'+Meteor.settings.AWS.folder+'/'+size+'/images/'+key+'-'+name
+      : file.url
   })
   return url_obj
 }
@@ -40,7 +46,7 @@ Meteor.methods({
       case 'story':
       case 'event': // Unused
       case 'blog':
-        var collection = Posts
+        var collection = GE_Posts
         collection.attachSchema(PostsSchema)
         var cond = { _id: args.id }
         break
@@ -49,7 +55,7 @@ Meteor.methods({
     }
 
     // Proceed with function
-    if( _.has( args, 'file')) var img_obj = get_img_obj( args.file._id, args.file.name) // New Placeholder Data
+    if( _.has( args, 'file')) var img_obj = get_img_obj(args.file) // New Placeholder Data
     else var img_obj = { key: GE_Help.random_string(12) }
 
     switch( args.img_type) {

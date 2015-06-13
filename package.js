@@ -2,7 +2,7 @@
 Package.describe({
   name: 'saeho:goodethos-blog',
   summary: "Blog and longform publishing for Meteor. Demo at https://goodethos.com.",
-  version: "0.7.1",
+  version: "0.7.7",
   git: "https://github.com/saeho/goodethos.git"
 })
 

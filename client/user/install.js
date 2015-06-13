@@ -4,7 +4,7 @@
  * This code for install/validation is written loosely. I hacked it together as fast as I could.
  */
 
-var aws_inputs = ['accessKeyId','secretAccessKey','bucket','folder','root','region']
+// var aws_inputs = ['accessKeyId','secretAccessKey','bucket','folder','root','region']
 
 var error_helper = {
   isValid: function(val){
@@ -46,11 +46,12 @@ Template.GE_install_four.events(install_events)
 
 Template.GE_install_two.helpers({
   button_text: function(){
-    var sessionData = Session.get('GE_install') || {}
-    var test = _.every(aws_inputs, function(aws){
-      return sessionData[aws] && sessionData[aws].length
-    })
-    return test ? 'Next' : 'Skip AWS'
+    // var sessionData = Session.get('GE_install') || {}
+    // var test = _.every(aws_inputs, function(aws){
+    //   return sessionData[aws] && sessionData[aws].length
+    // })
+    // return test ? 'Next' : 'Skip AWS'
+    return Meteor.settings && Meteor.settings.AWS ? 'Next' : 'Skip'
   }
 })
 
@@ -88,14 +89,14 @@ Template.GE_install.events({
       Session.set('valid',session)
     }
 
-    if ($('#aws-button').length) {
-      var test = _.map(aws_inputs, function(aws){
-        var input = $('input[name='+aws+']').length ? $('input[name='+aws+']').val() : ''
-        return input.length ? true : false
-      })
-      var text = _.contains(test,true) ? 'Next' : 'Skip AWS'
-      $('#aws-button').html(text)
-    }
+    // if ($('#aws-button').length) {
+    //   var test = _.map(aws_inputs, function(aws){
+    //     var input = $('input[name='+aws+']').length ? $('input[name='+aws+']').val() : ''
+    //     return input.length ? true : false
+    //   })
+    //   var text = _.contains(test,true) ? 'Next' : 'Skip AWS'
+    //   $('#aws-button').html(text)
+    // }
   },
   'submit': function(e,t) {
     e.preventDefault()
@@ -109,10 +110,10 @@ Template.GE_install.events({
      * Change it to whatever you desire or change the Mongo Collection data manually.
      */
     var error = false
-    var skipAWS = _.every(aws_inputs, function(aws){
-      var input = $('input[name='+aws+']').length ? $('input[name='+aws+']').val() : ''
-      return !input.length
-    })
+    // var skipAWS = _.every(aws_inputs, function(aws){
+    //   var input = $('input[name='+aws+']').length ? $('input[name='+aws+']').val() : ''
+    //   return !input.length
+    // })
     var validate = _.object( _.map( formData, function(v,k){
       var test = true // Default
       switch(k){
@@ -209,9 +210,13 @@ Template.GE_install_two.rendered = function() {
   .data('prev','GE_install_one')
   .data('next','GE_install_three')
 
-  var session = Session.get('GE_install') || {}
-  session.msg = '<p>Would you like to use Amazon s3 for file storage/upload? You can also set this using the settings.json file (see Readme.md).</p>'
-  Session.set('GE_install', session)
+  Meteor.call('check_aws', function(err,res){
+    var session = Session.get('GE_install') || {}
+    session.msg = res
+    ? '<p>Amazon s3 settings were found, please proceed to the next step.</p>'
+    : '<p><strong><span class="red">Amazon s3 settings were not found.</span> Without proper s3 settings, you will not be able to upload images. Please see Readme.md for instructions.</strong></p>'
+    Session.set('GE_install', session)
+  })
 }
 
 Template.GE_install_three.rendered = function() {
@@ -220,15 +225,16 @@ Template.GE_install_three.rendered = function() {
   .data('next',false)
 
   var session = Session.get('GE_install') || {}
-  var skipAWS = _.every(aws_inputs, function(aws){
-    return !_.has(session, aws) || !session[aws].length
+  // var skipAWS = _.every(aws_inputs, function(aws){
+  //   return !_.has(session, aws) || !session[aws].length
+  // })
+  Meteor.call('check_aws', function(err,res){
+    session.msg =
+    '<p>Your blog will be created <strong class="'+(res ? 'green' : 'red')+'">with'+(res ? '' : 'out')+' Amazon s3</strong> setup.\
+    Your settings.json file can also contain other setups such as Google Analytics, Facebook/Twitter/Instagram login and more.</p>\
+    <p>Do you want to create an admin account?</p>'
+    Session.set('GE_install', session)
   })
-
-  session.msg =
-  '<p>Your blog will be created <strong class="'+(skipAWS ? 'red' : 'green')+'">with'+(skipAWS ? 'out' : '')+' Amazon s3</strong> setup.\
-  You may also add these settings using your settings.json file.</p>\
-  <p>Do you want to create an admin account?</p>'
-  Session.set('GE_install', session)
 }
 
 Template.GE_install_four.rendered = function() {

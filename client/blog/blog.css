@@ -33,7 +33,7 @@
 	padding: 13px 4%; }
 #house-warmer .social {
 	width: 24px; height: 24px; margin: 0 7px;
-	background: url(/packages/saeho_goodethos/img/core/profile-sm.png) no-repeat; background-size: 210px 70px; }
+	background: url(/packages/saeho_goodethos-blog/img/core/profile-sm.png) no-repeat; background-size: 210px 70px; }
 #house-warmer .social:first-child { margin-left: -4px;  }
 
 #house-warmer.brand-light .social.facebook { background-position: -5px -5px; }
@@ -52,7 +52,7 @@
 
 #house-warmer .you {
 	display: inline-block; vertical-align: bottom;
-	background-image: url(/packages/saeho_goodethos/img/editor/no-user-big.png); background-size: 51px 51px;
+	background-image: url(/packages/saeho_goodethos-blog/img/editor/no-user-big.png); background-size: 51px 51px;
 	margin: 7px 1px 7px 0; }
 #house-warmer .you:hover { margin: 14px 1px 0 0; }
 
@@ -81,7 +81,7 @@
 
 .info .you {
 	width: 24px; height: 24px; float: left; margin: 0 5px 0 -3px;
-	background-image: url(/packages/saeho_goodethos/img/editor/no-user.png); background-size: 24px 24px; }
+	background-image: url(/packages/saeho_goodethos-blog/img/editor/no-user.png); background-size: 24px 24px; }
 .info .service { display: none; }
 
 	/* Loop - With Big Img */
@@ -129,7 +129,7 @@
 	#quick-post { padding-top: 0; padding-bottom: 0; }
 	#quick-post .inner {
 		padding: 15px 15px 20px;
-		background: #d5ebd8 url(/packages/saeho_goodethos/img/sections/quick-post.png) repeat-x 50% 100%; background-size: 14px 8px; }
+		background: #d5ebd8 url(/packages/saeho_goodethos-blog/img/sections/quick-post.png) repeat-x 50% 100%; background-size: 14px 8px; }
 	#quick-post.on .inner {
 		border-bottom: solid 2px #d7d7d7;
 		padding: 15px; background-image: none; }
@@ -205,7 +205,7 @@
 		.inner-close:after { height: 18px; width: 2px; margin: -9px 0 0 -1px; }
 
 /* Commons */
-.stripes { background-image: url(/packages/saeho_goodethos/img/core/stripes.png); background-size: 10px 10px; }
+.stripes { background-image: url(/packages/saeho_goodethos-blog/img/core/stripes.png); background-size: 10px 10px; }
 
 @media screen and (max-width: 1140px) {
 	#house { width: 50%; padding: 25px 0; }

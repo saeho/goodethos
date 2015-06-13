@@ -208,7 +208,7 @@ h4, h5, h6 { font-family: 'PT Sans', sans-serif; font-weight: 700; color: #3d3d3
 /* Social Media */
 .sm-tiny {
 	display: block; float: left; width: 18px; height: 18px; margin: 0 2px;
-	background-image: url(/packages/saeho_goodethos/img/core/sm-tiny.png); background-size: 126px 36px; }
+	background-image: url(/packages/saeho_goodethos-blog/img/core/sm-tiny.png); background-size: 126px 36px; }
 .smt-fb { background-position: 0 0; }
 .smt-tw { background-position: -18px 0; }
 .smt-gp { background-position: -36px 0; }
@@ -219,7 +219,7 @@ h4, h5, h6 { font-family: 'PT Sans', sans-serif; font-weight: 700; color: #3d3d3
 		/* Page Share */
 		.share-social {
 			width: 34px; height: 34px; cursor: pointer; margin: 0 1px;
-			background-image: url(/packages/saeho_goodethos/img/core/share-social.png); background-size: 170px 68px;
+			background-image: url(/packages/saeho_goodethos-blog/img/core/share-social.png); background-size: 170px 68px;
 			border-radius: 50%; }
 		.share-social, .share-social.pop-in { display: inline-block; }
 

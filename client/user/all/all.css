@@ -62,7 +62,7 @@
 
 	#user-page-master .icon, .house-loops .icon {
 		display: block; float: left; border-radius: 50%;
-		background-image: url(/packages/saeho_goodethos/img/editor/page-type-icons.png); background-size: 24px 96px;
+		background-image: url(/packages/saeho_goodethos-blog/img/editor/page-type-icons.png); background-size: 24px 96px;
 		width: 24px; height: 24px; margin: 0 5px 0 0; }
 	#user-page-master .icon-blog, .house-loops .icon-blog { background-color: #23a13b; background-position: 0 -48px; }
 	#user-page-master .icon-story, .house-loops .icon-story { background-color: #0077aa; background-position: 0 0; }

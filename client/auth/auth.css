@@ -1,13 +1,13 @@
 
 /* Not Found */
-#not-found { background-image: url(/packages/saeho_goodethos/img/core/404.jpg); }
+#not-found { background-image: url(/packages/saeho_goodethos-blog/img/core/404.jpg); }
 #not-found .text {
 	max-width: 500px; margin: 0 auto;
 	position: absolute; left: 0; right: 0; top: 15%; }
 #not-found p { padding: 0 0 12px; }
 #not-found img { margin: 0 auto 20px; }
 
-@media screen and (max-width: 780px) { #not-found { background-image: url(/packages/saeho_goodethos/img/core/404-mobile.jpg); } }
+@media screen and (max-width: 780px) { #not-found { background-image: url(/packages/saeho_goodethos-blog/img/core/404-mobile.jpg); } }
 
 		/* PIP */
 		#popup-in-popup.pop-in-soft { z-index: 100; }

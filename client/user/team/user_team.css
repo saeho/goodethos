@@ -7,7 +7,7 @@
 .you { position: relative; width: 40px; height: 40px; }
 .team-user .you {
 	position: absolute; top: 50%;
-	background-image: url(/packages/saeho_goodethos/img/editor/no-user.png); background-size: 40px 40px; }
+	background-image: url(/packages/saeho_goodethos-blog/img/editor/no-user.png); background-size: 40px 40px; }
 .you.profile { background-color: #222; }
 
 /* Loop - With Admin Options */
@@ -37,7 +37,7 @@
 
 /* Search - Big */
 .search-big {
-	background: url(/packages/saeho_goodethos/img/core/search-big.png) no-repeat 0 4px; background-size: 100px 100px;
+	background: url(/packages/saeho_goodethos-blog/img/core/search-big.png) no-repeat 0 4px; background-size: 100px 100px;
 	min-height: 100px; padding: 0 0 0 115px; }
 .search-big input {
 	font-size: 35px; line-height: 45px;
@@ -47,7 +47,7 @@
 
 /* Search - Small */
 .search-small, #search-profile {
-	background: #fff url(/packages/saeho_goodethos/img/core/search-small.png) no-repeat 0 0; background-size: 50px 100px;
+	background: #fff url(/packages/saeho_goodethos-blog/img/core/search-small.png) no-repeat 0 0; background-size: 50px 100px;
 	}
 input.search-small {
 	position: absolute; top: 0; left: 0; right: 0;

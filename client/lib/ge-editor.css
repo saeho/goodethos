@@ -29,7 +29,7 @@
 		.geeb {
 			width: 35px; height: 35px; display: block; float: left;
 			border-right: solid 1px #2a2a2a;
-			background: #2a2a2a url(/packages/saeho_goodethos/img/editor/toolbar.png) no-repeat; background-size: 385px 70px; }
+			background: #2a2a2a url(/packages/saeho_goodethos-blog/img/editor/toolbar.png) no-repeat; background-size: 385px 70px; }
 
 		.geeb-break { width: 1px; height: 35px; float: left; }
 		.geeb.hide { display: none; }
@@ -76,7 +76,7 @@
 .layout-controls.fixed { margin-top: 58px; }
 .working .layout-controls { display: none; }
 
-.layout-controls .round, .egi-twitter .helper, .egi-instagram .helper, .service { background-image: url(/packages/saeho_goodethos/img/editor/layout-controls.png); background-repeat: no-repeat; background-size: 176px 44px; }
+.layout-controls .round, .egi-twitter .helper, .egi-instagram .helper, .service { background-image: url(/packages/saeho_goodethos-blog/img/editor/layout-controls.png); background-repeat: no-repeat; background-size: 176px 44px; }
 .layout-controls .round {
 	display: inline-block; cursor: pointer;
 	background-color: rgba(0,0,0,.35);
@@ -120,7 +120,7 @@
 
 	.if-button {
 		position: relative; display: block; float: left;
-		background: #fff url(/packages/saeho_goodethos/img/editor/if-buttons.png) no-repeat; background-size: 150px 60px;
+		background: #fff url(/packages/saeho_goodethos-blog/img/editor/if-buttons.png) no-repeat; background-size: 150px 60px;
 		-webkit-box-shadow: 0 0 4px rgba(0,0,0,.4); -moz-box-shadow: 0 0 4px rgba(0,0,0,.4); box-shadow: 0 0 4px rgba(255,255,255,.4);
 		height: 28px; width: 28px; padding: 0; margin: 0 5px 0 0;
 		border: solid 1px #bbb; }
@@ -136,7 +136,7 @@
 /* Big Icons */
 .big-icon {
 	width: 100px; height: 100px;
-	background: url(/packages/saeho_goodethos/img/editor/big-icons.png) no-repeat; background-size: 200px 300px; }
+	background: url(/packages/saeho_goodethos-blog/img/editor/big-icons.png) no-repeat; background-size: 200px 300px; }
 .big-icon.img { background-position: 0 0; }
 .big-icon.all-media { width: 200px; background-position: 0 -100px; }
 .big-icon.all-media-white { width: 200px; background-position: 0 -200px; }
@@ -239,7 +239,7 @@
 	}
 	.img-editor .target {
 		-webkit-box-shadow: 0 0 0 2px rgba(255,255,255,.2); -moz-box-shadow: 0 0 0 2px rgba(255,255,255,.2); box-shadow: 0 0 0 2px rgba(255,255,255,.2);
-		background-color: rgba(0,0,0,.5); background-image: url(/packages/saeho_goodethos/img/editor/gal-controls.png); background-repeat: no-repeat; background-size: 32px 96px;
+		background-color: rgba(0,0,0,.5); background-image: url(/packages/saeho_goodethos-blog/img/editor/gal-controls.png); background-repeat: no-repeat; background-size: 32px 96px;
 		width: 32px; height: 32px; margin: 0 2px; position: relative; }
 	.img-editor:hover .target, .img-editor:hover .x { display: inline-block; }
 	.img-editor .desc {

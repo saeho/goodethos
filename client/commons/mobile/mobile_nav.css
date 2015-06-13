@@ -6,7 +6,7 @@
 
 #mobile-nav .lmi {
 	border-bottom: solid 1px rgba(255,255,255,.25); text-align: right;
-	background-image: url(/packages/saeho_goodethos/img/editor/lmi-bigger.png); background-repeat: no-repeat; background-size: 60px 675px;
+	background-image: url(/packages/saeho_goodethos-blog/img/editor/lmi-bigger.png); background-repeat: no-repeat; background-size: 60px 675px;
 	display: block; padding: 8px 0 7px 50px; }
 #mobile-nav .break { display: block; height: 32px; }
 #mobile-nav .lmi:last-child { border: none; }

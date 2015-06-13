@@ -4,7 +4,7 @@
 		<div class="inside center">
 			<div class="padding wrapper-block normal">
 
-				<img src="/packages/saeho_goodethos/img/logos/black.png" class="ge-logo-std" />
+				<img src="/packages/saeho_goodethos-blog/img/logos/black.png" class="ge-logo-std" />
 
 				<div class="normal-line padding-t margin-t">
 					{{{install.msg}}}
@@ -42,13 +42,6 @@
 
 <template name="GE_install_two">
 	<section class="input-wide re-wrapper pop-in-soft install-block">
-
-		<input type="text" name="accessKeyId" class="{{isValid 'accessKeyId'}}" placeholder="Access Key Id" value="{{savedVal 'accessKeyId'}}" />
-		<input type="text" name="secretAccessKey" class="{{isValid 'secretAccessKey'}}" placeholder="Secret Access Key" value="{{savedVal 'secretAccessKey'}}" />
-		<input type="text" name="bucket" class="{{isValid 'bucket'}}" placeholder="Bucket" value="{{savedVal 'bucket'}}" />
-		<input type="text" name="folder" class="{{isValid 'folder'}}" placeholder="Folder" value="{{savedVal 'folder'}}" />
-		<input type="text" name="root" class="{{isValid 'root'}}" placeholder="Root (https://s3-us-west-2.amazon...)" value="{{savedVal 'root'}}" />
-		<input type="text" name="region" class="{{isValid 'region'}}" placeholder="Region (us-west-2)" value="{{savedVal 'region'}}" />
 
 		<div class="button-back re-wrapper margin-b">
 			<button type="submit" class="sub submit-button" id="aws-button">{{button_text}}</button>

@@ -7,7 +7,7 @@
 
 .eu-icons {
 	width: 35px;
-	background: #fff url(/packages/saeho_goodethos/img/editor/edit-user.png) no-repeat; background-size: 315px 35px;
+	background: #fff url(/packages/saeho_goodethos-blog/img/editor/edit-user.png) no-repeat; background-size: 315px 35px;
 	position: absolute; right: 1px; top: 1px; bottom: 1px; }
 
 	.eu-icons.email-verified { background-position: 0 50%; }

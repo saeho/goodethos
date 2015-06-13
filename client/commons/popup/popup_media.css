@@ -31,7 +31,7 @@
 	#popup-media-nav .pmn-close { margin: 0 0 0 -14px; }
 	#popup-media-nav .pmn-prev { margin: 0 0 0 -45px; }
 	#popup-media-nav .pmn-next { margin: 0 0 0 17px; }
-	#popup-media-nav .pmn-save { background-image: url(/packages/saeho_goodethos/img/editor/popup-save.png); background-repeat: no-repeat; background-position: 50% 0; background-size: 25px 50px; }
+	#popup-media-nav .pmn-save { background-image: url(/packages/saeho_goodethos-blog/img/editor/popup-save.png); background-repeat: no-repeat; background-position: 50% 0; background-size: 25px 50px; }
 	#popup-media-nav .on { background-color: #009f4c; background-position: 50% -25px; border-color: rgba(0,0,0,0); }
 
 		/* If edit-mode, buttons are just inline-blocks */
@@ -70,7 +70,7 @@
 	background: #fff; border: solid 1px #444; }
 #pmc-new .cursor {
 	display: block; height: 35px; line-height: 1; padding: 0 0 0 35px;
-	background: url(/packages/saeho_goodethos/img/editor/pmc-new.png) no-repeat; background-size: 35px 140px; }
+	background: url(/packages/saeho_goodethos-blog/img/editor/pmc-new.png) no-repeat; background-size: 35px 140px; }
 #pmc-new .pmc-picture { background-position: 0 0; }
 #pmc-new .pmc-video { background-position: 0 -35px; }
 #pmc-new .pmc-twitter { background-position: 0 -70px; }
@@ -107,7 +107,7 @@
 
 				.pmc-area .icon {
 					width: 50px; height: 50px; margin: -25px 0 0 -25px; z-index: 2;
-					background: url(/packages/saeho_goodethos/img/editor/pmc-area.png) no-repeat; background-size: 50px 150px; }
+					background: url(/packages/saeho_goodethos-blog/img/editor/pmc-area.png) no-repeat; background-size: 50px 150px; }
 				#pmc-social-search .icon { margin: 0 auto; }
 				#pmc-img-change .icon { background-position: 0 0; }
 				#pmc-twitter-change .icon { background-position: 0 -50px; }

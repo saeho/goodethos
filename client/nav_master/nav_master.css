@@ -12,7 +12,7 @@
 #nav-master :before, #nav-master :after, .nav-by, .takeover, #nav-gateway .page-by { transition: left .23s; -webkit-transition: left .23s; }
 
 		#nav-master {
-			background-color: #111111; background-image: url(/packages/saeho_goodethos/img/core/nav-master.jpg);
+			background-color: #111111; background-image: url(/packages/saeho_goodethos-blog/img/core/nav-master.jpg);
 			width: 200px; margin: 0 0 0 -200px;
 			position: fixed; top: 0; left: 0; right: auto; bottom: 0; z-index: 780; }
 		#nav-master .scroll { position: absolute; top: 50px; bottom: 40px; left: 0; right: 0; padding: 0 0 50px; }
@@ -32,7 +32,7 @@
 		#nav-master .menu .submenu:after { bottom: 14px; }
 
 		.main-link, .sub-link {
-			background-image: url(/packages/saeho_goodethos/img/editor/lmi-icons.png); background-repeat: no-repeat; background-size: 40px 510px; background-position: -40px 0;
+			background-image: url(/packages/saeho_goodethos-blog/img/editor/lmi-icons.png); background-repeat: no-repeat; background-size: 40px 510px; background-position: -40px 0;
 			white-space: nowrap;
 			padding: 3px 15px 0 0; height: 28px; }
 		#nav-master .menu span.block:not(.cursor) { opacity: .5; filter: alpha(opacity=50); }
@@ -70,7 +70,7 @@
 .logo-top {
 	padding: 7px 0 6px; height: 37px;
 	background-color: rgba(0,0,0,.2); background-position: -50px 50%; background-repeat: no-repeat; background-size: 30px 30px; }
-.logo-ge { background-image: url(/packages/saeho_goodethos/img/logos/white-boxed.png); }
+.logo-ge { background-image: url(/packages/saeho_goodethos-blog/img/logos/white-boxed.png); }
 .logo-top img { display: block; max-width: none; width: 113px; height: 37px; margin: 0 auto; }
 
 #nav-master .version {
@@ -114,7 +114,7 @@
 	border-radius: 50%;
 	background-color: rgba(0,0,0,.4);
 	display: inline-block; width: 25px; height: 25px; margin: 0 1px; }
-#nav-auth .ana { background-image: url(/packages/saeho_goodethos/img/editor/ana.png); background-size: 25px 75px; }
+#nav-auth .ana { background-image: url(/packages/saeho_goodethos-blog/img/editor/ana.png); background-size: 25px 75px; }
 
 #ana-guide { display: none; }
 

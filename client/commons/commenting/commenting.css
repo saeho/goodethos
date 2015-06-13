@@ -16,13 +16,13 @@ ul.list-comments, .list-comments li, #commenting textarea { margin: 0; list-styl
 
 #commenting textarea {
   border: none;
-  background-image: url(/packages/saeho_goodethos/img/core/commenting-dark-dots.png);
+  background-image: url(/packages/saeho_goodethos-blog/img/core/commenting-dark-dots.png);
   background-color: transparent; background-position: 0 0; background-size: 9px 32px;
   font-size: 18px; line-height: 32px;
   padding: 0; margin: 20px 0; min-height: 140px; }
 .brand-light #commenting textarea {
   color: #fff;
-  background-image: url(/packages/saeho_goodethos/img/core/commenting-light-dots.png); }
+  background-image: url(/packages/saeho_goodethos-blog/img/core/commenting-light-dots.png); }
 
 #commenting .nca, .comment-single .nca { padding: 1px 0 0; }
 .comment-single:not(.edit-mode) .message p { font-size: 1.078em; }
@@ -48,7 +48,7 @@ ul.list-comments, .list-comments li, #commenting textarea { margin: 0; list-styl
         /* Author */
         .author-pic {
           background-color: #242424;
-          background-image: url(/packages/saeho_goodethos/img/editor/no-user-big.png); background-size: 51px 51px;
+          background-image: url(/packages/saeho_goodethos-blog/img/editor/no-user-big.png); background-size: 51px 51px;
           width: 48px; height: 48px; }
         #commenting .nca .author-pic { margin: 0 1px 0 9px; }
         #house-book .nca .author-pic { margin: 0; }
@@ -91,7 +91,7 @@ ul.list-comments, .list-comments li, #commenting textarea { margin: 0; list-styl
         /* Switch Social */
         .switch-social {
             display: block; float: left;
-            background-image: url(/packages/saeho_goodethos/img/core/switch-social.png); background-size: 200px 40px;
+            background-image: url(/packages/saeho_goodethos-blog/img/core/switch-social.png); background-size: 200px 40px;
             width: 40px; height: 40px; }
         #switch-to-fb { background-color: #3b5998; background-position: 0 0; }
         #switch-to-tw { background-color: #55acee; background-position: -40px 0; }

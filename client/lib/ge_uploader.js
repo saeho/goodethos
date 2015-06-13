@@ -82,7 +82,7 @@ ge_uploader.prototype = {
 
 		var res = Images.insert( fsFile, function(err, img){
 			if (err) {
-				console.log(err)
+				console.warn(err)
 				reset_func()
 				return false
 			} else if (img._id) {
@@ -122,7 +122,8 @@ ge_uploader.prototype = {
 								args.replace = res.key
 								args.file = {
 									_id: img._id,
-									name: img.name()
+									name: img.name(),
+									url: img.url()
 								}
 								Meteor.call('upload_img', args)
 							}, img._id)

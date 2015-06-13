@@ -88,15 +88,15 @@ Meteor.methods({
     })
 
     var keys = _.keys(data)
-    var awsInput = ['accessKeyId','secretAccessKey','bucket','folder','root','region']
+    // var awsInput = ['accessKeyId','secretAccessKey','bucket','folder','root','region']
 
-    if (_.intersection(awsInput, keys).length==awsInput.length) {
-      var col = { type: 'aws' }
-      _.extend(col, GE_Help.filterObj(data, function(v,k){
-        return _.contains(awsInput, k)
-      }))
-      GE_Settings.insert(col)
-    }
+    // if (_.intersection(awsInput, keys).length==awsInput.length) {
+    //   var col = { type: 'aws' }
+    //   _.extend(col, GE_Help.filterObj(data, function(v,k){
+    //     return _.contains(awsInput, k)
+    //   }))
+    //   GE_Settings.insert(col)
+    // }
 
     // Create Admin
     if (data.username && data.email && data.password) {
@@ -118,4 +118,7 @@ Meteor.methods({
       })
     }
   },
+  check_aws: function() {
+    return Meteor.settings && Meteor.settings.AWS
+  }
 })
